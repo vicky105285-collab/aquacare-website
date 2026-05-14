@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Droplets, Menu, MessageCircle, Phone, X } from "lucide-react";
-import { CALL, WHATSAPP } from "@/lib/site/constants";
+import { BRAND_LOGO_LINE_1, BRAND_LOGO_LINE_2, CALL, WHATSAPP } from "@/lib/site/constants";
 import { MAIN_NAV } from "@/lib/site/navigation";
 
 function navLinkActive(pathname: string, href: string, match: "exact" | "prefix" | undefined) {
@@ -51,8 +51,8 @@ export function Navbar() {
                 <Droplets className="w-5 h-5 text-white" aria-hidden />
               </div>
               <div>
-                <p className={`font-bold text-sm leading-tight ${logoLine1}`}>Aqua Care &</p>
-                <p className={`font-bold text-sm leading-tight ${logoLine2}`}>Solar Care Systems</p>
+                <p className={`font-bold text-sm leading-tight ${logoLine1}`}>{BRAND_LOGO_LINE_1}</p>
+                <p className={`font-bold text-sm leading-tight ${logoLine2}`}>{BRAND_LOGO_LINE_2}</p>
               </div>
             </Link>
 

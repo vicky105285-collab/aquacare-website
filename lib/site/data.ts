@@ -12,7 +12,7 @@ import {
   Refrigerator,
   WashingMachine,
 } from "lucide-react";
-import { CALL, MAPS_DIRECTIONS_URL, WHATSAPP } from "./constants";
+import { ADDRESS_LINES, CALL, MAPS_DIRECTIONS_URL, PHONE_DISPLAY, WHATSAPP } from "./constants";
 import type {
   AmcPlanItem,
   BookingStep,
@@ -272,7 +272,7 @@ export const CONTACT_CARDS: ContactChannelCard[] = [
   {
     icon: "phone",
     title: "Call Us",
-    lines: ["+91 85266 64424", "Mon–Sun: 8 AM – 8 PM"],
+    lines: [PHONE_DISPLAY, "Mon–Sun: 8 AM – 8 PM"],
     link: CALL,
     label: "Call Now",
     color: "from-cyan-500 to-blue-600",
@@ -288,7 +288,7 @@ export const CONTACT_CARDS: ContactChannelCard[] = [
   {
     icon: "map",
     title: "Visit Us",
-    lines: ["123, Sakthi Nagar, Karur", "Tamil Nadu – 639 001"],
+    lines: [...ADDRESS_LINES],
     link: MAPS_DIRECTIONS_URL,
     label: "Get Directions",
     color: "from-orange-500 to-red-500",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Droplets, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { CALL, EMAIL, INSTAGRAM, WHATSAPP } from "@/lib/site/constants";
+import { ADDRESS_FULL, CALL, COMPANY_NAME, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
 import { InstagramSvg } from "@/components/InstagramSvg";
 import type { FooterServiceLink } from "@/lib/site/types";
 
@@ -20,7 +20,7 @@ export function Footer({ serviceLinks, copyrightYear }: FooterProps) {
                 <Droplets className="w-5 h-5 text-white" aria-hidden />
               </div>
               <div>
-                <p className="font-black text-white text-sm">Aqua Care & Solar Care Systems</p>
+                <p className="font-black text-white text-sm">{COMPANY_NAME}</p>
                 <p className="text-cyan-400 text-xs">Karur, Tamil Nadu</p>
               </div>
             </div>
@@ -56,7 +56,7 @@ export function Footer({ serviceLinks, copyrightYear }: FooterProps) {
                 <InstagramSvg className="w-4 h-4 text-white" />
               </a>
               <a
-                href={`mailto:${EMAIL}`}
+                href={MAILTO_EMAIL}
                 className="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center hover:bg-slate-600 transition-colors"
                 aria-label="Email"
               >
@@ -83,11 +83,11 @@ export function Footer({ serviceLinks, copyrightYear }: FooterProps) {
             <ul className="space-y-3 text-sm">
               <li className="flex gap-2">
                 <Phone className="w-4 h-4 text-cyan-500 flex-shrink-0 mt-0.5" aria-hidden />
-                +91 85266 64424
+                {PHONE_DISPLAY}
               </li>
               <li className="flex gap-2">
                 <MessageCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" aria-hidden />
-                WhatsApp: +91 85266 64424
+                WhatsApp: {PHONE_DISPLAY}
               </li>
               <li className="flex gap-2">
                 <InstagramSvg className="w-4 h-4 text-pink-400 flex-shrink-0 mt-0.5" />
@@ -99,7 +99,7 @@ export function Footer({ serviceLinks, copyrightYear }: FooterProps) {
               </li>
               <li className="flex gap-2">
                 <MapPin className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" aria-hidden />
-                123, Sakthi Nagar, Karur – 639 001
+                {ADDRESS_FULL}
               </li>
             </ul>
             <div className="mt-6 p-4 bg-slate-800 rounded-2xl">
@@ -112,7 +112,9 @@ export function Footer({ serviceLinks, copyrightYear }: FooterProps) {
         </div>
 
         <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>© {copyrightYear} Aqua Care & Solar Care Systems, Karur. All rights reserved.</p>
+          <p>
+            © {copyrightYear} {COMPANY_NAME}, Karur. All rights reserved.
+          </p>
           <p className="text-slate-600">Made with care in Tamil Nadu, India</p>
         </div>
       </div>

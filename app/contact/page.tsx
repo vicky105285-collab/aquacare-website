@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Contact } from "@/components/Contact";
+import { ContactMapSection } from "@/components/ContactMapSection";
 import { CTASection } from "@/components/CTASection";
-import { CALL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
+import { ADDRESS_FULL, CALL, EMAIL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
 import { CONTACT_CARDS } from "@/lib/site/data";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description:
-    "Call or WhatsApp Aqua Care & Solar Care Systems in Karur for RO, solar, AMC, and appliance support — same-day slots when available.",
+  description: `Call or WhatsApp ${PHONE_DISPLAY}. Visit us at ${ADDRESS_FULL}. Email ${EMAIL}. RO, solar, AMC & appliance support in Karur.`,
   path: "/contact",
-  keywords: ["Aqua Care phone number", "RO service WhatsApp Karur", "solar enquiry Karur"],
+  keywords: [
+    "Aqua Care phone number",
+    "RO service WhatsApp Karur",
+    "Aqua Care address Karur",
+    "Reddipalayam Karur",
+    EMAIL,
+  ],
 });
 
 export default function ContactPage() {
@@ -23,6 +29,7 @@ export default function ContactPage() {
         tamilLine="எங்களை அழைக்கவும் அல்லது WhatsApp செய்யவும்."
       />
       <Contact cards={CONTACT_CARDS} />
+      <ContactMapSection />
       <CTASection
         callHref={CALL}
         whatsappHref={WHATSAPP}

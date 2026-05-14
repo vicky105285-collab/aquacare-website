@@ -1,4 +1,11 @@
-export const SITE_NAME = "Aqua Care & Solar Care Systems";
+/** Legal / registered business name */
+export const COMPANY_NAME = "Aqua Care & Solar Care Systems";
+
+/** Two-line logo lockup in navbar (visual brand split) */
+export const BRAND_LOGO_LINE_1 = "Aqua Care &";
+export const BRAND_LOGO_LINE_2 = "Solar Care Systems";
+
+export const SITE_NAME = COMPANY_NAME;
 export const SITE_TAGLINE = "Pure water, clean energy, and trusted home services in Karur, Tamil Nadu.";
 export const SITE_LOCALITY = "Karur, Tamil Nadu, India";
 
@@ -6,18 +13,53 @@ export const SITE_LOCALITY = "Karur, Tamil Nadu, India";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://aquacaresolar.in";
 
-export const CALL = "tel:+918526664424";
+/** E.164 without tel: prefix — WhatsApp wa.me */
+export const WHATSAPP_PHONE_DIGITS = "918526664424";
+
+/** Click-to-call (href) */
+export const CALL = `tel:+${WHATSAPP_PHONE_DIGITS}`;
+
+/** Human-readable phone */
 export const PHONE_DISPLAY = "+91 85266 64424";
 
-export const WHATSAPP =
-  "https://wa.me/918526664424?text=Hello%2C%20I%20need%20a%20service%20from%20Aqua%20Care%20%26%20Solar%20Care%20Systems";
+/** ITU-T E.164 for JSON-LD `telephone` */
+export const PHONE_E164 = `+${WHATSAPP_PHONE_DIGITS}`;
+
+const DEFAULT_WA_MESSAGE =
+  "Hello, I need a service from Aqua Care & Solar Care Systems";
+
+export const WHATSAPP = `https://wa.me/${WHATSAPP_PHONE_DIGITS}?text=${encodeURIComponent(DEFAULT_WA_MESSAGE)}`;
+
+export function buildWhatsAppUrl(message: string): string {
+  return `https://wa.me/${WHATSAPP_PHONE_DIGITS}?text=${encodeURIComponent(message)}`;
+}
 
 export const INSTAGRAM = "https://www.instagram.com/ananthaquacareindia";
 
-export const EMAIL = "care@aquacaresolar.in";
+export const EMAIL = "aquacareindia1@gmail.com";
 
-export const ADDRESS_LINES = ["123, Sakthi Nagar, Karur", "Tamil Nadu – 639 001"] as const;
+export const MAILTO_EMAIL = `mailto:${EMAIL}`;
 
-/** Google Maps search for storefront / area */
-export const MAPS_DIRECTIONS_URL =
-  "https://www.google.com/maps/search/?api=1&query=Aqua+Care+Solar+Care+Systems+Karur";
+/** Structured address (Reddipalayam showroom / office) */
+export const ADDRESS_STREET = "SH 84, Erode - Karur Rd, Reddipalayam";
+export const ADDRESS_LOCALITY = "Karur";
+export const ADDRESS_REGION = "Tamil Nadu";
+export const ADDRESS_POSTAL_CODE = "639002";
+export const ADDRESS_COUNTRY = "IN";
+
+/** Single line for maps query, schema, and meta */
+export const ADDRESS_FULL = `${ADDRESS_STREET}, ${ADDRESS_LOCALITY}, ${ADDRESS_REGION} ${ADDRESS_POSTAL_CODE}`;
+
+/** Two lines for cards and compact UI */
+export const ADDRESS_LINES: readonly [string, string] = [
+  `${ADDRESS_STREET}, ${ADDRESS_LOCALITY}`,
+  `${ADDRESS_REGION} ${ADDRESS_POSTAL_CODE}`,
+];
+
+/** Short link — open in Maps app / browser */
+export const MAPS_DIRECTIONS_URL = "https://maps.app.goo.gl/ZTdXepPdGCuifZ547";
+
+/**
+ * Google Maps embed (no API key). Uses address query; replace with place embed `pb=` if you add one from Maps UI.
+ */
+export const MAPS_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(ADDRESS_FULL)}&output=embed`;

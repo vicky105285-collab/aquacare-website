@@ -2,7 +2,18 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/AppShell";
-import { ADDRESS_LINES, EMAIL, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site/constants";
+import {
+  ADDRESS_LOCALITY,
+  ADDRESS_POSTAL_CODE,
+  ADDRESS_REGION,
+  ADDRESS_STREET,
+  EMAIL,
+  MAPS_DIRECTIONS_URL,
+  PHONE_E164,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+} from "@/lib/site/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,18 +33,19 @@ const orgJsonLd = {
   name: SITE_NAME,
   description: SITE_TAGLINE,
   url: SITE_URL,
-  telephone: "+918526664424",
+  telephone: PHONE_E164,
   email: EMAIL,
   address: {
     "@type": "PostalAddress",
-    streetAddress: ADDRESS_LINES[0],
-    addressLocality: "Karur",
-    addressRegion: "Tamil Nadu",
-    postalCode: "639001",
+    streetAddress: ADDRESS_STREET,
+    addressLocality: ADDRESS_LOCALITY,
+    addressRegion: ADDRESS_REGION,
+    postalCode: ADDRESS_POSTAL_CODE,
     addressCountry: "IN",
   },
   areaServed: ["Karur", "Kulithalai", "Aravakurichi", "Krishnarayapuram", "Pugalur", "Tiruchirappalli"],
   priceRange: "$$",
+  hasMap: MAPS_DIRECTIONS_URL,
 };
 
 export const metadata: Metadata = {

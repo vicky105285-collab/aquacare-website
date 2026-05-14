@@ -3,13 +3,13 @@ import { CheckCircle, MessageCircle } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CTASection } from "@/components/CTASection";
 import { PageHero } from "@/components/PageHero";
-import { CALL, PHONE_DISPLAY } from "@/lib/site/constants";
+import { buildWhatsAppUrl, CALL, COMPANY_NAME, PHONE_DISPLAY } from "@/lib/site/constants";
 import { TRUST_ITEMS } from "@/lib/site/data";
 import type { ServiceDetail } from "@/lib/site/types";
 
 function enquiryHref(serviceTitle: string) {
-  const text = `Hello, I want to know more about ${serviceTitle} — Aqua Care & Solar Care Systems.`;
-  return `https://wa.me/918526664424?text=${encodeURIComponent(text)}`;
+  const text = `Hello, I want to know more about ${serviceTitle} — ${COMPANY_NAME}.`;
+  return buildWhatsAppUrl(text);
 }
 
 export type ServicePageViewProps = {
