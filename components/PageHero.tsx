@@ -15,7 +15,7 @@ export function PageHero({ title, subtitle, tamilLine }: PageHeroProps) {
         }}
         aria-hidden
       />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-16 text-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-20 text-center">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-balance">{title}</h1>
         <p className="mt-4 text-lg text-blue-100/90 max-w-3xl mx-auto leading-relaxed text-pretty">{subtitle}</p>
         {tamilLine ? (
@@ -24,6 +24,16 @@ export function PageHero({ title, subtitle, tamilLine }: PageHeroProps) {
           </p>
         ) : null}
       </div>
+      {/* Wave separator — matches homepage hero */}
+      <div className="absolute bottom-0 left-0 right-0 leading-[0]">
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block" aria-hidden>
+          <path
+            d="M0 48L60 43C120 38 240 29 360 25.6C480 22 600 26 720 32C840 38 960 48 1080 44.8C1200 41 1320 26 1380 17.6L1440 10V48H0Z"
+            fill="white"
+          />
+        </svg>
+      </div>
     </header>
   );
 }
+

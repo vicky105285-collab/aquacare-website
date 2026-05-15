@@ -96,8 +96,13 @@ export function Navbar() {
           </div>
         </div>
 
-        {menuOpen ? (
-          <div className="lg:hidden bg-white/98 backdrop-blur-xl border-t border-slate-100 px-4 py-4 space-y-1 shadow-lg">
+        {/* Mobile menu — smooth slide-down via max-h transition */}
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            menuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="bg-white border-t border-slate-100 px-4 py-4 space-y-1 shadow-lg">
             {MAIN_NAV.map((item) => {
               const active = navLinkActive(pathname, item.href, item.activeMatch);
               return (
@@ -105,8 +110,10 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`block w-full text-left px-4 py-3 rounded-xl font-medium capitalize transition-colors ${
-                    active ? "bg-blue-50 text-blue-700" : "text-slate-700 hover:bg-blue-50 hover:text-blue-600"
+                  className={`flex items-center w-full text-left px-4 py-3 rounded-xl font-medium transition-colors ${
+                    active
+                      ? "bg-blue-50 text-blue-700 border-l-2 border-blue-500"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
                   }`}
                   aria-current={active ? "page" : undefined}
                 >
@@ -114,10 +121,10 @@ export function Navbar() {
                 </Link>
               );
             })}
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-2 gap-3 pt-3">
               <a
                 href={CALL}
-                className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold text-sm"
+                className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold text-sm shadow-md shadow-cyan-500/20"
               >
                 <Phone className="w-4 h-4" aria-hidden /> Call Now
               </a>
@@ -125,13 +132,13 @@ export function Navbar() {
                 href={WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold text-sm"
+                className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold text-sm shadow-md shadow-green-500/20"
               >
                 <MessageCircle className="w-4 h-4" aria-hidden /> WhatsApp
               </a>
             </div>
           </div>
-        ) : null}
+        </div>
       </nav>
     </header>
   );

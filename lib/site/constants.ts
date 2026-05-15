@@ -13,14 +13,14 @@ export const SITE_LOCALITY = "Karur, Tamil Nadu, India";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://aquacaresolar.in";
 
-/** E.164 without tel: prefix — WhatsApp wa.me */
-export const WHATSAPP_PHONE_DIGITS = "918526664424";
+/** Base phone digits used for tel: and wa.me links. */
+export const WHATSAPP_PHONE_DIGITS = "918428888854";
 
-/** Click-to-call (href) */
+/** Standard click-to-call link */
 export const CALL = `tel:+${WHATSAPP_PHONE_DIGITS}`;
 
 /** Human-readable phone */
-export const PHONE_DISPLAY = "+91 85266 64424";
+export const PHONE_DISPLAY = "+91 84288 88854";
 
 /** ITU-T E.164 for JSON-LD `telephone` */
 export const PHONE_E164 = `+${WHATSAPP_PHONE_DIGITS}`;

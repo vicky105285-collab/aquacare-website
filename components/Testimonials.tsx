@@ -1,7 +1,7 @@
 "use client";
 
-import { MapPin, Star } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { GoogleReviews } from "@/components/GoogleReviews";
 import type { TestimonialItem } from "@/lib/site/types";
 
 export type TestimonialsProps = {
@@ -24,34 +24,7 @@ export function Testimonials({ items }: TestimonialsProps) {
           </p>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {items.map((t, i) => (
-            <AnimatedSection key={t.name} delay={i * 80}>
-              <figure className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-cyan-200 transition-all duration-300 h-full flex flex-col">
-                <div className="flex items-center gap-0.5 mb-4" aria-label={`${t.stars} out of 5 stars`}>
-                  {Array.from({ length: t.stars }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" aria-hidden />
-                  ))}
-                </div>
-                <blockquote className="text-slate-600 text-sm leading-relaxed flex-1">
-                  <p>&ldquo;{t.text}&rdquo;</p>
-                </blockquote>
-                <figcaption className="mt-5 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm" aria-hidden>
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-bold text-slate-800 text-sm">{t.name}</p>
-                    <p className="text-slate-400 text-xs flex items-center gap-1">
-                      <MapPin className="w-3 h-3 shrink-0" aria-hidden />
-                      {t.loc}
-                    </p>
-                  </div>
-                </figcaption>
-              </figure>
-            </AnimatedSection>
-          ))}
-        </div>
+        <GoogleReviews reviews={items} />
       </div>
     </section>
   );

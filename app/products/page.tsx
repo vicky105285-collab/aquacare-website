@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Products } from "@/components/Products";
+import { ProductCatalog } from "@/components/ProductCatalog";
 import { PageHero } from "@/components/PageHero";
 import { WHATSAPP } from "@/lib/site/constants";
-import { PRODUCTS } from "@/lib/site/data";
+import { PRODUCTS, PRODUCT_CATEGORIES } from "@/lib/site/data";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -21,7 +21,7 @@ export default function ProductsPage() {
         subtitle="Curated models chosen for Tamil Nadu water conditions — with genuine spares and professional commissioning."
         tamilLine="தரமான RO மற்றும் நீர் அமைப்புகள்."
       />
-      <Products items={PRODUCTS} enquiryWhatsappHref={WHATSAPP} />
+      <ProductCatalog items={PRODUCTS} categories={PRODUCT_CATEGORIES} enquiryWhatsappHref={WHATSAPP} />
     </article>
   );
 }

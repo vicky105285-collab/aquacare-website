@@ -7,9 +7,21 @@ export type AnimatedSectionProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
+  direction?: "up" | "left" | "right";
 };
 
-export function AnimatedSection({ children, className = "", delay = 0 }: AnimatedSectionProps) {
+const transforms: Record<"up" | "left" | "right", string> = {
+  up: "translateY(20px)",
+  left: "translateX(-20px)",
+  right: "translateX(20px)",
+};
+
+export function AnimatedSection({
+  children,
+  className = "",
+  delay = 0,
+  direction = "up",
+}: AnimatedSectionProps) {
   const { ref, inView } = useInView();
 
   return (
@@ -18,8 +30,8 @@ export function AnimatedSection({ children, className = "", delay = 0 }: Animate
       className={className}
       style={{
         opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(32px)",
-        transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
+        transform: inView ? "translate(0,0)" : transforms[direction],
+        transition: `opacity 0.55s ease ${delay}ms, transform 0.55s ease ${delay}ms`,
       }}
     >
       {children}

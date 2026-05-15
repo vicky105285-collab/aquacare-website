@@ -35,6 +35,15 @@ export type ProductItem = {
   tank: string;
   img: string;
   features: string[];
+  categoryId: string;
+  featured?: boolean;
+};
+
+export type ProductCategory = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
 };
 
 export type AmcPlanItem = {

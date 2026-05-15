@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { CheckCircle, MessageCircle } from "lucide-react";
+import { CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CTASection } from "@/components/CTASection";
 import { PageHero } from "@/components/PageHero";
+import { FaqAccordion } from "@/components/FaqAccordion";
+import { InstallationGallery } from "@/components/InstallationGallery";
 import { buildWhatsAppUrl, CALL, COMPANY_NAME, PHONE_DISPLAY } from "@/lib/site/constants";
 import { TRUST_ITEMS } from "@/lib/site/data";
 import type { ServiceDetail } from "@/lib/site/types";
@@ -48,7 +50,7 @@ export function ServicePageView({ detail }: ServicePageViewProps) {
       <section className="py-16 lg:py-20 bg-slate-50" aria-labelledby="benefits-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 id="benefits-heading" className="text-2xl sm:text-3xl font-black text-slate-800 text-center mb-12">
-            Why customers choose this service
+            Why customers in Karur choose this service
           </h2>
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {detail.benefits.map((b) => (
@@ -72,10 +74,10 @@ export function ServicePageView({ detail }: ServicePageViewProps) {
       <section className="py-16 lg:py-20 bg-white" aria-labelledby="process-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 id="process-heading" className="text-2xl sm:text-3xl font-black text-slate-800 text-center mb-4">
-            Our service process
+            Our local service process
           </h2>
           <p className="text-center text-slate-500 max-w-2xl mx-auto mb-12">
-            Transparent steps from first call to sign-off — so you always know what happens next.
+            Transparent steps from first call to sign-off — fast dispatch across Karur district.
           </p>
           <ol className="grid md:grid-cols-3 gap-6 list-none p-0 m-0">
             {detail.process.map((p) => (
@@ -92,25 +94,33 @@ export function ServicePageView({ detail }: ServicePageViewProps) {
         </div>
       </section>
 
-      <section className="py-16 lg:py-20 bg-slate-50" aria-labelledby="faq-heading">
+      {/* Installation Gallery */}
+      <section className="py-16 lg:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-800 text-center mb-10">
+            Recent Work in Karur
+          </h2>
+          <InstallationGallery />
+          
+          <div className="mt-12 text-center bg-blue-50 p-6 rounded-2xl border border-blue-100">
+            <h3 className="text-lg font-bold text-blue-900 mb-2">Need a new system?</h3>
+            <p className="text-blue-700 mb-4">Browse our premium selection of water purifiers and systems.</p>
+            <Link 
+              href="/products"
+              className="inline-flex items-center justify-center px-6 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
+            >
+              Explore Products <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20 bg-white" aria-labelledby="faq-heading">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 id="faq-heading" className="text-2xl sm:text-3xl font-black text-slate-800 text-center mb-10">
             Frequently asked questions
           </h2>
-          <div className="space-y-3">
-            {detail.faqs.map((faq) => (
-              <details
-                key={faq.q}
-                className="group bg-white rounded-2xl border border-slate-100 shadow-sm open:shadow-md transition-shadow"
-              >
-                <summary className="cursor-pointer list-none font-semibold text-slate-800 px-5 py-4 flex items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
-                  {faq.q}
-                  <span className="text-cyan-600 text-xl leading-none group-open:rotate-45 transition-transform">+</span>
-                </summary>
-                <div className="px-5 pb-4 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">{faq.a}</div>
-              </details>
-            ))}
-          </div>
+          <FaqAccordion faqs={detail.faqs} />
         </div>
       </section>
 
