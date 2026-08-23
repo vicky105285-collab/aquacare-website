@@ -6,6 +6,7 @@ import { FloatingButtons } from "@/components/FloatingButtons";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
+import { AIChatBot } from "@/components/AIChatBot";
 import type { ReactNode } from "react";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -21,6 +22,9 @@ export function AppShell({ children }: { children: ReactNode }) {
       </main>
       <Footer copyrightYear={year} />
       
+      {/* AI Lead Assistant Floating Bot */}
+      <AIChatBot />
+
       {/* Desktop Floating Buttons */}
       <div className="hidden md:block">
         <FloatingButtons callHref={CALL} whatsappHref={WHATSAPP} />
