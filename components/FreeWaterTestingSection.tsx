@@ -39,13 +39,13 @@ export function FreeWaterTestingSection({ className = "" }: { className?: string
       setIsSubmitted(true);
 
       // 2. Format WhatsApp Redirect Message
-      const message = formatWhatsAppLeadMessage(
-        name || "Water Test Visitor",
+      const message = formatWhatsAppLeadMessage({
+        name: name || "Water Test Visitor",
         phone,
         location,
-        `FREE Water Quality Testing Booking (Source: ${waterSource}, Interest: ${requirement})`,
-        typeof window !== "undefined" ? window.location.href : "https://yuvanthikaaquasolar.in"
-      );
+        requirement: `FREE Water Quality Testing Booking (Source: ${waterSource}, Interest: ${requirement})`,
+        currentPage: typeof window !== "undefined" ? window.location.href : "https://yuvanthikaaquasolar.in",
+      });
 
       const waUrl = `https://wa.me/919842423589?text=${encodeURIComponent(message)}`;
       window.open(waUrl, "_blank");
