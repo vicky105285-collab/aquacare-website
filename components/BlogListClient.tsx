@@ -3,12 +3,37 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle";
 import type { BlogPost } from "@/lib/site/types";
 import { ArrowRight, BookOpen, Clock, User, Sparkles } from "lucide-react";
 
 export function BlogListClient({ posts, companyName }: { posts: BlogPost[]; companyName: string }) {
-  const [lang, setLang] = useState<"en" | "ta">("en");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [selectedLang, setSelectedLang] = useState<"en" | "ta" | null>(null);
+
+  const handleToggleLanguage = (newLang: "en" | "ta") => {
+    setSelectedLang(newLang);
+    try {
+      localStorage.setItem("app_lang", newLang);
+      document.cookie = `app_lang=${newLang}; path=/; max-age=31536000`;
+    } catch (e) {
+      console.error(e);
+    }
+    const params = new URLSearchParams(searchParams.toString());
+    if (newLang === "ta") {
+      params.set("lang", "ta");
+    } else {
+      params.delete("lang");
+    }
+    const queryStr = params.toString();
+    router.replace(queryStr ? `?${queryStr}` : window.location.pathname, { scroll: false });
+  };
+
+  const urlLang = searchParams.get("lang");
+  const lang: "en" | "ta" =
+    selectedLang ?? (urlLang === "ta" ? "ta" : "en");
   const isTamil = lang === "ta";
 
   return (
@@ -28,7 +53,7 @@ export function BlogListClient({ posts, companyName }: { posts: BlogPost[]; comp
           </div>
 
           <div className="shrink-0 flex items-center gap-2">
-            <BlogLanguageToggle currentLang={lang} onToggle={setLang} variant="hero" />
+            <BlogLanguageToggle currentLang={lang} onToggle={handleToggleLanguage} variant="hero" />
           </div>
         </div>
 

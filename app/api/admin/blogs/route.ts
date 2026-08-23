@@ -48,7 +48,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { title, content, featuredImage, metaTitle, metaDescription, keywords, author, isPublished } = body;
+    const { title, title_ta, excerpt_ta, content, content_ta, featuredImage, metaTitle, metaDescription, keywords, author, isPublished } = body;
 
     if (!title || !content) {
       return NextResponse.json({ error: "Title and content are required" }, { status: 400 });
@@ -60,8 +60,11 @@ export async function POST(request: Request) {
       const created = await prisma.blog.create({
         data: {
           title,
+          title_ta: title_ta || null,
+          excerpt_ta: excerpt_ta || null,
           slug,
           content,
+          content_ta: content_ta || null,
           featuredImage: featuredImage || "/products/7-wave-krystal.webp",
           metaTitle: metaTitle || title,
           metaDescription: metaDescription || content.slice(0, 160),

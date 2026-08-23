@@ -21,7 +21,10 @@ export default function AdminBlogPage() {
 
   // Form State
   const [title, setTitle] = useState("");
+  const [title_ta, setTitleTa] = useState("");
+  const [excerpt_ta, setExcerptTa] = useState("");
   const [content, setContent] = useState("");
+  const [content_ta, setContentTa] = useState("");
   const [author, setAuthor] = useState("Yuvanthika Water Expert");
   const [keywords, setKeywords] = useState("RO Purifier Karur, Water Softener Tamil Nadu");
   const [message, setMessage] = useState("");
@@ -47,14 +50,25 @@ export default function AdminBlogPage() {
       const res = await fetch("/api/admin/blogs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, content, author, keywords: keywords.split(",") }),
+        body: JSON.stringify({
+          title,
+          title_ta,
+          excerpt_ta,
+          content,
+          content_ta,
+          author,
+          keywords: keywords.split(","),
+        }),
       });
 
       if (res.ok) {
-        setMessage("Blog post created & published successfully!");
+        setMessage("Blog post created & published successfully with Tamil translations!");
         setIsAdding(false);
         setTitle("");
+        setTitleTa("");
+        setExcerptTa("");
         setContent("");
+        setContentTa("");
         const listRes = await fetch("/api/admin/blogs");
         if (listRes.ok) setPosts(await listRes.json());
       }
@@ -68,9 +82,9 @@ export default function AdminBlogPage() {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-black text-white">Blog Articles & SEO Management</h1>
+            <h1 className="text-2xl font-black text-white">Blog Articles & Multilingual SEO CMS</h1>
             <p className="text-xs text-slate-400">
-              Create, edit, and publish blogs with automatic Open Graph, Twitter & Schema.org metadata
+              Create, edit, and publish blogs with English and Tamil translations, automatic Open Graph, Twitter & Schema.org metadata
             </p>
           </div>
           <button
@@ -90,30 +104,67 @@ export default function AdminBlogPage() {
         {isAdding && (
           <form onSubmit={handleCreatePost} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
             <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
-              <Sparkles className="w-4 h-4" /> Write New Article
+              <Sparkles className="w-4 h-4" /> Write New Multilingual Article
             </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Article Title (English) *</label>
+                <input
+                  type="text"
+                  required
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="e.g. Best Water Softener for Hard Water in Karur"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm focus:border-cyan-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Article Title (Tamil - title_ta)</label>
+                <input
+                  type="text"
+                  value={title_ta}
+                  onChange={(e) => setTitleTa(e.target.value)}
+                  placeholder="எ.கா. கரூரில் கடின நீருக்கான சிறந்த நீர் மென்மையாக்கி"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm focus:border-cyan-500 outline-none"
+                />
+              </div>
+            </div>
+
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1">Article Title</label>
+              <label className="block text-xs font-bold text-slate-300 mb-1">Tamil Brief Excerpt (excerpt_ta)</label>
               <input
                 type="text"
-                required
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g. Best Water Softener for Hard Water in Karur & Namakkal"
+                value={excerpt_ta}
+                onChange={(e) => setExcerptTa(e.target.value)}
+                placeholder="கட்டுரையின் சுருக்கமான தமிழ் அறிக்கை..."
                 className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm focus:border-cyan-500 outline-none"
               />
             </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1">Content (Markdown / Text)</label>
-              <textarea
-                rows={6}
-                required
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Write full article body here..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm focus:border-cyan-500 outline-none"
-              />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">English Content (Markdown) *</label>
+                <textarea
+                  rows={6}
+                  required
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="Write full English article body here..."
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm focus:border-cyan-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Tamil Content (content_ta)</label>
+                <textarea
+                  rows={6}
+                  value={content_ta}
+                  onChange={(e) => setContentTa(e.target.value)}
+                  placeholder="தமிழ் வடிவில் முழு கட்டுரையை இங்கு எழுதவும்..."
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm focus:border-cyan-500 outline-none"
+                />
+              </div>
             </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1">Author Name</label>

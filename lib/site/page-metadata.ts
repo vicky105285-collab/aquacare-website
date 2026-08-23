@@ -15,7 +15,14 @@ export function pageMetadata(opts: {
     title: `${opts.title} | ${SITE_NAME}`,
     description: opts.description,
     keywords: opts.keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: {
+        en: url,
+        ta: `${url}?lang=ta`,
+        "x-default": url,
+      },
+    },
     openGraph: {
       type: "website",
       locale: "en_IN",

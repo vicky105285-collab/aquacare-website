@@ -200,8 +200,10 @@ export type BlogPost = {
   slug: string;
   title: string;
   titleTa?: string;
+  title_ta?: string;
   description: string;
   descriptionTa?: string;
+  excerpt_ta?: string;
   keywords: string[];
   publishedAt: string;
   updatedAt: string;
@@ -212,6 +214,7 @@ export type BlogPost = {
   image: string;
   content: string;
   contentTa?: string;
+  content_ta?: string;
   toc?: { id: string; text: string }[];
 };
 

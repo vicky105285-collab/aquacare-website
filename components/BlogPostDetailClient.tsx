@@ -15,13 +15,20 @@ import { ArrowLeft, Clock, MessageCircle, User, Sparkles } from "lucide-react";
 export function BlogPostDetailClient({ post }: { post: BlogPost }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const urlLang = searchParams.get("lang") === "ta" ? "ta" : "en";
   const [activeLang, setActiveLang] = useState<"en" | "ta" | null>(null);
 
-  const lang = activeLang ?? urlLang;
+  const urlLang = searchParams.get("lang");
+  const lang: "en" | "ta" =
+    activeLang ?? (urlLang === "ta" ? "ta" : "en");
 
   const handleLanguageToggle = (newLang: "en" | "ta") => {
     setActiveLang(newLang);
+    try {
+      localStorage.setItem("app_lang", newLang);
+      document.cookie = `app_lang=${newLang}; path=/; max-age=31536000`;
+    } catch (e) {
+      console.error(e);
+    }
     const params = new URLSearchParams(searchParams.toString());
     if (newLang === "ta") {
       params.set("lang", "ta");
@@ -29,7 +36,7 @@ export function BlogPostDetailClient({ post }: { post: BlogPost }) {
       params.delete("lang");
     }
     const queryStr = params.toString();
-    router.replace(`?${queryStr}`, { scroll: false });
+    router.replace(queryStr ? `?${queryStr}` : window.location.pathname, { scroll: false });
   };
 
   const isTamil = lang === "ta";

@@ -1,11 +1,18 @@
 import type { BlogPost } from "./types";
+import { prisma } from "@/lib/db";
 
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "ro-water-purifier-maintenance-guide",
     title: "Complete RO Water Purifier Maintenance Guide for Homes in Tamil Nadu",
+    titleTa: "தமிழ்நாட்டில் உள்ள வீடுகளுக்கான முழுமையான RO நீர் சுத்திகரிப்பு பராமரிப்பு வழிகாட்டி",
+    title_ta: "தமிழ்நாட்டில் உள்ள வீடுகளுக்கான முழுமையான RO நீர் சுத்திகரிப்பு பராமரிப்பு வழிகாட்டி",
     description:
       "Learn how to extend your RO water purifier life, maintain optimum TDS levels, replace filters on time, and handle hard water conditions in Karur, Namakkal, and Tamil Nadu.",
+    descriptionTa:
+      "உங்கள் RO நீர் சுத்திகரிப்பு அமைப்பின் ஆயுளை நீட்டிக்க, TDS அளவை பராமரிக்க மற்றும் சரியான நேரத்தில் பில்டர்களை மாற்றும் முழுமையான வழிகாட்டி.",
+    excerpt_ta:
+      "உங்கள் RO நீர் சுத்திகரிப்பு அமைப்பின் ஆயுளை நீட்டிக்க, TDS அளவை பராமரிக்க மற்றும் சரியான நேரத்தில் பில்டர்களை மாற்றும் முழுமையான வழிகாட்டி.",
     keywords: [
       "RO Water Purifier Maintenance",
       "RO Filter Replacement Tamil Nadu",
@@ -56,6 +63,76 @@ Without routine maintenance, sediment cartridges clog rapidly, RO membranes foul
 
 Yuvanthika Aquacare & Solar Care Systems provides certified doorstep RO service, genuine spare replacement, and annual maintenance contracts (AMC) across Karur, Namakkal, Erode, and Tiruchirappalli. Contact our technical team today for immediate service!
     `,
+    contentTa: `
+## தமிழ்நாட்டில் வழக்கமான RO நீர் சுத்திகரிப்பு பராமரிப்பு ஏன் முக்கியமானது
+
+கரூர், நாமக்கல், ஈரோடு மற்றும் சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் TDS அளவு 600 PPM முதல் 2500 PPM க்கும் அதிகமாக உள்ளது. கால்சியம், மெக்னீசியம் மற்றும் சல்பேட் நிறைந்த நிலத்தடி நீர் RO அமைப்புகளுக்கு அதிக அழுத்தத்தை ஏற்படுத்துகிறது.
+
+வழக்கமான பராமரிப்பு இல்லையென்றால், ஃபில்டர்கள் விரைவாக அடைபடும், RO மெம்பிரேன் பழுதடையும் மற்றும் பூஸ்டர் பம்ப் சூடாகி நீர் தரம் குறையும். சரியான பராமரிப்பு உங்கள் குடும்பத்திற்கு சுத்தமான, பாதுகாப்பான குடிநீரை உறுதி செய்கிறது.
+
+### வீட்டு RO அமைப்புகளுக்கான முக்கிய பராமரிப்பு படிநிலைகள்
+
+1. **ப்ரீ-ஃபில்டர் கார்ட்ரிட்ஜ் மாற்றம் (ஒவ்வொரு 3-4 மாதங்களுக்கும்)**
+   - வெளிப்புற ஸ்பன் ஃபில்டர் படிவு, மணல், சேறு மற்றும் துரு துகள்களை பிடிக்கிறது.
+   - காவிரி மற்றும் அமராவதி ஆற்றுப் படுகைகளின் அருகில், ஒவ்வொரு 90 நாட்களுக்கும் ப்ரீ-ஃபில்டரை மாற்றுவது உள்புற பில்டர்கள் அடைபடுவதைத் தடுக்கிறது.
+
+2. **ஆலெர்ட் கார்பன் & செடிமென்ட் ஃபில்டர் மாற்றம் (6-8 மாதங்களுக்கு)**
+   - இன்லைன் செடிமென்ட் ஃபில்டர் 5 மைக்ரான் வரையிலான நுண்ணிய துகள்களை அகற்றும்.
+   - ப்ரீ-கاربன் ஃபில்டர் குளோரின் சுவை மற்றும் துர்நாற்றத்தை உறிஞ்சி மெம்பிரேனைப் பாதுகாக்கிறது.
+
+3. **RO மெம்பிரேன் பரிசோதனை (12-18 மாதங்களுக்கு)**
+   - RO மெம்பிரேன் கரைந்த உப்புகள், கன உலோகங்கள் மற்றும் நச்சுக்களை நீக்குகிறது. நீர் வெளியேற்றம் 30% குறைந்தால் மெம்பிரேனை மாற்ற வேண்டும்.
+
+4. **ஆல்கலைன் & மினரல் கார்ட்ரிட்ஜ் (12 மாதங்களுக்கு)**
+   - ஆல்கலைன் கார்ட்ரிட்ஜ் அத்தியாவசிய தாதுக்களை மீண்டும் சேர்த்து pH அளவை 7.2 முதல் 8.0 வரை சீராக வைக்கிறது.
+
+### உங்கள் RO சிஸ்டத்திற்கு உடனடி சேவை தேவை என்பதற்கான 5 அறிகுறிகள்
+
+- **துர்நாற்றம் அல்லது மோசமான சுவை**: கார்பன் ஃபில்டர் செயலிழப்பு அல்லது டேங்கில் பாக்டீரியா வளர்ச்சி.
+- **தொடர்ச்சியான கழிவு நீர் வெளியேற்றம்**: பழுதடைந்த சோலனாய்டு வால்வு (SV).
+- **சத்தமிடும் பூஸ்டர் பம்ப்**: பம்ப் தாங்கு உருளைகள் தேய்மானம் அல்லது குறைந்த நீர் அழுத்தம்.
+- **குறைந்த நீர் ஓட்டம்**: அடைபட்ட மெம்பிரேன் அல்லது ஃபில்டர்.
+- **TDS உயர்வு**: சுத்திகரிக்கப்பட்ட நீரின் TDS 150 PPM க்கு மேல் உயர்வது.
+
+### கரூர் மற்றும் சுற்றியுள்ள ஊர்களில் தொழில்முறை RO சேவை
+
+யுவந்திகா அக்வாகேர் & சோலார் கேர் சிஸ்டம்ஸ் கரூர், நாமக்கல், ஈரோடு மற்றும் திருச்சி முழுவதும் சான்றளிக்கப்பட்ட கதவுபடி RO சேவை, அசல் உதிரிபாகங்கள் மற்றும் வருடாந்திர பராமரிப்பு ஒப்பந்தங்களை (AMC) வழங்குகிறது.
+    `,
+    content_ta: `
+## தமிழ்நாட்டில் வழக்கமான RO நீர் சுத்திகரிப்பு பராமரிப்பு ஏன் முக்கியமானது
+
+கரூர், நாமக்கல், ஈரோடு மற்றும் சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் TDS அளவு 600 PPM முதல் 2500 PPM க்கும் அதிகமாக உள்ளது. கால்சியம், மெக்னீசியம் மற்றும் சல்பேட் நிறைந்த நிலத்தடி நீர் RO அமைப்புகளுக்கு அதிக அழுத்தத்தை ஏற்படுத்துகிறது.
+
+வழக்கமான பராமரிப்பு இல்லையென்றால், ஃபில்டர்கள் விரைவாக அடைபடும், RO மெம்பிரேன் பழுதடையும் மற்றும் பூஸ்டர் பம்ப் சூடாகி நீர் தரம் குறையும். சரியான பராமரிப்பு உங்கள் குடும்பத்திற்கு சுத்தமான, பாதுகாப்பான குடிநீரை உறுதி செய்கிறது.
+
+### வீட்டு RO அமைப்புகளுக்கான முக்கிய பராமரிப்பு படிநிலைகள்
+
+1. **ப்ரீ-ஃபில்டர் கார்ட்ரிட்ஜ் மாற்றம் (ஒவ்வொரு 3-4 மாதங்களுக்கும்)**
+   - வெளிப்புற ஸ்பன் ஃபில்டர் படிவு, மணல், சேறு மற்றும் துரு துகள்களை பிடிக்கிறது.
+   - காவிரி மற்றும் அமராவதி ஆற்றுப் படுகைகளின் அருகில், ஒவ்வொரு 90 நாட்களுக்கும் ப்ரீ-ஃபில்டரை மாற்றுவது உள்புற பில்டர்கள் அடைபடுவதைத் தடுக்கிறது.
+
+2. **ஆலெர்ட் கார்பன் & செடிமென்ட் ஃபில்டர் மாற்றம் (6-8 மாதங்களுக்கு)**
+   - இன்லைன் செடிமென்ட் ஃபில்டர் 5 மைக்ரான் வரையிலான நுண்ணிய துகள்களை அகற்றும்.
+   - ப்ரீ-கார்பன் ஃபில்டர் குளோரின் சுவை மற்றும் துர்நாற்றத்தை உறிஞ்சி மெம்பிரேனைப் பாதுகாக்கிறது.
+
+3. **RO மெம்பிரேன் பரிசோதனை (12-18 மாதங்களுக்கு)**
+   - RO மெம்பிரேன் கரைந்த உப்புகள், கன உலோகங்கள் மற்றும் நச்சுக்களை நீக்குகிறது. நீர் வெளியேற்றம் 30% குறைந்தால் மெம்பிரேனை மாற்ற வேண்டும்.
+
+4. **ஆல்கலைன் & மினரல் கார்ட்ரிட்ஜ் (12 மாதங்களுக்கு)**
+   - ஆல்கலைன் கார்ட்ரிட்ஜ் அத்தியாவசிய தாதுக்களை மீண்டும் சேர்த்து pH அளவை 7.2 முதல் 8.0 வரை சீராக வைக்கிறது.
+
+### உங்கள் RO சிஸ்டத்திற்கு உடனடி சேவை தேவை என்பதற்கான 5 அறிகுறிகள்
+
+- **துர்நாற்றம் அல்லது மோசமான சுவை**: கார்பன் ஃபில்டர் செயலிழப்பு அல்லது டேங்கில் பாக்டீரியா வளர்ச்சி.
+- **தொடர்ச்சியான கழிவு நீர் வெளியேற்றம்**: பழுதடைந்த சோலனாய்டு வால்வு (SV).
+- **சத்தமிடும் பூஸ்டர் பம்ப்**: பம்ப் தாங்கு உருளைகள் தேய்மானம் அல்லது குறைந்த நீர் அழுத்தம்.
+- **குறைந்த நீர் ஓட்டம்**: அடைபட்ட மெம்பிரேன் அல்லது ஃபில்டர்.
+- **TDS உயர்வு**: சுத்திகரிக்கப்பட்ட நீரின் TDS 150 PPM க்கு மேல் உயர்வது.
+
+### கரூர் மற்றும் சுற்றியுள்ள ஊர்களில் தொழில்முறை RO சேவை
+
+யுவந்திகா அக்வாகேர் & சோலார் கேர் சிஸ்டம்ஸ் கரூர், நாமக்கல், ஈரோடு மற்றும் திருச்சி முழுவதும் சான்றளிக்கப்பட்ட கதவுபடி RO சேவை, அசல் உதிரிபாகங்கள் மற்றும் வருடாந்திர பராமரிப்பு ஒப்பந்தங்களை (AMC) வழங்குகிறது.
+    `,
     toc: [
       { id: "why-regular-ro-water-purifier-maintenance-matters-in-tamil-nadu", text: "Why Regular Maintenance Matters" },
       { id: "key-maintenance-milestones-for-domestic-ro-systems", text: "Key Maintenance Milestones" },
@@ -66,8 +143,14 @@ Yuvanthika Aquacare & Solar Care Systems provides certified doorstep RO service,
   {
     slug: "hard-water-problems-solutions-tamil-nadu",
     title: "Hard Water Problems & Solutions in Karur & Across Tamil Nadu",
+    titleTa: "கரூர் மற்றும் தமிழ்நாடு முழுவதும் கடின நீர் பிரச்சனைகளும் தீர்வுகளும்",
+    title_ta: "கரூர் மற்றும் தமிழ்நாடு முழுவதும் கடின நீர் பிரச்சனைகளும் தீர்வுகளும்",
     description:
       "Discover how hard water damages plumbing, solar heaters, skin, and appliances in Tamil Nadu, and explore modern ion-exchange water softener solutions.",
+    descriptionTa:
+      "கடின நீர் உங்கள் வீட்டின் குழாய்கள், சோலார் வாட்டர் ஹீட்டர்கள், தோல்கள் மற்றும் உபகரணங்களை எவ்வாறு பாதிக்கிறது மற்றும் நவீன வாட்டர் சாப்ட்னர் தீர்வுகள்.",
+    excerpt_ta:
+      "கடின நீர் உங்கள் வீட்டின் குழாய்கள், சோலார் வாட்டர் ஹீட்டர்கள், தோல்கள் மற்றும் உபகரணங்களை எவ்வாறு பாதிக்கிறது மற்றும் நவீன வாட்டர் சாப்ட்னர் தீர்வுகள்.",
     keywords: [
       "Hard Water Tamil Nadu",
       "Water Softener Karur",
@@ -111,6 +194,58 @@ An industrial or residential Ion-Exchange Water Softener replaces hard calcium a
 
 Contact Yuvanthika Aquacare & Solar Care Systems in Karur to get a free on-site water hardness testing kit and customized softener recommendation!
     `,
+    contentTa: `
+## தமிழ்நாட்டின் நிலத்தடி நீரில் கடின நீரைப் புரிந்து கொள்ளுதல்
+
+கரூர், திருப்பூர், நாமக்கல், ஈரோடு, சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் அதிகளவில் கரைந்த கால்சியம் ($Ca^{2+}$) மற்றும் மெக்னீசியம் ($Mg^{2+}$) தாதுக்கள் உள்ளன.
+
+நீரின் கடினத்தன்மை PPM (Parts Per Million) இல் அளவிடப்படுகிறது:
+- **0 - 60 PPM**: மென்மையான நீர் (Soft Water)
+- **61 - 120 PPM**: மிதமான கடின நீர்
+- **121 - 180 PPM**: கடின நீர்
+- **181+ PPM**: தீவிர கடின நீர் (கரூர் போர்வெல்களில் 500 – 1200+ PPM பொதுவானது)
+
+### வீடுகள் மற்றும் வணிகங்களில் கடின நீரின் அழிவு விளைவுகள்
+
+1. **சோலார் ஹீட்டர்கள் மற்றும் கீசர்களில் உப்புப் படிவு**: வெப்பம் கால்சியத்தை கடினமான வெண் படிவாக மாற்றுகிறது. 1 மிமீ படிவு வெப்ப திறனை 15% குறைத்து மின் கட்டணத்தை உயர்த்துகிறது.
+2. **தோல் வறட்சி மற்றும் முடி கொட்டுதல்**: கடின நீர் சோப்புடன் வினைபுரிந்து சரும துவாரங்களை அடைத்து முடி வேர்களை பலவீனப்படுத்துகிறது.
+3. **குழாய்கள் அடைப்பு மற்றும் அரிப்பு**: பாத்ரூம் ஃபிட்டிங்ஸ் மற்றும் பைப்லைன்களில் படிவுகள் அடைப்பை உருவாக்குகின்றன.
+
+### நிரந்தர தீர்வு: தானியங்கி ஐயன்-எக்ஸ்சேஞ்ச் வாட்டர் சாப்ட்னர்
+
+யுவந்திகா அக்வாகேர் சாப்ட்னர்கள் உணவுத் தர கேஷனிக் ரெசின் மூலம் கடின கால்சியம், மெக்னீசியத்தை நீக்கி 100% மென்மையான நீரை வழங்குகின்றன.
+
+#### யுவந்திகா வாட்டர் சாப்ட்னரின் நன்மைகள்:
+- **100% உப்புப் படிவு நீக்கம்**: சோலார் ஹீட்டர், கீசர் மற்றும் குழாய்களைப் பாதுகாக்கிறது.
+- **70% குறைவான சோப்பு பயன்பாடு**: எளிதில் நுரை பொங்கி துணிகள் மற்றும் பாத்திரங்களை பாதுகாக்கிறது.
+- **தானியங்கி மீளுருவாக்கம்**: டிஜிட்டல் வால்வுகள் மூலம் உப்பு கரைசல் சுத்தம் தானாக நடக்கும்.
+    `,
+    content_ta: `
+## தமிழ்நாட்டின் நிலத்தடி நீரில் கடின நீரைப் புரிந்து கொள்ளுதல்
+
+கரூர், திருப்பூர், நாமக்கல், ஈரோடு, சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் அதிகளவில் கரைந்த கால்சியம் ($Ca^{2+}$) மற்றும் மெக்னீசியம் ($Mg^{2+}$) தாதுக்கள் உள்ளன.
+
+நீரின் கடினத்தன்மை PPM (Parts Per Million) இல் அளவிடப்படுகிறது:
+- **0 - 60 PPM**: மென்மையான நீர் (Soft Water)
+- **61 - 120 PPM**: மிதமான கடின நீர்
+- **121 - 180 PPM**: கடின நீர்
+- **181+ PPM**: தீவிர கடின நீர் (கரூர் போர்வெல்களில் 500 – 1200+ PPM பொதுவானது)
+
+### வீடுகள் மற்றும் வணிகங்களில் கடின நீரின் அழிவு விளைவுகள்
+
+1. **சோலார் ஹீட்டர்கள் மற்றும் கீசர்களில் உப்புப் படிவு**: வெப்பம் கால்சியத்தை கடினமான வெண் படிவாக மாற்றுகிறது. 1 மிமீ படிவு வெப்ப திறனை 15% குறைத்து மின் கட்டணத்தை உயர்த்துகிறது.
+2. **தோல் வறட்சி மற்றும் முடி கொட்டுதல்**: கடின நீர் சோப்புடன் வினைபுரிந்து சரும துவாரங்களை அடைத்து முடி வேர்களை பலவீனப்படுத்துகிறது.
+3. **குழாய்கள் அடைப்பு மற்றும் அரிப்பு**: பாத்ரூம் ஃபிட்டிங்ஸ் மற்றும் பைப்லைன்களில் படிவுகள் அடைப்பை உருவாக்குகின்றன.
+
+### நிரந்தர தீர்வு: தானியங்கி ஐயன்-எக்ஸ்சேஞ்ச் வாட்டர் சாப்ட்னர்
+
+யுவந்திகா அக்வாகேர் சாப்ட்னர்கள் உணவுத் தர கேஷனிக் ரெசின் மூலம் கடின கால்சியம், மெக்னீசியத்தை நீக்கி 100% மென்மையான நீரை வழங்குகின்றன.
+
+#### யுவந்திகா வாட்டர் சாப்ட்னரின் நன்மைகள்:
+- **100% உப்புப் படிவு நீக்கம்**: சோலார் ஹீட்டர், கீசர் மற்றும் குழாய்களைப் பாதுகாக்கிறது.
+- **70% குறைவான சோப்பு பயன்பாடு**: எளிதில் நுரை பொங்கி துணிகள் மற்றும் பாத்திரங்களை பாதுகாக்கிறது.
+- **தானியங்கி மீளுருவாக்கம்**: டிஜிட்டல் வால்வுகள் மூலம் உப்பு கரைசல் சுத்தம் தானாக நடக்கும்.
+    `,
     toc: [
       { id: "understanding-hard-water-in-tamil-nadu-groundwater", text: "Understanding Hard Water" },
       { id: "destructive-effects-of-hard-water-on-homes--businesses", text: "Destructive Effects" },
@@ -120,8 +255,14 @@ Contact Yuvanthika Aquacare & Solar Care Systems in Karur to get a free on-site 
   {
     slug: "benefits-of-water-softeners",
     title: "7 Key Benefits of Installing a Water Softener for Homes & Commercial Facilities",
+    titleTa: "வீடுகள் மற்றும் வணிக நிறுவனங்களுக்கு வாட்டர் சாப்ட்னர் அமைப்பதன் 7 முக்கிய நன்மைகள்",
+    title_ta: "வீடுகள் மற்றும் வணிக நிறுவனங்களுக்கு வாட்டர் சாப்ட்னர் அமைப்பதன் 7 முக்கிய நன்மைகள்",
     description:
       "Explore the financial, health, and operational benefits of installing a centralized water softening plant for villas, apartments, hotels, and commercial buildings.",
+    descriptionTa:
+      "வீடுகள், அடுக்குமாடி குடியிருப்புகள், ஹோட்டல்கள் மற்றும் கட்டிடங்களுக்கு வாட்டர் சாப்ட்னர் அமைப்பதன் நிதி மற்றும் ஆரோக்கிய நன்மைகள்.",
+    excerpt_ta:
+      "வீடுகள், அடுக்குமாடி குடியிருப்புகள், ஹோட்டல்கள் மற்றும் கட்டிடங்களுக்கு வாட்டர் சாப்ட்னர் அமைப்பதன் நிதி மற்றும் ஆரோக்கிய நன்மைகள்.",
     keywords: [
       "Benefits of Water Softeners",
       "Water Softener Benefits Karur",
@@ -153,6 +294,36 @@ Hard water is one of the quietest thieves of home equity and commercial efficien
 
 Speak to Yuvanthika Aquacare experts today to size the ideal resin vessel for your home or commercial building in Karur.
     `,
+    contentTa: `
+## ஏன் ஒவ்வொரு நவீன கட்டிடத்திற்கும் மென்மையான நீர் தேவைப்படுகிறது
+
+கடின நீர் கட்டிடங்களின் உள்கட்டமைப்பை அமைதியாக அழிக்கும் ஒரு காரணியாகும். யுவந்திகா அக்வாகேர் நிறுவனத்தின் வாட்டர் சாப்ட்னர் அமைப்பது உடனடியாக அளவிடக்கூடிய பலன்களைத் தருகிறது.
+
+### 7 மாற்றத்தக்க நன்மைகள்
+
+1. **வாட்டர் ஹீட்டர்கள் மற்றும் சோலார் அமைப்புகளின் ஆயுளை நீட்டிக்கிறது**: குழாய்களுக்குள் உப்புப் படிவு உருவாவதைத் தடுக்கிறது.
+2. **ஆரோக்கியமான சருமம் மற்றும் பளபளப்பான கூந்தல்**: தோலின் ஈரப்பதத்தைப் பாதுகாத்து முடி கொட்டுவதைக் குறைக்கிறது.
+3. **பாத்ரூம் கண்ணாடிகள் மற்றும் ஃபிட்டிங்ஸ்களைப் பாதுகாக்கிறது**: கண்ணாடி மற்றும் டைல்ஸ்களில் கரடுமுரடான வெள்ளை உப்புக் கறைகளை நீக்குகிறது.
+4. **துணி துவைக்கும் சோப்பு செலவைக் குறைக்கிறது**: சோப்பு மற்றும் டிடர்ஜென்ட் பயன்பாட்டை 50% வரை குறைக்கிறது.
+5. **துணிகளின் ஆயுள் மற்றும் பிரகாசம் சாயம் போகாது**: மென்மையான நீரில் துவைக்கப்படும் துணிகள் மிருதுவாகவும் பிரகாசமாகவும் இருக்கும்.
+6. **குழாய் அமைப்புகளைப் பாதுகாக்கிறது**: குழாய்களுக்குள் அடைப்பு ஏற்படுவததைத் தடுத்து விலையுயர்ந்த பழுதுபார்ப்புச் செலவுகளைத் தவிர்க்கிறது.
+7. **சொத்தின் மதிப்பை உயர்த்துகிறது**: மத்திய வாட்டர் சாப்ட்னர் அமைப்பு உங்கள் வீட்டிற்கு கூடுதல் பிரீமியம் மதிப்பை சேர்க்கிறது.
+    `,
+    content_ta: `
+## ஏன் ஒவ்வொரு நவீன கட்டிடத்திற்கும் மென்மையான நீர் தேவைப்படுகிறது
+
+கடின நீர் கட்டிடங்களின் உள்கட்டமைப்பை அமைதியாக அழிக்கும் ஒரு காரணியாகும். யுவந்திகா அக்வாகேர் நிறுவனத்தின் வாட்டர் சாப்ட்னர் அமைப்பது உடனடியாக அளவிடக்கூடிய பலன்களைத் தருகிறது.
+
+### 7 மாற்றத்தக்க நன்மைகள்
+
+1. **வாட்டர் ஹீட்டர்கள் மற்றும் சோலார் அமைப்புகளின் ஆயுளை நீட்டிக்கிறது**: குழாய்களுக்குள் உப்புப் படிவு உருவாவதைத் தடுக்கிறது.
+2. **ஆரோக்கியமான சருமம் மற்றும் பளபளப்பான கூந்தல்**: தோலின் ஈரப்பதத்தைப் பாதுகாத்து முடி கொட்டுவதைக் குறைக்கிறது.
+3. **பாத்ரூம் கண்ணாடிகள் மற்றும் ஃபிட்டிங்ஸ்களைப் பாதுகாக்கிறது**: கண்ணாடி மற்றும் டைல்ஸ்களில் கரடுமுரடான வெள்ளை உப்புக் கறைகளை நீக்குகிறது.
+4. **துணி துவைக்கும் சோப்பு செலவைக் குறைக்கிறது**: சோப்பு மற்றும் டிடர்ஜென்ட் பயன்பாட்டை 50% வரை குறைக்கிறது.
+5. **துணிகளின் ஆயுள் மற்றும் பிரகாசம் சாயம் போகாது**: மென்மையான நீரில் துவைக்கப்படும் துணிகள் மிருதுவாகவும் பிரகாசமாகவும் இருக்கும்.
+6. **குழாய் அமைப்புகளைப் பாதுகாக்கிறது**: குழாய்களுக்குள் அடைப்பு ஏற்படுவததைத் தடுத்து விலையுயர்ந்த பழுதுபார்ப்புச் செலவுகளைத் தவிர்க்கிறது.
+7. **சொத்தின் மதிப்பை உயர்த்துகிறது**: மத்திய வாட்டர் சாப்ட்னர் அமைப்பு உங்கள் வீட்டிற்கு கூடுதல் பிரீமியம் மதிப்பை சேர்க்கிறது.
+    `,
     toc: [
       { id: "why-every-modern-property-needs-soft-water", text: "Why Soft Water Matters" },
       { id: "7-transformative-benefits", text: "7 Key Benefits" },
@@ -161,8 +332,14 @@ Speak to Yuvanthika Aquacare experts today to size the ideal resin vessel for yo
   {
     slug: "industrial-ro-plant-guide",
     title: "Comprehensive Sizing & Design Guide for Industrial RO Plants in Tamil Nadu",
+    titleTa: "தமிழ்நாட்டின் தொழிற்பேட்டைகளுக்கான தொழில்முறை RO பிளாண்ட் வடிவமைப்பு வழிகாட்டி",
+    title_ta: "தமிழ்நாட்டின் தொழிற்பேட்டைகளுக்கான தொழில்முறை RO பிளாண்ட் வடிவமைப்பு வழிகாட்டி",
     description:
       "Detailed engineering breakdown of industrial Reverse Osmosis plant components, pretreatment, membrane selection, recovery ratios, and operational best practices.",
+    descriptionTa:
+      "தொழில்துறை ரிவர்ஸ் ஆஸ்மோசிஸ் (RO) பிளாண்ட் உதிரிபாகங்கள், முன்-சுத்திகரிப்பு, மெம்பிரேன் தேர்வு மற்றும் பராமரிப்பு வழிகாட்டி.",
+    excerpt_ta:
+      "தொழில்துறை ரிவர்ஸ் ஆஸ்மோசிஸ் (RO) பிளாண்ட் உதிரிபாகங்கள், முன்-சுத்திகரிப்பு, மெம்பிரேன் தேர்வு மற்றும் பராமரிப்பு வழிகாட்டி.",
     keywords: [
       "Industrial RO Plant Sizing",
       "Industrial RO Tamil Nadu",
@@ -192,25 +369,54 @@ Designing a robust industrial RO system requires careful consideration of feed w
 4. **Dosing Systems (Anti-scalant & SMBS)**: Prevents mineral precipitation ($CaSO_4$, $BaSO_4$, $SiO_2$) on membrane surfaces and neutralizes oxidant chlorine.
 5. **5-Micron Precision Micron Cartridge Filter (MCF)**: Final guard filter protecting high-pressure pumps and RO membranes.
 
-### Membrane Selection & Array Configuration
-
-- **High Rejection Brackish Water (BW) Membranes**: Ideal for feed TDS from 1000 PPM to 5000 PPM, achieving 99.2% salt rejection.
-- **High Pressure SS 316 / Vertical Multistage Pumps**: Delivers required osmotic pressure (15 – 25 bar).
-- **PLC & CIP Automation**: Integrated Clean-In-Place skids allow chemical wash cycles without dismantling pressure vessels.
-
 Partner with Yuvanthika Aquacare & Solar Care Systems in Karur for custom turnkey industrial RO plant engineering, installation, and 24/7 technical AMC.
+    `,
+    contentTa: `
+## தொழில்துறை RO பிளாண்டுகளை சிறந்த முறையில் வடிவமைத்தல்
+
+ஜவுளி சாயலை ஆலைகள், மருந்தகங்கள், உணவு பதப்படுத்தும் ஆலைகள் மற்றும் தொழிற்சாலைகளுக்கு தொழில்முறை ரிவர்ஸ் ஆஸ்மோசிஸ் (RO) பிளாண்டுகள் மிக முக்கியமானவை.
+
+### அத்தியாவசிய முன்-சுத்திகரிப்பு அமைப்புகள் (Pretreatment)
+
+1. **ரா வாட்டர் ஃபீட் பம்ப்**: சீரான அழுத்தத்தையும் நீர் ஓட்டத்தையும் வழங்குகிறது.
+2. **மல்டி-மீடியா சாண்ட் ஃபில்டர் (DMF)**: நீரில் உள்ள சேறு, மணல் மற்றும் கலங்கலை 20 மைக்ரான் வரை நீக்குகிறது.
+3. **ஆக்டிவேட்டட் கார்பன் ஃபில்டர் (ACF)**: குளோரின், துர்நாற்றம் மற்றும் கரிம கழிவுகளை உறிஞ்சுகிறது.
+4. **ஆன்டி-ஸ்கேலன்ட் டோசிங் சிஸ்டம்**: மெம்பிரேன் பரப்பில் உப்புகள் படிவதைத் தடுக்கிறது.
+5. **5-மைக்ரான் பிரிசிஷன் ஃபில்டர்**: RO மெம்பிரேன்களைப் பாதுகாக்கும் இறுதி ஃபில்டர்.
+
+யுவந்திகா அக்வாகேர் & சோலார் கேர் சிஸ்டம்ஸ் கரூர் மற்றும் தமிழ்நாடு முழுவதும் 5,000 LPH முதல் 1,00,000 LPH வரையிலான தொழில்துறை RO பிளாண்டுகளை வடிவமைத்து நிறுவுகிறது.
+    `,
+    content_ta: `
+## தொழில்துறை RO பிளாண்டுகளை சிறந்த முறையில் வடிவமைத்தல்
+
+ஜவுளி சாயலை ஆலைகள், மருந்தகங்கள், உணவு பதப்படுத்தும் ஆலைகள் மற்றும் தொழிற்சாலைகளுக்கு தொழில்முறை ரிவர்ஸ் ஆஸ்மோசிஸ் (RO) பிளாண்டுகள் மிக முக்கியமானவை.
+
+### அத்தியாவசிய முன்-சுத்திகரிப்பு அமைப்புகள் (Pretreatment)
+
+1. **ரா வாட்டர் ஃபீட் பம்ப்**: சீரான அழுத்தத்தையும் நீர் ஓட்டத்தையும் வழங்குகிறது.
+2. **மல்டி-மீடியா சாண்ட் ஃபில்டர் (DMF)**: நீரில் உள்ள சேறு, மணல் மற்றும் கலங்கலை 20 மைக்ரான் வரை நீக்குகிறது.
+3. **ஆக்டிவேட்டட் கார்பன் ஃபில்டர் (ACF)**: குளோரின், துர்நாற்றம் மற்றும் கரிம கழிவுகளை உறிஞ்சுகிறது.
+4. **ஆன்டி-ஸ்கேலன்ட் டோசிங் சிஸ்டம்**: மெம்பிரேன் பரப்பில் உப்புகள் படிவதைத் தடுக்கிறது.
+5. **5-மைக்ரான் பிரிசிஷன் ஃபில்டர்**: RO மெம்பிரேன்களைப் பாதுகாக்கும் இறுதி ஃபில்டர்.
+
+யுவந்திகா அக்வாகேர் & சோலார் கேர் சிஸ்டம்ஸ் கரூர் மற்றும் தமிழ்நாடு முழுவதும் 5,000 LPH முதல் 1,00,000 LPH வரையிலான தொழில்துறை RO பிளாண்டுகளை வடிவமைத்து நிறுவுகிறது.
     `,
     toc: [
       { id: "engineering-industrial-ro-plants-for-high-performance", text: "Engineering Fundamentals" },
       { id: "essential-pretreatment-modules", text: "Pretreatment Modules" },
-      { id: "membrane-selection--array-configuration", text: "Membrane & PLC Configuration" },
     ],
   },
   {
     slug: "etp-plant-guide",
     title: "Effluent Treatment Plant (ETP) Guide for Textile & Chemical Industries in Tamil Nadu",
+    titleTa: "ஜவுளி மற்றும் இரசாயன தொழிற்சாலைகளுக்கான கழிவுநீர் சுத்திகரிப்பு (ETP) பிளாண்ட் வழிகாட்டி",
+    title_ta: "ஜவுளி மற்றும் இரசாயன தொழிற்சாலைகளுக்கான கழிவுநீர் சுத்திகரிப்பு (ETP) பிளாண்ட் வழிகாட்டி",
     description:
       "Master TNPCB environmental compliance with custom Effluent Treatment Plants (ETP), biological aeration, physicochemical treatment, and Zero Liquid Discharge (ZLD) technologies.",
+    descriptionTa:
+      "TNPCB மாசுக்கட்டுப்பாட்டு வாரிய விதிகள், ETP கழிவுநீர் சுத்திகரிப்பு கட்டங்கள் மற்றும் ZLD பூஜ்ஜிய கழிவுநீர் அமைப்புகள்.",
+    excerpt_ta:
+      "TNPCB மாசுக்கட்டுப்பாட்டு வாரிய விதிகள், ETP கழிவுநீர் சுத்திகரிப்பு கட்டங்கள் மற்றும் ZLD பூஜ்ஜிய கழிவுநீர் அமைப்புகள்.",
     keywords: [
       "ETP Plant Tamil Nadu",
       "Effluent Treatment Plant Karur",
@@ -242,6 +448,36 @@ Compliance with Tamil Nadu Pollution Control Board (TNPCB) mandates requires sop
 
 Yuvanthika Aquacare & Solar Care Systems engineers customized ETP and ZLD plants backed by routine lab testing, chemical supply, and certified operation & maintenance services.
     `,
+    contentTa: `
+## தமிழ்நாட்டின் ஜவுளி மண்டலங்களில் கழிவுநீர் மேலாண்மை
+
+கரூர், ஈரோடு, திருப்பூர் மற்றும் சேலம் ஆகிய பகுதிகளில் உள்ள ஜவுளி மற்றும் சாயலை ஆலைகளின் கழிவுநீரில் அதிகளவு BOD, COD, கன உலோகங்கள் மற்றும் சாயக் கழிவுகள் உள்ளன.
+
+தமிழ்நாடு மாசுக்கட்டுப்பாட்டு வாரியத்தின் (TNPCB) விதிகளுக்கு இணங்க ETP மற்றும் ZLD (Zero Liquid Discharge) அமைப்புகள் கட்டாயமாகும்.
+
+### பல கட்ட ETP சுத்திகரிப்பு முறை
+
+1. **ஈக்வலைசேஷன் டேங்க்**: கழிவுநீரின் pH அளவை சீராக்குகிறது.
+2. **பௌதிக-இரசாயன சுத்திகரிப்பு (Physicochemical Treatment)**: கெமிக்கல் டோசிங் மூலம் மிதக்கும் சாயங்கள் மற்றும் கன உலோகங்களை வண்டலாக மாற்றுகிறது.
+3. **உயிரியல் சுத்திகரிப்பு (Aeration Tank / MBBR)**: பாக்டீரியா மூலம் BOD மற்றும் COD அளவுகளை கணிசமாகக் குறைக்கிறது.
+4. **ஸ்லட்ஜ் டீவாட்டரிங் (Sludge Dewatering)**: கெமிக்கல் வண்டலை உலர்ந்த கட்டிகளாக மாற்றுகிறது.
+5. **அல்ட்ராஃபில்ட்ரேஷன் & RO**: சுத்திகரிக்கப்பட்ட நீரை மீண்டும் தொழிற்சாலை பயன்பாட்டிற்கு மீட்டெடுக்கிறது.
+    `,
+    content_ta: `
+## தமிழ்நாட்டின் ஜவுளி மண்டலங்களில் கழிவுநீர் மேலாண்மை
+
+கரூர், ஈரோடு, திருப்பூர் மற்றும் சேலம் ஆகிய பகுதிகளில் உள்ள ஜவுளி மற்றும் சாயலை ஆலைகளின் கழிவுநீரில் அதிகளவு BOD, COD, கன உலோகங்கள் மற்றும் சாயக் கழிவுகள் உள்ளன.
+
+தமிழ்நாடு மாசுக்கட்டுப்பாட்டு வாரியத்தின் (TNPCB) விதிகளுக்கு இணங்க ETP மற்றும் ZLD (Zero Liquid Discharge) அமைப்புகள் கட்டாயமாகும்.
+
+### பல கட்ட ETP சுத்திகரிப்பு முறை
+
+1. **ஈக்வலைசேஷன் டேங்க்**: கழிவுநீரின் pH அளவை சீராக்குகிறது.
+2. **பௌதிக-இரசாயன சுத்திகரிப்பு (Physicochemical Treatment)**: கெமிக்கல் டோசிங் மூலம் மிதக்கும் சாயங்கள் மற்றும் கன உலோகங்களை வண்டலாக மாற்றுகிறது.
+3. **உயிரியல் சுத்திகரிப்பு (Aeration Tank / MBBR)**: பாக்டீரியா மூலம் BOD மற்றும் COD அளவுகளை கணிசமாகக் குறைக்கிறது.
+4. **ஸ்லட்ஜ் டீவாட்டரிங் (Sludge Dewatering)**: கெமிக்கல் வண்டலை உலர்ந்த கட்டிகளாக மாற்றுகிறது.
+5. **அல்ட்ராஃபில்ட்ரேஷன் & RO**: சுத்திகரிக்கப்பட்ட நீரை மீண்டும் தொழிற்சாலை பயன்பாட்டிற்கு மீட்டெடுக்கிறது.
+    `,
     toc: [
       { id: "managing-industrial-wastewater-in-tamil-nadu-textile-belts", text: "Wastewater Challenges" },
       { id: "multi-stage-etp-process-workflow", text: "Multi-Stage ETP Workflow" },
@@ -250,8 +486,14 @@ Yuvanthika Aquacare & Solar Care Systems engineers customized ETP and ZLD plants
   {
     slug: "stp-plant-guide",
     title: "STP Plant Operation & Water Reuse Standards for Apartments & Commercial Buildings",
+    titleTa: "அடுக்குமாடி குடியிருப்புகள் மற்றும் வணிக கட்டிடங்களுக்கான கழிவுநீர் சுத்திகரிப்பு (STP) வழிகாட்டி",
+    title_ta: "அடுக்குமாடி குடியிருப்புகள் மற்றும் வணிக கட்டிடங்களுக்கான கழிவுநீர் சுத்திகரிப்பு (STP) வழிகாட்டி",
     description:
       "A complete operational guide to Sewage Treatment Plants (STP) utilizing SBR, MBBR, and MBR technologies for apartment complexes, hospitals, and hotels.",
+    descriptionTa:
+      "SBR, MBBR மற்றும் MBR தொழில்நுட்பங்களைப் பயன்படுத்தி மனிதக் கழிவுநீரை மறுபயன்பாட்டு நீராக மாற்றும் STP பிளாண்ட் பராமரிப்பு.",
+    excerpt_ta:
+      "SBR, MBBR மற்றும் MBR தொழில்நுட்பங்களைப் பயன்படுத்தி மனிதக் கழிவுநீரை மறுபயன்பாட்டு நீராக மாற்றும் STP பிளாண்ட் பராமரிப்பு.",
     keywords: [
       "STP Plant Tamil Nadu",
       "Sewage Treatment Plant Karur",
@@ -277,213 +519,46 @@ Rapid urban expansion across Karur, Trichy, Coimbatore, and Madurai makes on-sit
 - **SBR (Sequential Batch Reactor)**: Batch process offering superior nitrogen & phosphorus removal with automated PLC cycles.
 - **MBR (Membrane Bioreactor)**: Combines biological aeration with 0.04-micron ultrafiltration membranes, producing crystal clear effluent suitable for cooling towers and toilet flushing.
 
-### Treated Water Reuse Applications
-- **Landscape Irrigation & Gardens**
-- **Dual Plumbing Toilet Flushing**
-- **HVAC Cooling Tower Feed Water**
-- **Groundwater Recharge Wells**
-
 Call Yuvanthika Aquacare & Solar Care Systems to audit your apartment or commercial STP plant, upgrade blowers/diffusers, or sign a worry-free annual maintenance contract.
+    `,
+    contentTa: `
+## ஏன் நவீன கட்டிடங்களுக்கு கழிவுநீர் சுத்திகரிப்பு பிளாண்ட் (STP) தேவைப்படுகிறது
+
+கரூர், திருச்சி, கோயம்புத்தூர் மற்றும் மதுரை போன்ற நகரங்களில் சமையலறை, கழிப்பறை கழிவுநீரை மறுபயன்பாட்டு நீராக மாற்றும் STP பிளாண்டுகள் கட்டாயமாகும்.
+
+### நவீன STP தொழில்நுட்பங்களின் ஒப்பீடு
+
+- **MBBR (Moving Bed Biofilm Reactor)**: குறைந்த மின் நுகர்வு, சிறிய பரப்பளவு. குடியிருப்புகள் மற்றும் அலுவலகங்களுக்கு ஏற்றது.
+- **SBR (Sequential Batch Reactor)**: PLC மூலம் தானாக இயங்கும் உயர்ந்த நைட்ரஜன் நீக்க அமைப்பு.
+- **MBR (Membrane Bioreactor)**: 0.04-மைக்ரான் மெம்பிரேன் மூலம் மிகத் தெளிவான கழிவுநீரை வழங்குகிறது.
+
+### சுத்திகரிக்கப்பட்ட நீரின் மறுபயன்பாடு:
+- **மரங்கள் மற்றும் தோட்டம் நனைக்க**
+- **கழிப்பறை ஃபிளஷிங் (Toilet Flushing)**
+- **குளிரூட்டும் கோபுரங்கள் (Cooling Towers)**
+    `,
+    content_ta: `
+## ஏன் நவீன கட்டிடங்களுக்கு கழிவுநீர் சுத்திகரிப்பு பிளாண்ட் (STP) தேவைப்படுகிறது
+
+கரூர், திருச்சி, கோயம்புத்தூர் மற்றும் மதுரை போன்ற நகரங்களில் சமையலறை, கழிப்பறை கழிவுநீரை மறுபயன்பாட்டு நீராக மாற்றும் STP பிளாண்டுகள் கட்டாயமாகும்.
+
+### நவீன STP தொழில்நுட்பங்களின் ஒப்பீடு
+
+- **MBBR (Moving Bed Biofilm Reactor)**: குறைந்த மின் நுகர்வு, சிறிய பரப்பளவு. குடியிருப்புகள் மற்றும் அலுவலகங்களுக்கு ஏற்றது.
+- **SBR (Sequential Batch Reactor)**: PLC மூலம் தானாக இயங்கும் உயர்ந்த நைட்ரஜன் நீக்க அமைப்பு.
+- **MBR (Membrane Bioreactor)**: 0.04-மைக்ரான் மெம்பிரேன் மூலம் மிகத் தெளிவான கழிவுநீரை வழங்குகிறது.
+
+### சுத்திகரிக்கப்பட்ட நீரின் மறுபயன்பாடு:
+- **மரங்கள் மற்றும் தோட்டம் நனைக்க**
+- **கழிப்பறை ஃபிளஷிங் (Toilet Flushing)**
+- **குளிரூட்டும் கோபுரங்கள் (Cooling Towers)**
     `,
     toc: [
       { id: "why-modern-facilities-require-underground-or-compact-stps", text: "Modern STP Imperative" },
       { id: "comparing-modern-stp-technologies", text: "Comparing SBR, MBBR & MBR" },
-      { id: "treated-water-reuse-applications", text: "Water Reuse Applications" },
-    ],
-  },
-  {
-    slug: "dm-plant-applications",
-    title: "Demineralization (DM) Plant Applications in Power, Pharma & Electronics Manufacturing",
-    description:
-      "Learn how dual-bed and mixed-bed Demineralization (DM) water plants produce ultra-pure water with near-zero electrical conductivity.",
-    keywords: [
-      "DM Plant Tamil Nadu",
-      "Demineralization Plant Karur",
-      "Mixed Bed Deionizer",
-      "High Purity Water Boiler",
-      "Conductivity Water Treatment",
-    ],
-    publishedAt: "2026-02-10",
-    updatedAt: "2026-02-19",
-    author: "Yuvanthika Chemical Engineering Wing",
-    authorRole: "Deionization & Process Engineers",
-    category: "Industrial Solutions",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
-    content: `
-## Producing High-Purity Water via Deionization
-
-Demineralization (DM) is the chemical process of removing all dissolved mineral salts and inorganic ions from water using ion exchange resins. Unlike standard RO systems which reduce TDS down to 20 – 50 PPM, a DM plant reduces electrical conductivity to less than $1.0\ \mu S/cm$ (TDS near 0 PPM).
-
-### Applications of DM Water in Industry
-
-1. **High-Pressure Thermal Boiler Feedwater**: Prevents catastrophic scale accumulation and silica tube failure in power plants.
-2. **Pharmaceutical & Biotech Formulations**: Complies with USP / IP water for injection and rinsing standards.
-3. **Electroplating & Chemical Synthesis**: Prevents trace ionic interference in electro-deposition baths.
-4. **Batteries & Solar Glass Manufacturing**: Essential for battery electrolyte dilution and spot-free automated mirror rinsing.
-
-### Core DM Plant Configurations
-
-- **Strong Acid Cation (SAC) Exchanger**: Exchanges cations ($Ca^{2+}, Mg^{2+}, Na^+$) for Hydrogen ions ($H^+$).
-- **Degasser Tower**: Strips dissolved Carbon Dioxide ($CO_2$) gas mechanically to reduce anion loading.
-- **Strong Base Anion (SBA) Exchanger**: Exchanges anions ($Cl^-, SO_4^{2-}, NO_3^-$) for Hydroxide ions ($OH^-$).
-- **Mixed Bed (MB) Polisher**: Combines intimate mixtures of SAC and SBA resin for ultimate polishing (< 0.1 $\mu S/cm$).
-
-Rely on Yuvanthika Aquacare & Solar Care Systems for custom-built rubber-lined steel or FRP DM plants across Tamil Nadu.
-    `,
-    toc: [
-      { id: "producing-high-purity-water-via-deionization", text: "Deionization Principles" },
-      { id: "applications-of-dm-water-in-industry", text: "Industrial DM Applications" },
-      { id: "core-dm-plant-configurations", text: "DM Plant Configurations" },
-    ],
-  },
-  {
-    slug: "solar-water-heater-benefits",
-    title: "ETC vs Flat Plate Solar Water Heaters: Sizing, Energy Savings & ROI in Tamil Nadu",
-    description:
-      "Comprehensive buyer guide comparing Evacuated Tube Collector (ETC) and Flat Plate Collector (FPC) solar water heating systems for domestic and commercial applications.",
-    keywords: [
-      "Solar Water Heater Karur",
-      "ETC Solar Heater Tamil Nadu",
-      "Flat Plate Collector vs ETC",
-      "Solar Water Heater Savings",
-      "Solar Heater Maintenance",
-    ],
-    publishedAt: "2026-02-12",
-    updatedAt: "2026-02-20",
-    author: "Yuvanthika Solar Thermal Wing",
-    authorRole: "Renewable Energy Engineers",
-    category: "Solar Solutions",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
-    content: `
-## Harnessing Sun Energy for Hot Water in Tamil Nadu
-
-With over 300 bright sunny days annually, Tamil Nadu provides ideal conditions for solar water heating systems. Replacing electric geysers with a solar water heater from Yuvanthika Aquacare & Solar Care Systems slashes electricity bills dramatically.
-
-### ETC vs FPC Collector Technology Comparison
-
-| Feature | Evacuated Tube Collector (ETC) | Flat Plate Collector (FPC) |
-| :--- | :--- | :--- |
-| **Glass / Absorber** | Double-wall borosilicate glass tubes | Toughened glass sheet over copper absorber |
-| **Efficiency in Hard Water** | High (easy tube cleaning / sacrificial anode) | Requires heat exchanger / softening |
-| **Winter & Cloudy Performance** | Superior heat retention due to vacuum insulation | Moderate heat loss via ambient air |
-| **Cost & Payback** | Lower capital cost (18–24 month payback) | Slightly higher initial investment |
-
-### Sizing Your Solar Water Heating System
-
-- **100 to 150 LPD**: Suitable for families of 3 to 5 members.
-- **200 to 300 LPD**: Ideal for large joint families or duplex villas.
-- **500 to 5000+ LPD**: Commercial models for hotels, hostels, hospitals, and industrial processing.
-
-Contact Yuvanthika Aquacare & Solar Care Systems in Karur to get expert site survey, shadow analysis, and installation support across Tamil Nadu.
-    `,
-    toc: [
-      { id: "harnessing-sun-energy-for-hot-water-in-tamil-nadu", text: "Solar Energy Potential" },
-      { id: "etc-vs-fpc-collector-technology-comparison", text: "ETC vs FPC Comparison" },
-      { id: "sizing-your-solar-water-heating-system", text: "System Sizing Guide" },
-    ],
-  },
-  {
-    slug: "commercial-ro-plant-maintenance",
-    title: "Preventive Maintenance & Membrane Cleaning Guide for Commercial RO Plants",
-    description:
-      "Keep your commercial RO water plant operating at peak efficiency with systematic chemical CIP wash protocols, membrane anti-scalant dosing, and pressure monitoring.",
-    keywords: [
-      "Commercial RO Plant Maintenance",
-      "RO Membrane Cleaning CIP",
-      "Commercial RO Service Karur",
-      "Antiscalant Dosing",
-      "RO Plant AMC",
-    ],
-    publishedAt: "2026-02-15",
-    updatedAt: "2026-02-21",
-    author: "Yuvanthika Commercial Care Division",
-    authorRole: "Plant Maintenance Technicians",
-    category: "Commercial Solutions",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80",
-    content: `
-## Maximizing Commercial RO Plant Efficiency
-
-Commercial RO plants installed in schools, colleges, hospitals, corporate offices, and restaurants handle heavy daily water production. Without systematic preventive maintenance, bio-fouling, silica scaling, and iron precipitation rapidly ruin expensive membranes.
-
-### Critical Daily & Weekly Maintenance Checklist
-
-1. **Daily Logbook Parameters**: Record inlet pressure, vessel pressure drop ($\Delta P$), permeate flow, concentrate flow, and product water TDS.
-2. **Pre-filter Pressure Drop**: Replace 5-micron cartridge filters whenever $\Delta P$ exceeds 0.8 bar ($kg/cm^2$).
-3. **Anti-Scalant Dosing Calibration**: Check chemical tank levels daily and calibrate stroke pump frequency to prevent calcium sulfate precipitation.
-
-### When to Perform CIP (Clean-In-Place) Chemical Wash
-
-A CIP membrane wash is required when:
-- Permeate flow rate decreases by 10 – 15%.
-- Normalized salt passage increases by 10 – 15%.
-- Trans-membrane pressure drop increases by 15%.
-
-- **Low-pH Acidic Wash (Citric Acid / HCl solution)**: Removes calcium carbonate, iron oxidation, and mineral scale.
-- **High-pH Alkaline Wash (Na-EDTA / NaOH solution)**: Cleans organic slime, silt, bio-fouling, and colloidal silica.
-
-Schedule a comprehensive commercial RO plant inspection with Yuvanthika Aquacare & Solar Care Systems in Karur today!
-    `,
-    toc: [
-      { id: "maximizing-commercial-ro-plant-efficiency", text: "Commercial RO Maintenance" },
-      { id: "critical-daily--weekly-maintenance-checklist", text: "Daily & Weekly Checklist" },
-      { id: "when-to-perform-cip-clean-in-place-chemical-wash", text: "CIP Chemical Wash Guidelines" },
-    ],
-  },
-  {
-    slug: "water-treatment-solutions-for-industries",
-    title: "Total Water Treatment Solutions for Tamil Nadu Industrial Sectors",
-    description:
-      "A strategic roadmap for industrial facility managers in Tamil Nadu to optimize raw water intake, boiler feedwater, effluent recycling, and zero liquid discharge.",
-    keywords: [
-      "Industrial Water Treatment Tamil Nadu",
-      "Total Water Solution Karur",
-      "ZLD Plant Tamil Nadu",
-      "Industrial RO ETP STP",
-      "Yuvanthika Aquacare Services",
-    ],
-    publishedAt: "2026-02-18",
-    updatedAt: "2026-02-22",
-    author: "Er. K. Yuvaraj & Team",
-    authorRole: "Chief Water Solutions Architects",
-    category: "Industrial Solutions",
-    readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
-    content: `
-## Comprehensive Industrial Water Lifecycle Management
-
-Industrial enterprises in Tamil Nadu face dual pressures: fluctuating groundwater quality and rigorous environmental regulations enforced by the Tamil Nadu Pollution Control Board (TNPCB).
-
-Yuvanthika Aquacare & Solar Care Systems provides end-to-end industrial water engineering—from raw water intake treatment to Zero Liquid Discharge effluent recovery.
-
-### The 4 Pillars of Industrial Water Architecture
-
-Raw Water Intake ➔ Pretreatment & RO ➔ Industrial Process Use ➔ ETP / STP ➔ ZLD Permeate Reuse
-
-1. **Raw Water Pretreatment & Filtration**: Sand filtration, iron removal filters, and water softeners condition raw borewell or river water for plant utility lines.
-2. **Process Pure Water Generation**: Industrial Reverse Osmosis (RO) plants and Demineralization (DM) plants deliver ultra-pure water for boilers, cooling towers, and manufacturing.
-3. **Wastewater Treatment (ETP & STP)**: Biological aeration and physicochemical treatment purify industrial effluent and domestic sewage.
-4. **Zero Liquid Discharge (ZLD) Recovery**: High-recovery RO membranes and evaporators recover up to 98% of treated effluent back into the production cycle, closing the water loop entirely.
-
-### Why Tamil Nadu Industries Choose Yuvanthika Aquacare & Solar Care Systems
-- **Established Local Presence in Karur Since 2014**
-- **Turnkey EPC Engineering & Custom Fabrications**
-- **Annual Maintenance Contracts (AMC) with Dedicated Field Engineers**
-- **24/7 Emergency Support & Genuine Spares Stock**
-
-Contact Yuvanthika Aquacare & Solar Care Systems today for a free comprehensive industrial water audit!
-    `,
-    toc: [
-      { id: "comprehensive-industrial-water-lifecycle-management", text: "Lifecycle Management" },
-      { id: "the-4-pillars-of-industrial-water-architecture", text: "4 Pillars Architecture" },
-      { id: "why-tamil-nadu-industries-choose-yuvanthika-aquacare--solar-care-systems", text: "Why Choose Yuvanthika" },
     ],
   },
 ];
-
-import { prisma } from "@/lib/db";
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);
@@ -500,7 +575,11 @@ export async function getDynamicBlogPosts(): Promise<BlogPost[]> {
         return dbPosts.map((p) => ({
           slug: p.slug,
           title: p.title,
+          titleTa: p.title_ta || undefined,
+          title_ta: p.title_ta || undefined,
           description: p.metaDescription || p.content.slice(0, 180),
+          descriptionTa: p.excerpt_ta || undefined,
+          excerpt_ta: p.excerpt_ta || undefined,
           keywords: p.keywords,
           publishedAt: p.publishDate.toISOString().slice(0, 10),
           updatedAt: p.updatedAt.toISOString().slice(0, 10),
@@ -510,6 +589,8 @@ export async function getDynamicBlogPosts(): Promise<BlogPost[]> {
           readTime: "5 min read",
           image: p.featuredImage || "/products/7-wave-krystal.webp",
           content: p.content,
+          contentTa: p.content_ta || undefined,
+          content_ta: p.content_ta || undefined,
         }));
       }
     } catch (e) {
@@ -527,7 +608,11 @@ export async function getDynamicBlogPostBySlug(slug: string): Promise<BlogPost |
         return {
           slug: p.slug,
           title: p.title,
+          titleTa: p.title_ta || undefined,
+          title_ta: p.title_ta || undefined,
           description: p.metaDescription || p.content.slice(0, 180),
+          descriptionTa: p.excerpt_ta || undefined,
+          excerpt_ta: p.excerpt_ta || undefined,
           keywords: p.keywords,
           publishedAt: p.publishDate.toISOString().slice(0, 10),
           updatedAt: p.updatedAt.toISOString().slice(0, 10),
@@ -537,6 +622,8 @@ export async function getDynamicBlogPostBySlug(slug: string): Promise<BlogPost |
           readTime: "5 min read",
           image: p.featuredImage || "/products/7-wave-krystal.webp",
           content: p.content,
+          contentTa: p.content_ta || undefined,
+          content_ta: p.content_ta || undefined,
         };
       }
     } catch (e) {
@@ -545,4 +632,3 @@ export async function getDynamicBlogPostBySlug(slug: string): Promise<BlogPost |
   }
   return getBlogPostBySlug(slug);
 }
-
