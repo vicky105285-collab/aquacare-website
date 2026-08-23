@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductCompareBar } from "@/components/ProductCompareBar";
+import { ProductComparisonModal } from "@/components/ProductComparisonModal";
 import type { ProductItem, ProductCategory } from "@/lib/site/types";
 import { Search, SlidersHorizontal, Filter, Check } from "lucide-react";
 
@@ -19,6 +21,29 @@ export function ProductCatalog({ items, categories, enquiryWhatsappHref, initial
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  // Comparison State
+  const [comparedProducts, setComparedProducts] = useState<ProductItem[]>([]);
+  const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
+
+  const handleToggleCompare = (product: ProductItem) => {
+    const pKey = product.slug || product.name;
+    const exists = comparedProducts.some((p) => (p.slug || p.name) === pKey);
+
+    if (exists) {
+      setComparedProducts((prev) => prev.filter((p) => (p.slug || p.name) !== pKey));
+    } else {
+      if (comparedProducts.length >= 3) {
+        alert("You can compare up to 3 products at a time.");
+        return;
+      }
+      setComparedProducts((prev) => [...prev, product]);
+    }
+  };
+
+  const handleRemoveCompare = (slugOrName: string) => {
+    setComparedProducts((prev) => prev.filter((p) => (p.slug || p.name) !== slugOrName));
+  };
 
   const filteredItems = useMemo(() => {
     return items.filter((item) => {
@@ -162,11 +187,21 @@ export function ProductCatalog({ items, categories, enquiryWhatsappHref, initial
         ) : (
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {visibleItems.map((p, i) => (
-                <AnimatedSection key={`${p.name}-${i}`} delay={(i % ITEMS_PER_PAGE) * 40}>
-                  <ProductCard product={p} enquiryWhatsappHref={enquiryWhatsappHref} priority={i < 4} />
-                </AnimatedSection>
-              ))}
+              {visibleItems.map((p, i) => {
+                const pKey = p.slug || p.name;
+                const isCompared = comparedProducts.some((cp) => (cp.slug || cp.name) === pKey);
+                return (
+                  <AnimatedSection key={`${p.name}-${i}`} delay={(i % ITEMS_PER_PAGE) * 40}>
+                    <ProductCard 
+                      product={p} 
+                      enquiryWhatsappHref={enquiryWhatsappHref} 
+                      priority={i < 4}
+                      onToggleCompare={handleToggleCompare}
+                      isCompared={isCompared}
+                    />
+                  </AnimatedSection>
+                );
+              })}
             </div>
 
             {/* Load More Button */}
@@ -185,6 +220,20 @@ export function ProductCatalog({ items, categories, enquiryWhatsappHref, initial
             )}
           </>
         )}
+
+        {/* Product Comparison Floating Bar & Modal */}
+        <ProductCompareBar
+          selectedProducts={comparedProducts}
+          onOpenModal={() => setIsCompareModalOpen(true)}
+          onClearAll={() => setComparedProducts([])}
+        />
+
+        <ProductComparisonModal
+          isOpen={isCompareModalOpen}
+          onClose={() => setIsCompareModalOpen(false)}
+          products={comparedProducts}
+          onRemoveProduct={handleRemoveCompare}
+        />
       </div>
     </section>
   );

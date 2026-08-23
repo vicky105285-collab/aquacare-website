@@ -6,6 +6,11 @@ import { CTASection } from "@/components/CTASection";
 import { Contact } from "@/components/Contact";
 import { BrandsWeService } from "@/components/BrandsWeService";
 import { ServiceArea } from "@/components/ServiceArea";
+import { TrustBadgesSection } from "@/components/TrustBadgesSection";
+import { FreeWaterTestingSection } from "@/components/FreeWaterTestingSection";
+import { BeforeAfterGallerySection } from "@/components/BeforeAfterGallerySection";
+import { IndustriesWeServeSection } from "@/components/IndustriesWeServeSection";
+import { GoogleReviewCTA } from "@/components/GoogleReviewCTA";
 import {
   AMC_PLANS,
   BOOKING_STEPS,
@@ -36,8 +41,12 @@ export function HomePageClient() {
         trustItems={TRUST_ITEMS}
       />
       <BrandsWeService />
+      <TrustBadgesSection />
       <Services items={SERVICES} />
       <Products items={PRODUCTS} enquiryWhatsappHref={WHATSAPP} />
+      <FreeWaterTestingSection />
+      <BeforeAfterGallerySection />
+      <IndustriesWeServeSection />
       <AMCPlans plans={AMC_PLANS} callHref={CALL} />
       <WhyChooseUs
         points={WHY_CHOOSE_POINTS}
@@ -46,6 +55,7 @@ export function HomePageClient() {
         whatsappHref={WHATSAPP}
       />
       <FeaturedProjectsSection />
+      <GoogleReviewCTA />
       <Testimonials items={TESTIMONIALS} />
       <CTASection
         callHref={CALL}

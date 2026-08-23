@@ -14,6 +14,9 @@ export const DEVELOPER_CREDIT = "Dr. Vignesh M.S.";
 export const BUSINESS_HISTORY_NOTE =
   "Formerly known as Aqua Care & Solar Care Systems, serving customers since 2014.";
 
+/** Official Google Business Review link */
+export const GOOGLE_REVIEW_URL = "https://g.page/r/CdK_0JHo7kH5EAI/review";
+
 /** Two-line logo lockup in navbar (visual brand split) */
 export const BRAND_LOGO_LINE_1 = "Yuvanthika Aquacare &";
 export const BRAND_LOGO_LINE_2 = "Solar Care Systems";

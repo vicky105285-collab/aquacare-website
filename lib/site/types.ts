@@ -64,6 +64,11 @@ export type ProductItem = {
   categoryId: string;
   slug?: string;
   featured?: boolean;
+  suitableTds?: string;
+  powerConsumption?: string;
+  installationType?: string;
+  warranty?: string;
+  recommendedUsage?: string;
 };
 
 export type ProductCategory = {

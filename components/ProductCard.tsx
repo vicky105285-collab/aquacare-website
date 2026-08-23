@@ -12,9 +12,17 @@ export type ProductCardProps = {
   product: ProductItem;
   enquiryWhatsappHref?: string;
   priority?: boolean;
+  onToggleCompare?: (product: ProductItem) => void;
+  isCompared?: boolean;
 };
 
-export function ProductCard({ product, enquiryWhatsappHref, priority }: ProductCardProps) {
+export function ProductCard({
+  product,
+  enquiryWhatsappHref,
+  priority,
+  onToggleCompare,
+  isCompared,
+}: ProductCardProps) {
   const [imgSrc, setImgSrc] = useState(product.img);
   const productSlug = product.slug || slugify(product.name);
   const href = `/products/item/${productSlug}`;
@@ -25,23 +33,47 @@ export function ProductCard({ product, enquiryWhatsappHref, priority }: ProductC
     : `${WHATSAPP}?text=${encodedMsg}`;
 
   return (
-    <article className="group bg-white rounded-2xl border border-slate-100 hover:border-cyan-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] overflow-hidden transition-all duration-300 flex flex-col h-full">
+    <article className="group bg-white rounded-2xl border border-slate-100 hover:border-cyan-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] overflow-hidden transition-all duration-300 flex flex-col h-full relative">
       {/* Image Container */}
-      <Link href={href} className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50/60 aspect-[4/3] block flex-shrink-0">
-        <span className="absolute top-3 left-3 z-10 px-2.5 py-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-[11px] font-bold rounded-full shadow-md tracking-wide">
+      <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50/60 aspect-[4/3] block flex-shrink-0">
+        <Link href={href} className="absolute inset-0 z-0">
+          <Image
+            src={imgSrc}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover group-hover:scale-[1.04] transition-transform duration-500 ease-out"
+            priority={priority}
+            onError={() => setImgSrc("/products/aqua_shark.webp")}
+          />
+        </Link>
+        
+        <span className="absolute top-3 left-3 z-10 px-2.5 py-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-[11px] font-bold rounded-full shadow-md tracking-wide pointer-events-none">
           {product.tag}
         </span>
-        <Image
-          src={imgSrc}
-          alt={product.name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover group-hover:scale-[1.04] transition-transform duration-500 ease-out"
-          priority={priority}
-          onError={() => setImgSrc("/products/aqua_shark.webp")}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </Link>
+
+        {/* Compare Checkbox Toggle */}
+        {onToggleCompare && (
+          <label
+            onClick={(e) => e.stopPropagation()}
+            className={`absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer shadow-md backdrop-blur-md ${
+              isCompared
+                ? "bg-cyan-500 text-slate-950 ring-2 ring-cyan-300"
+                : "bg-slate-900/80 text-white hover:bg-slate-900"
+            }`}
+          >
+            <input
+              type="checkbox"
+              checked={!!isCompared}
+              onChange={() => onToggleCompare(product)}
+              className="w-3.5 h-3.5 accent-cyan-600 rounded cursor-pointer"
+            />
+            <span>Compare</span>
+          </label>
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      </div>
 
       {/* Card Body */}
       <div className="p-5 flex-1 flex flex-col">

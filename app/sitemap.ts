@@ -4,6 +4,7 @@ import { SERVICE_SLUGS } from "@/lib/site/service-details";
 import { BLOG_POSTS } from "@/lib/site/blog";
 import { PROJECTS_DATA } from "@/lib/site/projects";
 import { PRODUCTS, PRODUCT_CATEGORIES } from "@/lib/site/data";
+import { LANDING_PAGES } from "@/lib/site/landing-pages";
 import { slugify } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -28,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/dm-plant-tamil-nadu",
   ];
 
+  const landingRoutes = LANDING_PAGES.map((page) => `/${page.slug}`);
   const serviceRoutes = SERVICE_SLUGS.map((slug) => `/services/${slug}`);
   const blogRoutes = BLOG_POSTS.map((post) => `/blog/${post.slug}`);
   const projectRoutes = PROJECTS_DATA.map((proj) => `/projects/${proj.slug}`);
@@ -37,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const allPaths = Array.from(
     new Set([
       ...staticRoutes,
+      ...landingRoutes,
       ...serviceRoutes,
       ...blogRoutes,
       ...projectRoutes,
