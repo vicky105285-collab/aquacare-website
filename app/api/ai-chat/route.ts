@@ -3,8 +3,18 @@ import { processAIChatMessage } from "@/lib/ai-agent";
 
 export async function POST(request: Request) {
   try {
+    const referer = request.headers.get("referer") || "";
     const body = await request.json();
     const { message, history, collectedLeadData } = body;
+
+    // Backend protection: Reject chat & lead creation from /admin routes
+    const currentPage = collectedLeadData?.currentPage || "";
+    if (currentPage.includes("/admin") || referer.includes("/admin")) {
+      return NextResponse.json(
+        { error: "AI Chatbot interactions on admin routes are prohibited." },
+        { status: 403 }
+      );
+    }
 
     if (!message && !collectedLeadData) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 });

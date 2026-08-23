@@ -18,6 +18,7 @@ interface MessageItem {
 
 export function AIChatBot() {
   const pathname = usePathname();
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<MessageItem[]>([
     {
@@ -218,6 +219,11 @@ export function AIChatBot() {
       setIsLoading(false);
     }
   };
+
+  // Exclude chatbot component completely on all admin pages
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <>

@@ -12,11 +12,13 @@ export interface LeadRecord {
   source?: string;
 }
 
-// In-memory runtime store for leads and chat conversations
+// In-memory runtime fallback buffer (ONLY for fallback when DB is disconnected)
 const leadsMemoryStore: LeadRecord[] = [];
-let totalConversationsCount = 28; // Baseline track for conversation analytics
+let totalConversationsCount = 0;
 
-export function incrementConversationCount() {
+export function incrementConversationCount(page?: string) {
+  // Do not count conversations originating from admin pages
+  if (page && page.includes("/admin")) return;
   totalConversationsCount += 1;
 }
 
@@ -51,7 +53,13 @@ export async function addLead(leadData: {
   serviceRequired: string;
   message?: string;
   source?: string;
+  currentPage?: string;
 }): Promise<{ lead: LeadRecord; isDuplicate?: boolean }> {
+  // Reject leads originating from admin routes
+  if (leadData.currentPage && (leadData.currentPage.includes("/admin") || leadData.currentPage.startsWith("/admin"))) {
+    throw new Error("Lead creation from admin pages is strictly prohibited.");
+  }
+
   // Validate Phone
   if (!validatePhone(leadData.phone)) {
     throw new Error("Invalid phone number format. Please provide a valid 10-digit mobile number.");
@@ -67,37 +75,44 @@ export async function addLead(leadData: {
     }
   }
 
+  const formattedLocation = leadData.location || "Karur / Tamil Nadu";
+  const source = leadData.source || "AI Assistant";
+  const fullMessage = `Location: ${formattedLocation}. Source: ${source}. ${leadData.message || ""}`;
+
   const newLead: LeadRecord = {
     id: `lead-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
     name: leadData.name || "Valued Customer",
     phone: leadData.phone,
-    location: leadData.location || "Karur / Tamil Nadu",
+    location: formattedLocation,
     serviceRequired: leadData.serviceRequired || "General Enquiry",
-    message: leadData.message || `Location: ${leadData.location || "N/A"}. Request from AI Lead Assistant`,
+    message: fullMessage,
     status: "NEW",
     createdAt: new Date().toISOString(),
-    source: leadData.source || "AI Lead Chatbot",
+    source,
   };
 
-  // Add to in-memory store
-  leadsMemoryStore.unshift(newLead);
-
-  // Sync to PostgreSQL Prisma DB if connected
+  // 1. Sync to PostgreSQL Prisma DB table directly
   if (prisma) {
     try {
-      await prisma.lead.create({
+      const dbCreated = await prisma.lead.create({
         data: {
           name: newLead.name,
           phone: newLead.phone,
           serviceRequired: newLead.serviceRequired,
-          message: `Location: ${leadData.location || "N/A"}. ${leadData.message || "Captured by AI Lead Agent"}`,
+          message: fullMessage,
           status: "NEW",
         },
       });
+
+      newLead.id = dbCreated.id;
+      newLead.createdAt = dbCreated.createdAt.toISOString();
     } catch (e) {
-      console.warn("Prisma lead save skipped:", e);
+      console.warn("Prisma lead create error:", e);
     }
   }
+
+  // 2. Add to local memory store
+  leadsMemoryStore.unshift(newLead);
 
   return { lead: newLead, isDuplicate: false };
 }
@@ -113,6 +128,7 @@ export async function getLeads(): Promise<{
 }> {
   let dbLeads: LeadRecord[] = [];
 
+  // Read directly from Prisma Lead table
   if (prisma) {
     try {
       const records = await prisma.lead.findMany({
@@ -126,50 +142,16 @@ export async function getLeads(): Promise<{
         message: r.message || undefined,
         status: r.status as "NEW" | "CONTACTED" | "CLOSED",
         createdAt: r.createdAt.toISOString(),
+        source: "AI Assistant",
       }));
     } catch (e) {
       console.warn("Prisma getLeads error:", e);
     }
   }
 
-  // Combine unique leads by phone number or ID
+  // Combine unique leads (without any hardcoded seed/demo data)
   const map = new Map<string, LeadRecord>();
 
-  // Add default demo lead entries if empty
-  const defaultLeads: LeadRecord[] = [
-    {
-      id: "lead-01",
-      name: "S. Kamesh",
-      phone: "+91 94433 12345",
-      location: "Karur Town",
-      serviceRequired: "Domestic RO Water Purifier & Installation",
-      message: "Required 12L Aqua Shark RO system for borewell water.",
-      status: "NEW",
-      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-    },
-    {
-      id: "lead-02",
-      name: "Dr. R. Anbarasan",
-      phone: "+91 98421 98765",
-      location: "Perundurai Road, Erode",
-      serviceRequired: "5000 LPD Commercial Solar Water Heater",
-      message: "Needs quote for 120-bed hospital setup.",
-      status: "CONTACTED",
-      createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-    },
-    {
-      id: "lead-03",
-      name: "M. Saravanan",
-      phone: "+91 97890 54321",
-      location: "Namakkal",
-      serviceRequired: "Water Softener for Hard Borewell Water",
-      message: "TDS 1400 PPM in borewell water. Need centralized softener.",
-      status: "NEW",
-      createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
-    },
-  ];
-
-  defaultLeads.forEach((l) => map.set(l.id, l));
   leadsMemoryStore.forEach((l) => map.set(l.id, l));
   dbLeads.forEach((l) => map.set(l.id, l));
 
@@ -178,7 +160,7 @@ export async function getLeads(): Promise<{
   );
 
   const totalLeads = allLeads.length;
-  const conversations = Math.max(totalConversationsCount, totalLeads * 3 + 12);
+  const conversations = Math.max(totalConversationsCount, totalLeads > 0 ? totalLeads * 2 + 5 : 0);
   const conversionRate = conversations > 0 ? ((totalLeads / conversations) * 100).toFixed(1) : "0.0";
   const newLeadsCount = allLeads.filter((l) => l.status === "NEW").length;
 
@@ -204,7 +186,7 @@ export async function updateLeadStatus(id: string, status: "NEW" | "CONTACTED" |
         data: { status },
       });
     } catch (e) {
-      console.warn("Prisma update lead status skipped:", e);
+      console.warn("Prisma update lead status error:", e);
     }
   }
 
@@ -219,7 +201,7 @@ export async function deleteLeadRecord(id: string): Promise<boolean> {
     try {
       await prisma.lead.delete({ where: { id } });
     } catch (e) {
-      console.warn("Prisma delete lead skipped:", e);
+      console.warn("Prisma delete lead error:", e);
     }
   }
 

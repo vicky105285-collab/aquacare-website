@@ -13,6 +13,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const year = new Date().getFullYear();
   const pathname = usePathname();
   const navKey = pathname === "/" ? "home" : "inner";
+  const isAdminPage = pathname?.startsWith("/admin");
 
   return (
     <>
@@ -22,8 +23,8 @@ export function AppShell({ children }: { children: ReactNode }) {
       </main>
       <Footer copyrightYear={year} />
       
-      {/* AI Lead Assistant Floating Bot */}
-      <AIChatBot />
+      {/* AI Lead Assistant Floating Bot (Excludes /admin routes) */}
+      {!isAdminPage && <AIChatBot />}
 
       {/* Desktop Floating Buttons */}
       <div className="hidden md:block">
