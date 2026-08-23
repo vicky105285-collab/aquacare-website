@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Droplets, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { ADDRESS_FULL, BUSINESS_HISTORY_NOTE, CALL, COMPANY_NAME, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
+import { Droplets, Mail, MapPin, MessageCircle, Phone, User, ShieldCheck } from "lucide-react";
+import { ADDRESS_FULL, BUSINESS_HISTORY_NOTE, BUSINESS_OWNER, CALL, COMPANY_NAME, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WEBSITE_MANAGER, WHATSAPP } from "@/lib/site/constants";
 import { InstagramSvg } from "@/components/InstagramSvg";
 import type { FooterServiceLink } from "@/lib/site/types";
 
@@ -128,13 +128,22 @@ export function Footer({ copyrightYear }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>
-            © {copyrightYear} {COMPANY_NAME}. All rights reserved.
+        {/* Ownership & Copyright Bar */}
+        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <p className="text-center md:text-left font-medium">
+            © {copyrightYear} {COMPANY_NAME}. All Rights Reserved.
           </p>
-          <p className="text-slate-500">
-            Karur & Entire Tamil Nadu Water & Solar Experts
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-medium">
+            <span className="flex items-center gap-1.5 text-slate-300">
+              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+              Owned & Operated by <strong className="text-cyan-400 font-bold">{BUSINESS_OWNER}</strong>
+            </span>
+            <span className="hidden sm:inline text-slate-700">|</span>
+            <span className="flex items-center gap-1.5 text-slate-300">
+              <User className="w-3.5 h-3.5 text-blue-400" />
+              Website Managed by <strong className="text-blue-400 font-bold">{WEBSITE_MANAGER}</strong>
+            </span>
+          </div>
         </div>
       </div>
     </footer>

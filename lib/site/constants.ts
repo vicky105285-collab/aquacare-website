@@ -4,6 +4,12 @@ export const COMPANY_NAME = "Yuvanthika Aquacare & Solar Care Systems";
 /** Former business name for trust preservation */
 export const FORMER_COMPANY_NAME = "Aqua Care & Solar Care Systems";
 
+/** Business owner name */
+export const BUSINESS_OWNER = "Mr. Ananth";
+
+/** Website manager name */
+export const WEBSITE_MANAGER = "Dr. Vignesh";
+
 /** Trust & history badge note */
 export const BUSINESS_HISTORY_NOTE =
   "Formerly known as Aqua Care & Solar Care Systems, serving customers since 2014.";

@@ -9,6 +9,7 @@ import {
   ADDRESS_REGION,
   ADDRESS_STREET,
   BUSINESS_HISTORY_NOTE,
+  BUSINESS_OWNER,
   EMAIL,
   FORMER_COMPANY_NAME,
   GA_MEASUREMENT_ID,
@@ -72,6 +73,14 @@ const orgJsonLd = {
         "Thanjavur",
         "Tamil Nadu",
       ],
+      founder: {
+        "@type": "Person",
+        name: BUSINESS_OWNER,
+      },
+      owner: {
+        "@type": "Person",
+        name: BUSINESS_OWNER,
+      },
       priceRange: "$$",
       hasMap: MAPS_DIRECTIONS_URL,
     },
@@ -81,6 +90,10 @@ const orgJsonLd = {
       name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/favicon.ico`,
+      founder: {
+        "@type": "Person",
+        name: BUSINESS_OWNER,
+      },
       sameAs: [
         "https://www.instagram.com/ananthaquacareindia",
         MAPS_DIRECTIONS_URL,
