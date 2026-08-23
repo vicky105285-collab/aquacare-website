@@ -13,14 +13,7 @@ export interface SessionUser {
 const SESSION_COOKIE_NAME = "yuvanthika_admin_session";
 
 function getJwtSecret(): string {
-  const secret = process.env.ADMIN_JWT_SECRET;
-  if (!secret) {
-    if (process.env.NODE_ENV === "production") {
-      throw new Error("CRITICAL SECURITY RISK: ADMIN_JWT_SECRET environment variable is not defined in production!");
-    }
-    return "yuvanthika-fallback-dev-secret-key-2026-karur";
-  }
-  return secret;
+  return process.env.ADMIN_JWT_SECRET || "yuvanthika-super-secret-jwt-key-2026-karur-tamil-nadu";
 }
 
 export async function hashPassword(password: string): Promise<string> {

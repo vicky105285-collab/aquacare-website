@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Lock, Mail, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { Lock, Mail, ArrowRight, AlertCircle, Sparkles, Eye, EyeOff } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -11,7 +11,8 @@ function LoginForm() {
   const redirectUrl = searchParams.get("redirect") || "/admin/dashboard";
 
   const [email, setEmail] = useState("admin@yuvanthikaaquasolar.in");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("admin123");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -30,13 +31,13 @@ function LoginForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Login failed");
+        throw new Error(data.error || "Login failed. Please check your credentials.");
       }
 
       router.push(redirectUrl);
       router.refresh();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Invalid credentials");
+      setError(err instanceof Error ? err.message : "Invalid email or password");
     } finally {
       setLoading(false);
     }
@@ -45,8 +46,8 @@ function LoginForm() {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-xs font-semibold">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3 text-red-400 text-xs font-semibold leading-relaxed">
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>
       )}
@@ -84,13 +85,21 @@ function LoginForm() {
             <Lock className="w-4 h-4" />
           </div>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="block w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+            className="block w-full pl-10 pr-10 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
             placeholder="••••••••••••"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white transition-colors"
+            title={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+          </button>
         </div>
       </div>
 
@@ -139,11 +148,14 @@ export default function AdminLoginPage() {
           <div className="mt-8 pt-6 border-t border-slate-800/80 text-center">
             <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800/60 text-slate-400 text-[11px] leading-relaxed">
               <span className="text-cyan-400 font-bold flex items-center justify-center gap-1 mb-1">
-                <Sparkles className="w-3 h-3" /> Default Credentials
+                <Sparkles className="w-3 h-3" /> Quick Admin Login
               </span>
-              Email: <code className="text-white bg-slate-800 px-1 py-0.5 rounded">admin@yuvanthikaaquasolar.in</code>
+              Email: <code className="text-white bg-slate-800 px-1.5 py-0.5 rounded">admin@yuvanthikaaquasolar.in</code>
               <br />
-              Password: <code className="text-white bg-slate-800 px-1 py-0.5 rounded">admin123</code>
+              Password: <code className="text-white bg-slate-800 px-1.5 py-0.5 rounded">admin123</code>
+              <div className="mt-2 text-[10px] text-slate-500">
+                You can change your email & password inside <strong className="text-slate-300">Admin Settings & Users</strong> after logging in.
+              </div>
             </div>
           </div>
         </div>
