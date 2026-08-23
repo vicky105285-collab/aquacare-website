@@ -26,14 +26,36 @@ export default function AdminUsersPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const loadUsers = async () => {
-    try {
-      const meRes = await fetch("/api/admin/auth/me");
-      if (meRes.ok) {
-        const u = (await meRes.json()).user;
-        setUser(u);
-      }
+  useEffect(() => {
+    let isMounted = true;
+    async function load() {
+      try {
+        const meRes = await fetch("/api/admin/auth/me");
+        if (meRes.ok && isMounted) {
+          const u = (await meRes.json()).user;
+          setUser(u);
+        }
 
+        const res = await fetch("/api/admin/users");
+        if (res.ok && isMounted) {
+          const data = await res.json();
+          if (Array.isArray(data)) {
+            setUsers(data);
+          } else if (data.users) {
+            setUsers(data.users);
+            setMasterPasswordDisabled(data.masterPasswordDisabled || false);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to load users:", e);
+      }
+    }
+    load();
+    return () => { isMounted = false; };
+  }, []);
+
+  const refreshUsers = async () => {
+    try {
       const res = await fetch("/api/admin/users");
       if (res.ok) {
         const data = await res.json();
@@ -45,13 +67,9 @@ export default function AdminUsersPage() {
         }
       }
     } catch (e) {
-      console.error("Failed to load users:", e);
+      console.error(e);
     }
   };
-
-  useEffect(() => {
-    loadUsers();
-  }, []);
 
   const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,7 +91,7 @@ export default function AdminUsersPage() {
         setName("");
         setEmail("");
         setPassword("");
-        await loadUsers();
+        await refreshUsers();
       } else {
         setError(data.error || "Failed to create admin user");
       }
@@ -113,7 +131,7 @@ export default function AdminUsersPage() {
       const res = await fetch(`/api/admin/users/${id}`, { method: "DELETE" });
       if (res.ok) {
         setMessage(`Admin user ${userEmail} removed.`);
-        await loadUsers();
+        await refreshUsers();
       }
     } catch (err) {
       console.error("Delete error:", err);
