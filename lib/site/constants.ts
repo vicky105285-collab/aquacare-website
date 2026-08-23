@@ -72,5 +72,8 @@ export const ADDRESS_LINES: readonly [string, string] = [
 /** Exact Google Maps Business Listing URL for directions & external links */
 export const MAPS_DIRECTIONS_URL = "https://maps.app.goo.gl/n9AB68PGcExhybM37";
 
+/** Google Analytics 4 Measurement ID */
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-1B5XT1GH9C";
+
 /** Exact Google Maps Place Embed URL for Yuvanthika Aqua Care & Solar Care Systems */
 export const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.4728373024846!2d78.0493822!3d10.9677355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f1dca0a3871%3A0xf941eee891d0bfd2!2sYuvanthika%20Aqua%20Care%20%26%20Solar%20Care%20Systems!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin";

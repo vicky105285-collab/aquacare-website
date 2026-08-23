@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/AppShell";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import {
   ADDRESS_LOCALITY,
   ADDRESS_POSTAL_CODE,
@@ -10,6 +11,7 @@ import {
   BUSINESS_HISTORY_NOTE,
   EMAIL,
   FORMER_COMPANY_NAME,
+  GA_MEASUREMENT_ID,
   LATITUDE,
   LONGITUDE,
   MAPS_DIRECTIONS_URL,
@@ -149,6 +151,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <AppShell>{children}</AppShell>
+        <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
       </body>
     </html>
   );
