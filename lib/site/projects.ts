@@ -438,7 +438,6 @@ export async function getDynamicProjects(): Promise<ProjectItem[]> {
                 clientName: p.clientName || "Valued Client",
                 designation: p.designation || "Managing Director",
                 company: p.company || "Local Enterprise",
-                rating: 5,
               }
             : undefined,
           projectImages: Array.isArray(p.projectImages)
@@ -490,7 +489,6 @@ export async function getDynamicProjectBySlug(slug: string): Promise<ProjectItem
                 clientName: p.clientName || "Valued Client",
                 designation: p.designation || "Managing Director",
                 company: p.company || "Local Enterprise",
-                rating: 5,
               }
             : undefined,
           projectImages: Array.isArray(p.projectImages)
