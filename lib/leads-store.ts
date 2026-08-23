@@ -24,6 +24,26 @@ export function getConversationCount() {
   return totalConversationsCount;
 }
 
+/** Validate phone number format (Indian 10-digit or +91 standard) */
+export function validatePhone(phone: string): boolean {
+  if (!phone) return false;
+  const digits = phone.replace(/[^0-9]/g, "");
+  // 10 digits starting with 6-9, or 12 digits starting with 91 followed by 6-9
+  return /^[6-9]\d{9}$/.test(digits) || /^91[6-9]\d{9}$/.test(digits);
+}
+
+/** Check for duplicate lead submitted within last 10 minutes */
+export function isDuplicateLead(phone: string): boolean {
+  const digits = phone.replace(/[^0-9]/g, "");
+  const tenMinutesAgo = Date.now() - 10 * 60 * 1000;
+
+  return leadsMemoryStore.some((l) => {
+    const lDigits = l.phone.replace(/[^0-9]/g, "");
+    const createdTime = new Date(l.createdAt).getTime();
+    return lDigits === digits && createdTime > tenMinutesAgo;
+  });
+}
+
 export async function addLead(leadData: {
   name: string;
   phone: string;
@@ -31,7 +51,22 @@ export async function addLead(leadData: {
   serviceRequired: string;
   message?: string;
   source?: string;
-}): Promise<LeadRecord> {
+}): Promise<{ lead: LeadRecord; isDuplicate?: boolean }> {
+  // Validate Phone
+  if (!validatePhone(leadData.phone)) {
+    throw new Error("Invalid phone number format. Please provide a valid 10-digit mobile number.");
+  }
+
+  // Check Duplicate
+  if (isDuplicateLead(leadData.phone)) {
+    const existing = leadsMemoryStore.find(
+      (l) => l.phone.replace(/[^0-9]/g, "") === leadData.phone.replace(/[^0-9]/g, "")
+    );
+    if (existing) {
+      return { lead: existing, isDuplicate: true };
+    }
+  }
+
   const newLead: LeadRecord = {
     id: `lead-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
     name: leadData.name || "Valued Customer",
@@ -64,7 +99,7 @@ export async function addLead(leadData: {
     }
   }
 
-  return newLead;
+  return { lead: newLead, isDuplicate: false };
 }
 
 export async function getLeads(): Promise<{

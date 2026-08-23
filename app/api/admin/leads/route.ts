@@ -44,7 +44,7 @@ export async function GET(request: Request) {
   });
 }
 
-// Public or Admin Lead creation
+// Public or Admin Lead creation with Spam Protection
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -54,7 +54,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Phone number is required" }, { status: 400 });
     }
 
-    const created = await addLead({
+    const { lead, isDuplicate } = await addLead({
       name: name || "Website Visitor",
       phone,
       location: location || "Karur / Tamil Nadu",
@@ -62,9 +62,14 @@ export async function POST(request: Request) {
       message,
     });
 
-    return NextResponse.json({ success: true, lead: created });
-  } catch (error) {
-    console.error("Lead submission error:", error);
-    return NextResponse.json({ error: "Failed to record lead" }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      lead,
+      isDuplicate: !!isDuplicate,
+    });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Failed to record lead";
+    console.error("Lead submission error:", errorMessage);
+    return NextResponse.json({ error: errorMessage }, { status: 400 });
   }
 }
