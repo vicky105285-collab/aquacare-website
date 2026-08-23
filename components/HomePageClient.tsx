@@ -23,6 +23,7 @@ import { Products } from "@/components/Products";
 import { Services } from "@/components/Services";
 import { Testimonials } from "@/components/Testimonials";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { FeaturedProjectsSection } from "@/components/FeaturedProjectsSection";
 
 export function HomePageClient() {
   return (
@@ -44,6 +45,7 @@ export function HomePageClient() {
         callHref={CALL}
         whatsappHref={WHATSAPP}
       />
+      <FeaturedProjectsSection />
       <Testimonials items={TESTIMONIALS} />
       <CTASection
         callHref={CALL}

@@ -153,26 +153,40 @@ export type ServiceDetail = {
   }[];
 };
 
-/** Reusable Project Structure as requested by User */
+/** Scalable Project & Case Study Schema */
 export type ProjectItem = {
   id: string;
   slug: string;
-  projectName: string;
-  location: string;
-  capacity: string;
-  industry: string;
-  category: ServiceCategoryType;
-  problem: string;
-  solution: string;
-  gallery: { url: string; caption: string }[];
+  projectTitle: string;
+  projectName?: string; // alias for backwards compatibility
+  projectType: string; // e.g., "Industrial RO Plant", "Water Softener", "Solar Water Heater", "ETP Plant", "STP Plant", "DM Plant"
+  location: string; // e.g., "Reddipalayam, Karur"
+  district: string; // e.g., "Karur", "Namakkal", "Erode", "Tiruchirappalli", "Salem"
+  customerCategory: ServiceCategoryType; // "residential" | "commercial" | "industrial"
+  category?: ServiceCategoryType; // alias for backwards compatibility
+  industryType: string; // e.g., "Textile & Dyeing", "Hospitality", "Apartments", "Thermal Power"
+  industry?: string; // alias
+  capacity: string; // e.g., "50,000 LPH", "3,000 LPD", "100 KLD"
+  installationDate: string; // e.g., "2024-03"
+  completionYear?: string;
+  problemFaced: string;
+  problem?: string; // alias
+  solutionProvided: string;
+  solution?: string; // alias
+  productsUsed: string[];
+  projectDescription: string;
+  benefitsAchieved: string[];
+  keyHighlights?: string[];
   testimonial?: {
     quote: string;
     clientName: string;
     designation: string;
     company?: string;
   };
-  keyHighlights?: string[];
-  completionYear?: string;
+  projectImages: { url: string; caption: string }[];
+  gallery?: { url: string; caption: string }[]; // alias
+  videoUrl?: string;
+  featured?: boolean;
 };
 
 /** Unlimited SEO Blog Post Infrastructure */
