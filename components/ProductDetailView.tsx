@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle, MessageCircle, ArrowLeft, ShieldCheck, Truck, Wrench, Droplets, Layers, Archive } from "lucide-react";
+import { CheckCircle, MessageCircle, ArrowLeft, ShieldCheck, Truck, Wrench, Droplets, Layers, Archive, Phone, Sparkles } from "lucide-react";
 import type { ProductItem } from "@/lib/site/types";
 import { ProductCard } from "@/components/ProductCard";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { CALL, PHONE_DISPLAY } from "@/lib/site/constants";
 
 export type ProductDetailViewProps = {
   product: ProductItem;
@@ -16,8 +17,7 @@ export type ProductDetailViewProps = {
 };
 
 export function ProductDetailView({ product, relatedProducts, categoryTitle, categorySlug, whatsappHref }: ProductDetailViewProps) {
-  // Pre-fill WhatsApp message
-  const encodedMessage = encodeURIComponent(`Hi, I'm interested in the ${product.name} (${product.brand}). Can you provide more details?`);
+  const encodedMessage = encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.brand}). Please share the latest price, offers & installation details.`);
   const finalWhatsappHref = `${whatsappHref}?text=${encodedMessage}`;
 
   return (
@@ -86,9 +86,15 @@ export function ProductDetailView({ product, relatedProducts, categoryTitle, cat
                 {product.name}
               </h1>
               
-              <div className="text-3xl font-black text-blue-700 mb-8">
-                {product.price}
-                {product.mrp && <span className="text-lg text-slate-400 line-through ml-3 font-medium">{product.mrp}</span>}
+              {/* Clean Price Contact Us Box */}
+              <div className="p-4 bg-blue-50/80 border border-blue-200/80 rounded-2xl mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 block mb-0.5">Price & Availability</span>
+                  <span className="text-xl font-black text-blue-800">Price: Contact Us for Best Quote</span>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-100/80 px-3 py-1.5 rounded-full shrink-0">
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-600" /> Free Doorstep Quote
+                </span>
               </div>
 
               {/* Specifications Grid */}
@@ -111,7 +117,7 @@ export function ProductDetailView({ product, relatedProducts, categoryTitle, cat
               </div>
 
               {/* Features */}
-              <div className="mb-10 flex-1">
+              <div className="mb-8 flex-1">
                 <h3 className="text-lg font-bold text-slate-800 mb-4">Key Features</h3>
                 <ul className="space-y-3">
                   {product.features.map((feature, idx) => (
@@ -123,22 +129,39 @@ export function ProductDetailView({ product, relatedProducts, categoryTitle, cat
                 </ul>
               </div>
 
-              {/* CTA & Trust Badges */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              {/* Action Buttons: Call Now, WhatsApp, Get Best Quote */}
+              <div className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <a
+                    href={CALL}
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-md"
+                  >
+                    <Phone className="w-4 h-4 text-cyan-400" /> Call {PHONE_DISPLAY}
+                  </a>
+                  <a
+                    href={finalWhatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 bg-green-600 text-white rounded-xl text-sm font-bold hover:bg-green-500 transition-all shadow-md shadow-green-600/20"
+                  >
+                    <MessageCircle className="w-4 h-4" /> WhatsApp Enquiry
+                  </a>
+                </div>
+
                 <a
                   href={finalWhatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl text-lg font-bold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-green-500/20"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl text-base font-black hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/25"
                 >
-                  <MessageCircle className="w-6 h-6" /> Inquire via WhatsApp
+                  <Sparkles className="w-5 h-5" /> Get Best Quote Now
                 </a>
               </div>
 
-              <div className="flex flex-wrap items-center gap-5 mt-4 pt-4 border-t border-slate-100 text-sm font-medium">
+              <div className="flex flex-wrap items-center gap-5 mt-6 pt-4 border-t border-slate-100 text-sm font-medium">
                 <span className="flex items-center gap-1.5 text-green-700"><ShieldCheck className="w-4 h-4 text-green-500" /> Genuine Brand</span>
                 <span className="flex items-center gap-1.5 text-blue-700"><Truck className="w-4 h-4 text-blue-500" /> Fast Delivery</span>
-                <span className="flex items-center gap-1.5 text-amber-700"><Wrench className="w-4 h-4 text-amber-500" /> Free Installation</span>
+                <span className="flex items-center gap-1.5 text-amber-700"><Wrench className="w-4 h-4 text-amber-500" /> Doorstep Installation</span>
               </div>
             </div>
           </div>

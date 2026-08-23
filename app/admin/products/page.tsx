@@ -17,7 +17,7 @@ export default function AdminProductsPage() {
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("YUVANTHIKA AQUACARE");
   const [categoryId, setCategoryId] = useState("domestic-ro");
-  const [price, setPrice] = useState("₹9,500");
+  const [price, setPrice] = useState("Contact Us");
   const [liters, setLiters] = useState("12L/Hr");
   const [stages, setStages] = useState("6 Stage");
   const [tank, setTank] = useState("8L Tank");
@@ -118,7 +118,7 @@ export default function AdminProductsPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1">Category</label>
                 <select
@@ -132,15 +132,6 @@ export default function AdminProductsPage() {
                   <option value="solar">Solar Water Heaters</option>
                   <option value="softeners">Water Softeners</option>
                 </select>
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">Price Display</label>
-                <input
-                  type="text"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm"
-                />
               </div>
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1">Image URL</label>
@@ -183,7 +174,7 @@ export default function AdminProductsPage() {
                   <th className="px-6 py-3.5">Product Name</th>
                   <th className="px-6 py-3.5">Brand</th>
                   <th className="px-6 py-3.5">Category</th>
-                  <th className="px-6 py-3.5">Price</th>
+                  <th className="px-6 py-3.5">Pricing Mode</th>
                   <th className="px-6 py-3.5">Specs</th>
                 </tr>
               </thead>
@@ -193,7 +184,7 @@ export default function AdminProductsPage() {
                     <td className="px-6 py-3.5 font-bold text-white">{p.name}</td>
                     <td className="px-6 py-3.5 text-cyan-400 font-semibold">{p.brand}</td>
                     <td className="px-6 py-3.5 text-slate-400">{p.categoryId}</td>
-                    <td className="px-6 py-3.5 font-black text-white">{p.price}</td>
+                    <td className="px-6 py-3.5 font-bold text-emerald-400">Price: Contact Us</td>
                     <td className="px-6 py-3.5 text-slate-400">
                       {[p.stages, p.liters, p.tank].filter(Boolean).join(" • ")}
                     </td>

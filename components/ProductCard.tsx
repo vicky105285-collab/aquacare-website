@@ -3,20 +3,26 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { CheckCircle, ArrowRight, Phone, MessageCircle } from "lucide-react";
 import type { ProductItem } from "@/lib/site/types";
 import { slugify } from "@/lib/utils";
+import { CALL, WHATSAPP } from "@/lib/site/constants";
 
 export type ProductCardProps = {
   product: ProductItem;
-  enquiryWhatsappHref: string;
+  enquiryWhatsappHref?: string;
   priority?: boolean;
 };
 
-export function ProductCard({ product, priority }: ProductCardProps) {
+export function ProductCard({ product, enquiryWhatsappHref, priority }: ProductCardProps) {
   const [imgSrc, setImgSrc] = useState(product.img);
   const productSlug = slugify(product.name);
   const href = `/products/item/${productSlug}`;
+
+  const encodedMsg = encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.brand}). Please share the latest price & quote.`);
+  const waUrl = enquiryWhatsappHref
+    ? `${enquiryWhatsappHref.split("?")[0]}?text=${encodedMsg}`
+    : `${WHATSAPP}?text=${encodedMsg}`;
 
   return (
     <article className="group bg-white rounded-2xl border border-slate-100 hover:border-cyan-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] overflow-hidden transition-all duration-300 flex flex-col h-full">
@@ -34,7 +40,6 @@ export function ProductCard({ product, priority }: ProductCardProps) {
           priority={priority}
           onError={() => setImgSrc("/products/aqua_shark.webp")}
         />
-        {/* Overlay hint on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </Link>
 
@@ -56,7 +61,7 @@ export function ProductCard({ product, priority }: ProductCardProps) {
           ))}
         </div>
 
-        {/* Features — max 3, truncated */}
+        {/* Features — max 3 */}
         <ul className="space-y-1.5 mb-5 flex-1">
           {product.features.slice(0, 3).map((f, i) => (
             <li key={i} className="flex items-start gap-2 text-slate-500 text-[13px] leading-snug">
@@ -66,15 +71,36 @@ export function ProductCard({ product, priority }: ProductCardProps) {
           ))}
         </ul>
 
-        {/* Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-100 gap-3 mt-auto">
-          <span className="text-xl font-black text-blue-700 tracking-tight">{product.price}</span>
-          <Link
-            href={href}
-            className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg text-[13px] font-semibold hover:from-cyan-600 hover:to-blue-700 hover:shadow-md hover:shadow-blue-500/25 active:scale-[0.97] transition-all duration-200 shrink-0"
-          >
-            Details <ArrowRight className="w-3.5 h-3.5" aria-hidden />
-          </Link>
+        {/* Footer: Price Badge & Direct Action Buttons */}
+        <div className="pt-4 border-t border-slate-100 mt-auto space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-black uppercase tracking-wider text-blue-800 bg-blue-50 border border-blue-200/80 px-2.5 py-1 rounded-full">
+              Price: Contact Us
+            </span>
+            <Link
+              href={href}
+              className="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1 transition-colors"
+            >
+              View Specs <ArrowRight className="w-3.5 h-3.5" aria-hidden />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 pt-1">
+            <a
+              href={CALL}
+              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+            >
+              <Phone className="w-3.5 h-3.5 text-cyan-400" /> Call Now
+            </a>
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-green-600 hover:bg-green-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+            >
+              <MessageCircle className="w-3.5 h-3.5" /> WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </article>

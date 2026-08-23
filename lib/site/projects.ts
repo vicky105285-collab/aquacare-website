@@ -111,7 +111,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     benefitsAchieved: [
       "Water hardness reduced from 1,200 PPM down to 30 PPM",
       "Zero limescale accumulation in boiler heat exchangers",
-      "Saves over ₹3,50,000 annually in descaling maintenance",
+      "Saves over Rs.3,50,000 annually in descaling maintenance",
       "Fully automated salt regeneration system",
     ],
     keyHighlights: [
@@ -156,9 +156,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
     installationDate: "2024-01",
     completionYear: "2024",
     problemFaced:
-      "High electrical heating bills (over ₹1,20,000 monthly) to provide round-the-clock 60°C hot water for 120 hospital beds and patient sterilization facilities.",
+      "High electrical heating bills (over Rs.1,20,000 monthly) to provide round-the-clock 60°C hot water for 120 hospital beds and patient sterilization facilities.",
     problem:
-      "High electrical heating bills (over ₹1,20,000 monthly) to provide round-the-clock 60°C hot water for 120 hospital beds and patient sterilization facilities.",
+      "High electrical heating bills (over Rs.1,20,000 monthly) to provide round-the-clock 60°C hot water for 120 hospital beds and patient sterilization facilities.",
     solutionProvided:
       "Designed a 5,000 LPD Evacuated Tube Collector (ETC) Solar Water Heating System integrated with heavy-duty food grade SS 304 insulated storage tanks and automated heat pump booster backup.",
     solution:
@@ -173,13 +173,13 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Turnkey solar water heating engineering for a premier multi-specialty hospital in Erode, delivering eco-friendly 80°C hot water around the clock and cutting power bills by 75%.",
     benefitsAchieved: [
       "Provides 24/7 hot water up to 80°C naturally using solar energy",
-      "Cuts monthly electric power bills by over ₹85,000",
+      "Cuts monthly electric power bills by over Rs.85,000",
       "Full capital ROI achieved within 20 months",
       "Heavy PUF insulation retains heat overnight even during winter",
     ],
     keyHighlights: [
       "Provides 80°C hot water 24/7",
-      "Saves over ₹10,000,00 annually in electricity",
+      "Saves over Rs.10,000,00 annually in electricity",
       "Includes automatic thermal backup",
     ],
     testimonial: {
@@ -304,7 +304,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "Compact, odor-free Sewage Treatment Plant (STP) installed in Trichy, converting domestic sewage into clear recycled water for toilet flushing and landscape green belts.",
     benefitsAchieved: [
       "Recycles 75,000 liters of domestic sewage daily",
-      "Saves over ₹45,000 monthly in municipal tanker water purchasing",
+      "Saves over Rs.45,000 monthly in municipal tanker water purchasing",
       "Zero odor emissions with subterranean MBBR tank design",
       "Meets TNPCB non-potable discharge standards",
     ],
@@ -315,7 +315,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     ],
     testimonial: {
       quote:
-        "Our resident association reduced fresh water purchasing costs by over ₹45,000 monthly. Yuvanthika Aquacare handles complete operation & maintenance seamlessly.",
+        "Our resident association reduced fresh water purchasing costs by over Rs.45,000 monthly. Yuvanthika Aquacare handles complete operation & maintenance seamlessly.",
       clientName: "Dr. S. Ramanathan",
       designation: "President",
       company: "Royal Heights Apartment Owners Association, Trichy",

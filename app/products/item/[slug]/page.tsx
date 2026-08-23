@@ -85,9 +85,6 @@ export default async function ProductPage({ params }: Props) {
     "offers": {
       "@type": "Offer",
       "url": canonicalUrl,
-      "priceCurrency": "INR",
-      "price": product.price.replace(/[^0-9]/g, '') || "0",
-      "priceValidUntil": "2026-12-31",
       "itemCondition": "https://schema.org/NewCondition",
       "availability": "https://schema.org/InStock",
       "seller": {
