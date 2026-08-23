@@ -4,10 +4,10 @@ import Image from "next/image";
 
 // Placeholder images for the gallery. In a real scenario, these would come from props or CMS.
 const GALLERY_IMAGES = [
-  "/products/aqua_shark.webp",
-  "/products/blue_rock.webp",
+  "/products/7-wave-krystal.webp",
+  "/products/86-aqua-pearl.webp",
   "/products/2dolphin.webp",
-  "/products/91-aqua-grand-new.webp",
+  "/products/73-aqua-grand-plus.webp",
 ];
 
 export function InstallationGallery() {
