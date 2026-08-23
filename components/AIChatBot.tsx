@@ -228,7 +228,7 @@ export function AIChatBot() {
   return (
     <>
       {/* Floating Trigger Button */}
-      <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-[99]">
+      <div className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] sm:bottom-[92px] right-4 sm:right-6 z-[99]">
         {!isOpen && (
           <button
             onClick={() => setIsOpen(true)}

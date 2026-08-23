@@ -26,10 +26,8 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* AI Lead Assistant Floating Bot (Excludes /admin routes) */}
       {!isAdminPage && <AIChatBot />}
 
-      {/* Desktop Floating Buttons */}
-      <div className="hidden md:block">
-        <FloatingButtons callHref={CALL} whatsappHref={WHATSAPP} />
-      </div>
+      {/* Floating Action Stack (WhatsApp & Call Buttons) */}
+      {!isAdminPage && <FloatingButtons callHref={CALL} whatsappHref={WHATSAPP} />}
 
       {/* Mobile Sticky CTA */}
       <StickyMobileCTA callHref={CALL} whatsappHref={WHATSAPP} />
