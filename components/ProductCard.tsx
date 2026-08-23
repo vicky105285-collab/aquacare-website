@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle, ArrowRight } from "lucide-react";
@@ -11,6 +14,7 @@ export type ProductCardProps = {
 };
 
 export function ProductCard({ product, priority }: ProductCardProps) {
+  const [imgSrc, setImgSrc] = useState(product.img);
   const productSlug = slugify(product.name);
   const href = `/products/item/${productSlug}`;
 
@@ -22,12 +26,13 @@ export function ProductCard({ product, priority }: ProductCardProps) {
           {product.tag}
         </span>
         <Image
-          src={product.img}
+          src={imgSrc}
           alt={product.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover group-hover:scale-[1.04] transition-transform duration-500 ease-out"
           priority={priority}
+          onError={() => setImgSrc("/products/aqua_shark.webp")}
         />
         {/* Overlay hint on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -75,4 +80,3 @@ export function ProductCard({ product, priority }: ProductCardProps) {
     </article>
   );
 }
-
