@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { BLOG_POSTS } from "@/lib/site/blog";
@@ -69,9 +70,12 @@ export async function POST(request: Request) {
           isPublished: isPublished !== false,
         },
       });
+      revalidatePath("/blog");
+      revalidatePath(`/blog/${slug}`);
       return NextResponse.json({ success: true, post: created });
     }
 
+    revalidatePath("/blog");
     return NextResponse.json({
       success: true,
       message: "Post created successfully (Fallback mode)",

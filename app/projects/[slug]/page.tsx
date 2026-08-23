@@ -14,6 +14,8 @@ export async function generateStaticParams() {
   }));
 }
 
+export const revalidate = 0;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = await getDynamicProjectBySlug(slug);

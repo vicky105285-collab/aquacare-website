@@ -3,6 +3,8 @@ import { getDynamicProjects } from "@/lib/site/projects";
 import { COMPANY_NAME, FORMER_COMPANY_NAME, SITE_URL } from "@/lib/site/constants";
 import { ProjectsIndexView } from "@/components/ProjectsIndexView";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: `Our Turnkey Projects Portfolio & Case Studies | ${COMPANY_NAME}`,
   description:

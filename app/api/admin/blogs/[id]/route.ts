@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { slugify } from "@/lib/utils";
@@ -31,9 +32,12 @@ export async function PUT(
           ...(typeof isPublished === "boolean" && { isPublished }),
         },
       });
+      revalidatePath("/blog");
+      revalidatePath(`/blog/${updated.slug}`);
       return NextResponse.json({ success: true, post: updated });
     }
 
+    revalidatePath("/blog");
     return NextResponse.json({ success: true, message: "Updated (Fallback mode)" });
   } catch (error) {
     console.error("Blog update error:", error);
@@ -55,6 +59,7 @@ export async function DELETE(
     if (prisma) {
       await prisma.blog.delete({ where: { id } });
     }
+    revalidatePath("/blog");
     return NextResponse.json({ success: true, message: "Blog post deleted successfully" });
   } catch (error) {
     console.error("Blog delete error:", error);

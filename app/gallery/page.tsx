@@ -6,6 +6,8 @@ import { CALL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
 import { getDynamicGalleryItems } from "@/lib/site/gallery";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = pageMetadata({
   title: "Gallery",
   description:

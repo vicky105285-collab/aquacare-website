@@ -5,6 +5,8 @@ import { WHATSAPP } from "@/lib/site/constants";
 import { getDynamicProducts, PRODUCT_CATEGORIES } from "@/lib/site/data";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = pageMetadata({
   title: "Products",
   description:

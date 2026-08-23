@@ -8,6 +8,8 @@ import { getDynamicBlogPosts } from "@/lib/site/blog";
 import { pageMetadata } from "@/lib/site/page-metadata";
 import { ArrowRight, BookOpen, Clock, User } from "lucide-react";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = pageMetadata({
   title: "SEO Water Treatment & Solar Blog | Tamil Nadu Knowledge Hub",
   description:

@@ -10,6 +10,8 @@ type Props = {
   params: Promise<{ category: string }>;
 };
 
+export const revalidate = 0;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
   const categoryData = PRODUCT_CATEGORIES.find((c) => c.slug === category);

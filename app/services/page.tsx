@@ -5,6 +5,8 @@ import { PageHero } from "@/components/PageHero";
 import { pageMetadata } from "@/lib/site/page-metadata";
 import { COMPANY_NAME, FORMER_COMPANY_NAME } from "@/lib/site/constants";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = pageMetadata({
   title: `Residential, Commercial & Industrial Services | ${COMPANY_NAME}`,
   description:
