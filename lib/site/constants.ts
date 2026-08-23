@@ -7,8 +7,8 @@ export const FORMER_COMPANY_NAME = "Aqua Care & Solar Care Systems";
 /** Business owner name */
 export const BUSINESS_OWNER = "Mr. Ananth";
 
-/** Website manager name */
-export const WEBSITE_MANAGER = "Dr. Vignesh";
+/** Developer & engineering credit */
+export const DEVELOPER_CREDIT = "Dr. Vignesh M.S.";
 
 /** Trust & history badge note */
 export const BUSINESS_HISTORY_NOTE =

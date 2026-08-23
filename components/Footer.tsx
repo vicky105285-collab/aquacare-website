@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Droplets, Mail, MapPin, MessageCircle, Phone, User, ShieldCheck } from "lucide-react";
-import { ADDRESS_FULL, BUSINESS_HISTORY_NOTE, BUSINESS_OWNER, CALL, COMPANY_NAME, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WEBSITE_MANAGER, WHATSAPP } from "@/lib/site/constants";
+import { ADDRESS_FULL, BUSINESS_HISTORY_NOTE, BUSINESS_OWNER, CALL, COMPANY_NAME, DEVELOPER_CREDIT, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
 import { InstagramSvg } from "@/components/InstagramSvg";
 import type { FooterServiceLink } from "@/lib/site/types";
 
@@ -141,7 +141,7 @@ export function Footer({ copyrightYear }: FooterProps) {
             <span className="hidden sm:inline text-slate-700">|</span>
             <span className="flex items-center gap-1.5 text-slate-300">
               <User className="w-3.5 h-3.5 text-blue-400" />
-              Website Managed by <strong className="text-blue-400 font-bold">{WEBSITE_MANAGER}</strong>
+              Developed & Engineered by <strong className="text-blue-400 font-bold">{DEVELOPER_CREDIT}</strong>
             </span>
           </div>
         </div>
