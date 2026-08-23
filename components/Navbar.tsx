@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Droplets, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { Menu, MessageCircle, Phone, X } from "lucide-react";
 import { BRAND_LOGO_LINE_1, BRAND_LOGO_LINE_2, CALL, WHATSAPP } from "@/lib/site/constants";
 import { MAIN_NAV } from "@/lib/site/navigation";
 
@@ -40,19 +41,26 @@ export function Navbar() {
     <header>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          solidNav ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-blue-900/10" : "bg-transparent"
+          solidNav ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-blue-900/10" : "bg-slate-950/80 backdrop-blur-md"
         }`}
         aria-label="Primary"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            <Link href="/" className="flex items-center gap-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg">
-                <Droplets className="w-5 h-5 text-white" aria-hidden />
+            <Link href="/" className="flex items-center gap-3 rounded-xl group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500">
+              <div className="relative h-10 sm:h-12 w-auto bg-white p-1 rounded-xl shadow-md border border-slate-100 flex items-center justify-center">
+                <Image
+                  src="/images/logo.png"
+                  alt="Yuvanthika Aquacare & Solar Care Systems Logo"
+                  width={180}
+                  height={50}
+                  className="h-8 sm:h-10 w-auto object-contain"
+                  priority
+                />
               </div>
-              <div>
-                <p className={`font-bold text-sm leading-tight ${logoLine1}`}>{BRAND_LOGO_LINE_1}</p>
-                <p className={`font-bold text-sm leading-tight ${logoLine2}`}>{BRAND_LOGO_LINE_2}</p>
+              <div className="hidden min-[400px]:block">
+                <p className={`font-black text-xs sm:text-sm tracking-tight leading-tight ${logoLine1}`}>{BRAND_LOGO_LINE_1}</p>
+                <p className={`font-black text-[11px] sm:text-xs tracking-tight leading-tight ${logoLine2}`}>{BRAND_LOGO_LINE_2}</p>
               </div>
             </Link>
 

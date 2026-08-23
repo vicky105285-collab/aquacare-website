@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Droplets, Mail, MapPin, MessageCircle, Phone, User, ShieldCheck } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone, User, ShieldCheck } from "lucide-react";
 import { ADDRESS_FULL, BUSINESS_HISTORY_NOTE, BUSINESS_OWNER, CALL, COMPANY_NAME, DEVELOPER_CREDIT, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
 import { InstagramSvg } from "@/components/InstagramSvg";
 import type { FooterServiceLink } from "@/lib/site/types";
@@ -16,12 +17,18 @@ export function Footer({ copyrightYear }: FooterProps) {
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg">
-                <Droplets className="w-5 h-5 text-white" aria-hidden />
+              <div className="relative bg-white p-1.5 rounded-xl shadow-lg border border-slate-700">
+                <Image
+                  src="/images/logo.png"
+                  alt="Yuvanthika Aquacare & Solar Care Systems Logo"
+                  width={220}
+                  height={60}
+                  className="h-12 w-auto object-contain"
+                />
               </div>
               <div>
                 <p className="font-black text-white text-sm leading-snug">{COMPANY_NAME}</p>
-                <p className="text-cyan-400 text-xs">Karur & Entire Tamil Nadu</p>
+                <p className="text-cyan-400 text-xs font-semibold">Karur & Entire Tamil Nadu</p>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-slate-300">
@@ -141,7 +148,7 @@ export function Footer({ copyrightYear }: FooterProps) {
             <span className="hidden sm:inline text-slate-700">|</span>
             <span className="flex items-center gap-1.5 text-slate-300">
               <User className="w-3.5 h-3.5 text-blue-400" />
-              Developed & Engineered by <strong className="text-blue-400 font-bold">{DEVELOPER_CREDIT}</strong>
+              Website Designed, Developed & Engineered by <strong className="text-blue-400 font-bold">{DEVELOPER_CREDIT}</strong>
             </span>
           </div>
         </div>

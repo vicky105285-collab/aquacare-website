@@ -44,6 +44,8 @@ const orgJsonLd = {
       alternateName: FORMER_COMPANY_NAME,
       description: `${SITE_TAGLINE} ${BUSINESS_HISTORY_NOTE}`,
       url: SITE_URL,
+      logo: `${SITE_URL}/images/logo.png`,
+      image: `${SITE_URL}/images/logo.png`,
       telephone: PHONE_E164,
       email: EMAIL,
       foundingDate: "2014",
@@ -89,7 +91,8 @@ const orgJsonLd = {
       "@id": `${SITE_URL}/#corp`,
       name: SITE_NAME,
       url: SITE_URL,
-      logo: `${SITE_URL}/favicon.ico`,
+      logo: `${SITE_URL}/images/logo.png`,
+      image: `${SITE_URL}/images/logo.png`,
       founder: {
         "@type": "Person",
         name: BUSINESS_OWNER,
@@ -126,6 +129,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   alternates: {
     canonical: SITE_URL,
   },
@@ -136,11 +144,20 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} | Karur & Tamil Nadu`,
     description: `${SITE_TAGLINE} ${BUSINESS_HISTORY_NOTE}`,
+    images: [
+      {
+        url: `${SITE_URL}/images/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} Official Company Logo`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} | Karur & Tamil Nadu`,
     description: `${SITE_TAGLINE} ${BUSINESS_HISTORY_NOTE}`,
+    images: [`${SITE_URL}/images/og-image.png`],
   },
   robots: { index: true, follow: true },
   formatDetection: { telephone: true, email: true, address: true },
@@ -169,4 +186,3 @@ export default function RootLayout({
     </html>
   );
 }
-

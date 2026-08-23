@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -125,9 +126,16 @@ export default function AdminLoginPage() {
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <div className="flex justify-center">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-cyan-500/20">
-            Y
+        <div className="flex justify-center mb-3">
+          <div className="bg-white p-2 rounded-2xl shadow-xl shadow-cyan-500/20 border border-slate-700 flex items-center justify-center">
+            <Image
+              src="/images/logo.png"
+              alt="Yuvanthika Aquacare & Solar Care Systems Logo"
+              width={220}
+              height={65}
+              className="h-16 w-auto object-contain"
+              priority
+            />
           </div>
         </div>
         <h2 className="mt-4 text-center text-2xl font-black text-white tracking-tight">

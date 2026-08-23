@@ -6,8 +6,11 @@ export function pageMetadata(opts: {
   description: string;
   path: string;
   keywords?: string[];
+  image?: string;
 }): Metadata {
   const url = `${SITE_URL}${opts.path.startsWith("/") ? opts.path : `/${opts.path}`}`;
+  const imageUrl = opts.image || `${SITE_URL}/images/og-image.png`;
+
   return {
     title: `${opts.title} | ${SITE_NAME}`,
     description: opts.description,
@@ -20,11 +23,20 @@ export function pageMetadata(opts: {
       siteName: SITE_NAME,
       title: `${opts.title} | ${SITE_NAME}`,
       description: opts.description,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${opts.title} | ${SITE_NAME}`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${opts.title} | ${SITE_NAME}`,
       description: opts.description,
+      images: [imageUrl],
     },
   };
 }
