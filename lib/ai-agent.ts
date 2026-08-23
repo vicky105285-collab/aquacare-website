@@ -1,5 +1,5 @@
 import { addLead, incrementConversationCount } from "./leads-store";
-import { COMPANY_NAME, FORMER_COMPANY_NAME, PHONE_DISPLAY, WHATSAPP } from "./site/constants";
+import { COMPANY_NAME, FORMER_COMPANY_NAME, PHONE_DISPLAY, WHATSAPP_PHONE_DIGITS } from "./site/constants";
 
 export interface ChatMessage {
   id: string;
@@ -11,10 +11,45 @@ export interface ChatMessage {
   leadCaptured?: boolean;
 }
 
+export function formatWhatsAppLeadMessage(data: {
+  name: string;
+  phone: string;
+  location?: string;
+  requirement?: string;
+  currentPage?: string;
+  dateTime?: string;
+}): string {
+  const name = data.name || "Valued Customer";
+  const phone = data.phone || "N/A";
+  const location = data.location || "Karur / Tamil Nadu";
+  const requirement = data.requirement || "General RO / Solar Quote";
+  const currentPage = data.currentPage || "Homepage";
+  const time = data.dateTime || new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+  const messageText = `👋 Hello Yuvanthika Aquacare & Solar Care Systems,
+
+I visited your website and would like a quotation.
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+📍 Location: ${location}
+📝 Requirement: ${requirement}
+
+Source: Website AI Assistant
+Page: ${currentPage}
+Time: ${time}
+
+Please contact me with pricing and installation details.
+
+Thank you.`;
+
+  return `https://wa.me/${WHATSAPP_PHONE_DIGITS}?text=${encodeURIComponent(messageText)}`;
+}
+
 export async function processAIChatMessage(
   userText: string,
   history: ChatMessage[],
-  collectedLeadData?: { name?: string; phone?: string; location?: string; requirement?: string }
+  collectedLeadData?: { name?: string; phone?: string; location?: string; requirement?: string; currentPage?: string }
 ): Promise<{
   reply: string;
   nextStep?: "ask_name" | "ask_phone" | "ask_location" | "lead_complete";
@@ -35,6 +70,7 @@ export async function processAIChatMessage(
     const name = collectedLeadData?.name || "Website Customer";
     const location = collectedLeadData?.location || "Karur / Tamil Nadu";
     const req = collectedLeadData?.requirement || userText || "General RO / Solar Quote";
+    const page = collectedLeadData?.currentPage || "/";
 
     // Save lead into database
     await addLead({
@@ -42,21 +78,24 @@ export async function processAIChatMessage(
       phone,
       location,
       serviceRequired: req,
-      message: `Enquiry submitted via AI Assistant on website. Customer text: "${userText}"`,
+      message: `Enquiry submitted via AI Assistant on website (${page}). Customer text: "${userText}"`,
       source: "AI Lead Agent",
     });
 
-    const encodedMsg = encodeURIComponent(
-      `Hi Yuvanthika Aquacare! I requested a quote on your website.\n\nName: ${name}\nPhone: ${phone}\nLocation: ${location}\nRequirement: ${req}`
-    );
-    const waUrl = `${WHATSAPP}?text=${encodedMsg}`;
+    const waUrl = formatWhatsAppLeadMessage({
+      name,
+      phone,
+      location,
+      requirement: req,
+      currentPage: page,
+    });
 
     return {
-      reply: `Thank you, ${name}! Your request for "${req}" has been registered. Our chief engineer in Karur will call you shortly on ${phone}. You can also connect directly with us on WhatsApp right now!`,
+      reply: `Thank you, ${name}! Your request for "${req}" has been registered in our system. Our chief engineer in Karur will call you shortly on ${phone}. Click below to continue on WhatsApp!`,
       leadCaptured: true,
       whatsappLink: waUrl,
       options: [
-        { label: "💬 Chat on WhatsApp Now", action: "whatsapp" },
+        { label: "💬 Continue on WhatsApp", action: "whatsapp" },
         { label: "📞 Call Engineer Directly", action: "call" },
         { label: "❓ Ask Another Question", action: "reset" },
       ],

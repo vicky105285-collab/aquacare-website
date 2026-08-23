@@ -2,8 +2,10 @@
 /* eslint-disable react-hooks/purity */
 
 import React, { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { X, Send, Phone, MessageCircle, Sparkles, Bot } from "lucide-react";
-import { CALL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
+import { CALL, PHONE_DISPLAY } from "@/lib/site/constants";
+import { formatWhatsAppLeadMessage } from "@/lib/ai-agent";
 
 interface MessageItem {
   id: string;
@@ -15,6 +17,7 @@ interface MessageItem {
 }
 
 export function AIChatBot() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<MessageItem[]>([
     {
@@ -51,6 +54,13 @@ export function AIChatBot() {
     }
   }, [messages, isOpen, showLeadForm]);
 
+  const getCurrentPage = () => {
+    if (typeof window !== "undefined") {
+      return `${window.location.origin}${pathname}`;
+    }
+    return pathname || "/";
+  };
+
   const handleSendMessage = async (textToSend?: string) => {
     const text = textToSend || inputText;
     if (!text.trim()) return;
@@ -78,6 +88,7 @@ export function AIChatBot() {
             phone: leadPhone,
             location: leadLocation,
             requirement: leadReq,
+            currentPage: getCurrentPage(),
           },
         }),
       });
@@ -102,10 +113,27 @@ export function AIChatBot() {
     }
   };
 
+  const handleOpenWhatsAppHandoff = (reqLabel?: string) => {
+    const req = reqLabel || leadReq || "RO Water Purifier & Solar Consultation";
+    const name = leadName || "Valued Customer";
+    const phone = leadPhone || "N/A";
+    const location = leadLocation || "Karur / Tamil Nadu";
+    const pageUrl = getCurrentPage();
+
+    const waUrl = formatWhatsAppLeadMessage({
+      name,
+      phone,
+      location,
+      requirement: req,
+      currentPage: pageUrl,
+    });
+
+    window.open(waUrl, "_blank");
+  };
+
   const handleOptionClick = (action: string, label: string) => {
     if (action === "whatsapp" || action === "whatsapp_quote") {
-      const msg = encodeURIComponent(`Hi Yuvanthika Aquacare! I'm interested in ${label}. Please send quote details.`);
-      window.open(`${WHATSAPP}?text=${msg}`, "_blank");
+      handleOpenWhatsAppHandoff(label);
       return;
     }
 
@@ -133,45 +161,59 @@ export function AIChatBot() {
     if (!leadPhone.trim()) return;
 
     setIsLoading(true);
+    const currentPage = getCurrentPage();
+    const nowStr = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
     try {
-      const res = await fetch("/api/ai-chat", {
+      // 1. Save lead to database BEFORE WhatsApp redirect
+      const saveRes = await fetch("/api/admin/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: `My name is ${leadName || "Customer"}, phone: ${leadPhone}, location: ${leadLocation || "Karur"}, requirement: ${leadReq}`,
-          collectedLeadData: {
-            name: leadName,
-            phone: leadPhone,
-            location: leadLocation,
-            requirement: leadReq,
-          },
+          name: leadName || "Website Visitor",
+          phone: leadPhone,
+          location: leadLocation || "Karur / Tamil Nadu",
+          serviceRequired: leadReq,
+          message: `Captured via AI Lead Chatbot on ${currentPage}`,
         }),
       });
 
-      if (res.ok) {
-        setShowLeadForm(false);
-        const encodedMsg = encodeURIComponent(
-          `Hi Yuvanthika Aquacare! I submitted a quote request.\n\nName: ${leadName}\nPhone: ${leadPhone}\nLocation: ${leadLocation}\nRequirement: ${leadReq}`
-        );
-        const waUrl = `${WHATSAPP}?text=${encodedMsg}`;
-
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `bot-success-${Math.random().toString(36).substring(2, 9)}`,
-            sender: "bot",
-            text: `🎉 Thank you ${leadName || "valued customer"}! Your request for "${leadReq}" has been saved in our system. Our chief engineer will call you shortly on ${leadPhone}.`,
-            whatsappLink: waUrl,
-            leadCaptured: true,
-            options: [
-              { label: "💬 Continue on WhatsApp", action: "whatsapp" },
-              { label: "📞 Call Store Now", action: "call" },
-            ],
-          },
-        ]);
+      if (!saveRes.ok) {
+        console.warn("Lead pre-save returned status:", saveRes.status);
       }
+
+      setShowLeadForm(false);
+
+      // 2. Generate clean professional WhatsApp message
+      const waUrl = formatWhatsAppLeadMessage({
+        name: leadName || "Valued Customer",
+        phone: leadPhone,
+        location: leadLocation || "Karur / Tamil Nadu",
+        requirement: leadReq,
+        currentPage,
+        dateTime: nowStr,
+      });
+
+      // 3. Update chat messages stream
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `bot-success-${Math.random().toString(36).substring(2, 9)}`,
+          sender: "bot",
+          text: `🎉 Thank you ${leadName || "valued customer"}! Your lead has been saved in our system. Our chief engineer will contact you shortly on ${leadPhone}.\n\nClick below to open WhatsApp with your quote request details.`,
+          whatsappLink: waUrl,
+          leadCaptured: true,
+          options: [
+            { label: "💬 Open Clean WhatsApp Chat", action: "whatsapp" },
+            { label: "📞 Call Store Now", action: "call" },
+          ],
+        },
+      ]);
+
+      // 4. Open WhatsApp in new tab
+      window.open(waUrl, "_blank");
     } catch (err) {
-      console.error(err);
+      console.error("Lead submission error:", err);
     } finally {
       setIsLoading(false);
     }
@@ -340,9 +382,10 @@ export function AIChatBot() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-xs rounded-xl hover:from-cyan-400 hover:to-blue-500 transition-all shadow-md"
+                  className="w-full py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-xs rounded-xl hover:from-cyan-400 hover:to-blue-500 transition-all shadow-md flex items-center justify-center gap-2"
                 >
-                  {isLoading ? "Submitting..." : "Submit Quote Request"}
+                  <MessageCircle className="w-4 h-4" />
+                  {isLoading ? "Saving Lead..." : "Submit & Open WhatsApp"}
                 </button>
               </form>
             )}
@@ -375,14 +418,12 @@ export function AIChatBot() {
               <Sparkles className="w-3.5 h-3.5 text-cyan-600" /> Get Quote
             </button>
             <span className="text-slate-300">|</span>
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => handleOpenWhatsAppHandoff()}
               className="flex items-center gap-1 text-green-700 hover:text-green-800 px-2 py-1 rounded-lg hover:bg-white transition-colors"
             >
               <MessageCircle className="w-3.5 h-3.5 text-green-600" /> WhatsApp
-            </a>
+            </button>
           </div>
 
           {/* Input Box */}
