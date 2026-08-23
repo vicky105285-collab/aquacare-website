@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
     "Yuvanthika Aquacare Phone Number",
     "Aqua Care Karur Address",
     "RO service WhatsApp Karur",
-    "Reddipalayam Karur Showroom",
+    "Andankoil East Karur Office",
   ],
 });
 

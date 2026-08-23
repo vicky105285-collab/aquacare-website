@@ -48,12 +48,16 @@ export const EMAIL = "aquacareindia1@gmail.com";
 
 export const MAILTO_EMAIL = `mailto:${EMAIL}`;
 
-/** Structured address (Reddipalayam showroom / office) */
-export const ADDRESS_STREET = "SH 84, Erode - Karur Rd, Reddipalayam";
+/** Official Business Location Details */
+export const ADDRESS_STREET = "Andankoil East";
 export const ADDRESS_LOCALITY = "Karur";
 export const ADDRESS_REGION = "Tamil Nadu";
 export const ADDRESS_POSTAL_CODE = "639002";
 export const ADDRESS_COUNTRY = "IN";
+export const PLUS_CODE = "X29X+3QR";
+
+export const LATITUDE = "10.967750";
+export const LONGITUDE = "78.049389";
 
 /** Single line for maps query, schema, and meta */
 export const ADDRESS_FULL = `${ADDRESS_STREET}, ${ADDRESS_LOCALITY}, ${ADDRESS_REGION} ${ADDRESS_POSTAL_CODE}`;
@@ -64,11 +68,8 @@ export const ADDRESS_LINES: readonly [string, string] = [
   `${ADDRESS_REGION} ${ADDRESS_POSTAL_CODE}`,
 ];
 
-/** Short link — open in Maps app / browser */
-export const MAPS_DIRECTIONS_URL = "https://maps.app.goo.gl/ZTdXepPdGCuifZ547";
+/** Google Maps directions link based on exact coordinates */
+export const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/search/?api=1&query=${LATITUDE},${LONGITUDE}`;
 
-/**
- * Google Maps embed (no API key). Uses address query; replace with place embed `pb=` if you add one from Maps UI.
- */
-export const MAPS_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(ADDRESS_FULL)}&output=embed`;
-
+/** Google Maps embed URL based on exact latitude & longitude coordinates */
+export const MAPS_EMBED_URL = `https://www.google.com/maps?q=${LATITUDE},${LONGITUDE}&hl=en&z=16&output=embed`;

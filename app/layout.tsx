@@ -10,6 +10,8 @@ import {
   BUSINESS_HISTORY_NOTE,
   EMAIL,
   FORMER_COMPANY_NAME,
+  LATITUDE,
+  LONGITUDE,
   MAPS_DIRECTIONS_URL,
   PHONE_E164,
   SITE_NAME,
@@ -52,8 +54,8 @@ const orgJsonLd = {
       },
       geo: {
         "@type": "GeoCoordinates",
-        latitude: "10.9577",
-        longitude: "78.0772",
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
       },
       areaServed: [
         "Karur",

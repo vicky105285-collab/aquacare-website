@@ -43,7 +43,7 @@ async function main() {
     { key: 'phone', value: '+91 84288 88854' },
     { key: 'whatsapp', value: '918428888854' },
     { key: 'email', value: 'aquacareindia1@gmail.com' },
-    { key: 'address', value: 'SH 84, Erode - Karur Rd, Reddipalayam, Karur, Tamil Nadu 639002' },
+    { key: 'address', value: 'Andankoil East, Karur, Tamil Nadu 639002' },
   ];
 
   for (const s of initialSettings) {
