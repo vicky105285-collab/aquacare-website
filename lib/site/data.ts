@@ -132,7 +132,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
 export const PRODUCTS: ProductItem[] = [
   {
     name: "Aqua Shark",
-    brand: "WATERNET",
+    brand: "YUVANTHIKA AQUACARE",
     tag: "Best Seller",
     price: "₹8,500",
     mrp: null,
@@ -145,7 +145,7 @@ export const PRODUCTS: ProductItem[] = [
     featured: true},
   {
     name: "Blue Rock",
-    brand: "WATERNET",
+    brand: "YUVANTHIKA AQUACARE",
     tag: "TDS Control",
     price: "₹9,500",
     mrp: null,
@@ -158,7 +158,7 @@ export const PRODUCTS: ProductItem[] = [
     featured: true},
   {
     name: "Aqua Angel",
-    brand: "WATERNET",
+    brand: "YUVANTHIKA AQUACARE",
     tag: "Alkaline",
     price: "₹12,500",
     mrp: null,
@@ -171,7 +171,7 @@ export const PRODUCTS: ProductItem[] = [
     featured: false},
   {
     name: "Aqua Zebra",
-    brand: "WATERNET",
+    brand: "YUVANTHIKA AQUACARE",
     tag: "Alkaline RO",
     price: "₹15,500",
     mrp: null,
@@ -196,8 +196,8 @@ export const PRODUCTS: ProductItem[] = [
     categoryId: "domestic-ro",
     featured: false},
   {
-    name: "Waternet Tulips",
-    brand: "WATERNET",
+    name: "Yuvanthika Tulips",
+    brand: "YUVANTHIKA AQUACARE",
     tag: "Steel Body",
     price: "₹22,500",
     mrp: null,

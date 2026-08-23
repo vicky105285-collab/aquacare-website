@@ -10,7 +10,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Premium RO purifiers and water systems from leading brands — transparent pricing, EMI options, and expert installation in Karur.",
   path: "/products",
-  keywords: ["RO purifier price Karur", "WATERNET RO", "alkaline water purifier"],
+  keywords: ["RO purifier price Karur", "Yuvanthika Aquacare RO", "alkaline water purifier"],
 });
 
 export default function ProductsPage() {
