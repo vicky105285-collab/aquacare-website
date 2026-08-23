@@ -194,7 +194,9 @@ export type ProjectItem = {
 export type BlogPost = {
   slug: string;
   title: string;
+  titleTa?: string;
   description: string;
+  descriptionTa?: string;
   keywords: string[];
   publishedAt: string;
   updatedAt: string;
@@ -204,6 +206,7 @@ export type BlogPost = {
   readTime: string;
   image: string;
   content: string;
+  contentTa?: string;
   toc?: { id: string; text: string }[];
 };
 
