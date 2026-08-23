@@ -3,7 +3,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { CALL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
-import { GALLERY_ITEMS } from "@/lib/site/gallery";
+import { getDynamicGalleryItems } from "@/lib/site/gallery";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -14,7 +14,8 @@ export const metadata: Metadata = pageMetadata({
   keywords: ["RO installation Karur", "solar water heater photos", "water purifier gallery"],
 });
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const galleryItems = await getDynamicGalleryItems();
   return (
     <article>
       <PageHero
@@ -25,7 +26,7 @@ export default function GalleryPage() {
       <section className="py-16 lg:py-20 bg-slate-50" aria-label="Photo gallery">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {GALLERY_ITEMS.map((item, i) => (
+            {galleryItems.map((item, i) => (
               <figure
                 key={item.src}
                 className="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:border-cyan-200"

@@ -483,6 +483,66 @@ Contact Yuvanthika Aquacare & Solar Care Systems today for a free comprehensive 
   },
 ];
 
+import { prisma } from "@/lib/db";
+
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);
 }
+
+export async function getDynamicBlogPosts(): Promise<BlogPost[]> {
+  if (prisma) {
+    try {
+      const dbPosts = await prisma.blog.findMany({
+        where: { isPublished: true },
+        orderBy: { publishDate: "desc" },
+      });
+      if (dbPosts.length > 0) {
+        return dbPosts.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          description: p.metaDescription || p.content.slice(0, 180),
+          keywords: p.keywords,
+          publishedAt: p.publishDate.toISOString().slice(0, 10),
+          updatedAt: p.updatedAt.toISOString().slice(0, 10),
+          author: p.author,
+          authorRole: "Water Specialist",
+          category: "Knowledge Hub",
+          readTime: "5 min read",
+          image: p.featuredImage || "/products/7-wave-krystal.webp",
+          content: p.content,
+        }));
+      }
+    } catch (e) {
+      console.warn("DB blog query fallback:", e);
+    }
+  }
+  return BLOG_POSTS;
+}
+
+export async function getDynamicBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  if (prisma) {
+    try {
+      const p = await prisma.blog.findUnique({ where: { slug } });
+      if (p) {
+        return {
+          slug: p.slug,
+          title: p.title,
+          description: p.metaDescription || p.content.slice(0, 180),
+          keywords: p.keywords,
+          publishedAt: p.publishDate.toISOString().slice(0, 10),
+          updatedAt: p.updatedAt.toISOString().slice(0, 10),
+          author: p.author,
+          authorRole: "Water Specialist",
+          category: "Knowledge Hub",
+          readTime: "5 min read",
+          image: p.featuredImage || "/products/7-wave-krystal.webp",
+          content: p.content,
+        };
+      }
+    } catch (e) {
+      console.warn("DB blog slug query fallback:", e);
+    }
+  }
+  return getBlogPostBySlug(slug);
+}
+

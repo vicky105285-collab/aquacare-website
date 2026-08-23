@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ProductCatalog } from "@/components/ProductCatalog";
 import { PageHero } from "@/components/PageHero";
 import { WHATSAPP } from "@/lib/site/constants";
-import { PRODUCTS, PRODUCT_CATEGORIES } from "@/lib/site/data";
+import { getDynamicProducts, PRODUCT_CATEGORIES } from "@/lib/site/data";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -13,7 +13,8 @@ export const metadata: Metadata = pageMetadata({
   keywords: ["RO purifier price Karur", "Yuvanthika Aquacare RO", "alkaline water purifier"],
 });
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await getDynamicProducts();
   return (
     <article>
       <PageHero
@@ -21,7 +22,7 @@ export default function ProductsPage() {
         subtitle="Curated models chosen for Tamil Nadu water conditions — with genuine spares and professional commissioning."
         tamilLine="தரமான RO மற்றும் நீர் அமைப்புகள்."
       />
-      <ProductCatalog items={PRODUCTS} categories={PRODUCT_CATEGORIES} enquiryWhatsappHref={WHATSAPP} />
+      <ProductCatalog items={products} categories={PRODUCT_CATEGORIES} enquiryWhatsappHref={WHATSAPP} />
     </article>
   );
 }

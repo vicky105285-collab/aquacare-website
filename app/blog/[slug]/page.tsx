@@ -6,7 +6,7 @@ import { PageHero } from "@/components/PageHero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CTASection } from "@/components/CTASection";
 import { buildWhatsAppUrl, CALL, COMPANY_NAME, FORMER_COMPANY_NAME, PHONE_DISPLAY, SITE_URL } from "@/lib/site/constants";
-import { BLOG_POSTS, getBlogPostBySlug } from "@/lib/site/blog";
+import { BLOG_POSTS, getDynamicBlogPostBySlug } from "@/lib/site/blog";
 import { ArrowLeft, Clock, MessageCircle, User } from "lucide-react";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -17,7 +17,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getDynamicBlogPostBySlug(slug);
   if (!post) return { title: "Blog Article" };
   const url = `${SITE_URL}/blog/${post.slug}`;
 
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostDetailPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getDynamicBlogPostBySlug(slug);
   if (!post) notFound();
 
   const articleUrl = `${SITE_URL}/blog/${post.slug}`;

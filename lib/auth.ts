@@ -11,7 +11,17 @@ export interface SessionUser {
 }
 
 const SESSION_COOKIE_NAME = "yuvanthika_admin_session";
-const SECRET = process.env.ADMIN_JWT_SECRET || "yuvanthika-super-secret-key-2026-karur-tamil-nadu";
+
+function getJwtSecret(): string {
+  const secret = process.env.ADMIN_JWT_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("CRITICAL SECURITY RISK: ADMIN_JWT_SECRET environment variable is not defined in production!");
+    }
+    return "yuvanthika-fallback-dev-secret-key-2026-karur";
+  }
+  return secret;
+}
 
 export async function hashPassword(password: string): Promise<string> {
   const salt = await bcrypt.genSalt(10);
@@ -22,22 +32,23 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
   return bcrypt.compare(password, hash);
 }
 
-// Simple tamper-proof session token serializer for serverless environments
 export function createSessionToken(user: SessionUser): string {
+  const secret = getJwtSecret();
   const payload = JSON.stringify({
     ...user,
     exp: Date.now() + 7 * 24 * 60 * 60 * 1000, // 7 days
   });
   const encoded = Buffer.from(payload).toString("base64url");
-  const signature = Buffer.from(`${encoded}.${SECRET}`).toString("hex").slice(0, 16);
+  const signature = Buffer.from(`${encoded}.${secret}`).toString("hex").slice(0, 16);
   return `${encoded}.${signature}`;
 }
 
 export function parseSessionToken(token: string): SessionUser | null {
   try {
+    const secret = getJwtSecret();
     const [encoded, signature] = token.split(".");
     if (!encoded || !signature) return null;
-    const expectedSig = Buffer.from(`${encoded}.${SECRET}`).toString("hex").slice(0, 16);
+    const expectedSig = Buffer.from(`${encoded}.${secret}`).toString("hex").slice(0, 16);
     if (signature !== expectedSig) return null;
 
     const payload = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8"));

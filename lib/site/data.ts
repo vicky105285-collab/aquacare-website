@@ -2907,7 +2907,39 @@ export const CONTACT_CARDS: ContactChannelCard[] = [
   },
 ];
 
+import { prisma } from "@/lib/db";
+
 export const FOOTER_SERVICE_LINKS: FooterServiceLink[] = SERVICES.map((s) => ({
   label: s.title,
   href: `/services/${s.slug}`,
 }));
+
+export async function getDynamicProducts(): Promise<ProductItem[]> {
+  if (prisma) {
+    try {
+      const dbProducts = await prisma.product.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+      if (dbProducts.length > 0) {
+        return dbProducts.map((p) => ({
+          name: p.name,
+          brand: p.brand,
+          tag: p.featured ? "Featured" : "Pure Water",
+          price: p.price,
+          mrp: p.mrp || null,
+          liters: p.liters || "12L/Hr",
+          stages: p.stages || "Multi Stage",
+          tank: p.tank || "Storage Tank",
+          img: p.image,
+          features: p.features.length > 0 ? p.features : ["High Rejection RO Membrane", "Alkaline Mineral Cartridge"],
+          categoryId: p.categoryId,
+          featured: p.featured,
+        }));
+      }
+    } catch (e) {
+      console.warn("DB product query fallback:", e);
+    }
+  }
+  return PRODUCTS;
+}
+

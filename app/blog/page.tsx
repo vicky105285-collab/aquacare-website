@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { CALL, COMPANY_NAME, FORMER_COMPANY_NAME, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
-import { BLOG_POSTS } from "@/lib/site/blog";
+import { getDynamicBlogPosts } from "@/lib/site/blog";
 import { pageMetadata } from "@/lib/site/page-metadata";
 import { ArrowRight, BookOpen, Clock, User } from "lucide-react";
 
@@ -23,7 +23,8 @@ export const metadata: Metadata = pageMetadata({
   ],
 });
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
+  const posts = await getDynamicBlogPosts();
   return (
     <article>
       <PageHero
@@ -46,7 +47,7 @@ export default function BlogIndexPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {BLOG_POSTS.map((post) => (
+            {posts.map((post) => (
               <div
                 key={post.slug}
                 className="flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-cyan-300 transition-all duration-300 group"

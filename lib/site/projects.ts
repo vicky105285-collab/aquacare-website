@@ -1,5 +1,6 @@
 import type { ProjectItem, ServiceCategoryType } from "./types";
 import { FORMER_COMPANY_NAME, PHONE_DISPLAY, SITE_URL } from "./constants";
+import { prisma } from "@/lib/db";
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
@@ -402,6 +403,112 @@ export function getProjectBySlug(slug: string): ProjectItem | undefined {
   return PROJECTS_DATA.find((p) => p.slug === slug);
 }
 
+export async function getDynamicProjects(): Promise<ProjectItem[]> {
+  if (prisma) {
+    try {
+      const dbProjects = await prisma.project.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+      if (dbProjects.length > 0) {
+        return dbProjects.map((p) => ({
+          id: p.id,
+          slug: p.slug,
+          projectTitle: p.projectTitle,
+          projectName: p.projectTitle,
+          projectType: p.projectType,
+          location: p.location,
+          district: p.district,
+          customerCategory: p.customerCategory as ServiceCategoryType,
+          category: p.customerCategory as ServiceCategoryType,
+          industryType: p.industryType,
+          industry: p.industryType,
+          capacity: p.capacity,
+          installationDate: p.installationDate,
+          completionYear: p.installationDate.slice(0, 4),
+          problemFaced: p.problemFaced,
+          problem: p.problemFaced,
+          solutionProvided: p.solutionProvided,
+          solution: p.solutionProvided,
+          productsUsed: p.productsUsed,
+          projectDescription: p.projectDescription,
+          benefitsAchieved: p.benefitsAchieved,
+          testimonial: p.testimonialQuote
+            ? {
+                quote: p.testimonialQuote,
+                clientName: p.clientName || "Valued Client",
+                designation: p.designation || "Managing Director",
+                company: p.company || "Local Enterprise",
+                rating: 5,
+              }
+            : undefined,
+          projectImages: Array.isArray(p.projectImages)
+            ? (p.projectImages as unknown as Array<{ url: string; caption: string }>)
+            : [{ url: "/products/7-wave-krystal.webp", caption: "Installation View" }],
+          gallery: Array.isArray(p.projectImages)
+            ? (p.projectImages as unknown as Array<{ url: string; caption: string }>)
+            : [],
+          featured: p.featured,
+        }));
+      }
+    } catch (e) {
+      console.warn("DB project query fallback:", e);
+    }
+  }
+  return PROJECTS_DATA;
+}
+
+export async function getDynamicProjectBySlug(slug: string): Promise<ProjectItem | undefined> {
+  if (prisma) {
+    try {
+      const p = await prisma.project.findUnique({ where: { slug } });
+      if (p) {
+        return {
+          id: p.id,
+          slug: p.slug,
+          projectTitle: p.projectTitle,
+          projectName: p.projectTitle,
+          projectType: p.projectType,
+          location: p.location,
+          district: p.district,
+          customerCategory: p.customerCategory as ServiceCategoryType,
+          category: p.customerCategory as ServiceCategoryType,
+          industryType: p.industryType,
+          industry: p.industryType,
+          capacity: p.capacity,
+          installationDate: p.installationDate,
+          completionYear: p.installationDate.slice(0, 4),
+          problemFaced: p.problemFaced,
+          problem: p.problemFaced,
+          solutionProvided: p.solutionProvided,
+          solution: p.solutionProvided,
+          productsUsed: p.productsUsed,
+          projectDescription: p.projectDescription,
+          benefitsAchieved: p.benefitsAchieved,
+          testimonial: p.testimonialQuote
+            ? {
+                quote: p.testimonialQuote,
+                clientName: p.clientName || "Valued Client",
+                designation: p.designation || "Managing Director",
+                company: p.company || "Local Enterprise",
+                rating: 5,
+              }
+            : undefined,
+          projectImages: Array.isArray(p.projectImages)
+            ? (p.projectImages as unknown as Array<{ url: string; caption: string }>)
+            : [{ url: "/products/7-wave-krystal.webp", caption: "Installation View" }],
+          gallery: Array.isArray(p.projectImages)
+            ? (p.projectImages as unknown as Array<{ url: string; caption: string }>)
+            : [],
+          featured: p.featured,
+        };
+      }
+    } catch (e) {
+      console.warn("DB project slug query fallback:", e);
+    }
+  }
+  return getProjectBySlug(slug);
+}
+
 export function getFeaturedProjects(): ProjectItem[] {
   return PROJECTS_DATA.filter((p) => p.featured);
 }
@@ -426,3 +533,4 @@ export function generateSocialPostPack(project: ProjectItem) {
     seoSummary: `${title}: ${cap} ${type} designed and commissioned in ${project.location}, ${dist} by Yuvanthika Aquacare & Solar Care Systems (${FORMER_COMPANY_NAME}). Solved groundwater hardness and high TDS issues with guaranteed performance and 24/7 AMC service across Tamil Nadu.`,
   };
 }
+

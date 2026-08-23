@@ -1,3 +1,5 @@
+import { prisma } from "@/lib/db";
+
 /** Curated gallery items — product photography doubles as installation showcase until a dedicated media library is added. */
 export type GalleryItem = {
   src: string;
@@ -14,3 +16,23 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   { src: "/products/143-blue-life-tulips-plus.webp", alt: "Yuvanthika Tulips stainless RO", caption: "304 stainless body — commercial-grade finish" },
   { src: "/products/157-25-lph-whale.webp", alt: "Whale high-capacity RO", caption: "Large-family RO + UF storage solution" },
 ];
+
+export async function getDynamicGalleryItems(): Promise<GalleryItem[]> {
+  if (prisma) {
+    try {
+      const dbItems = await prisma.gallery.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+      if (dbItems.length > 0) {
+        return dbItems.map((item) => ({
+          src: item.mediaUrl,
+          alt: item.title,
+          caption: item.caption || item.title,
+        }));
+      }
+    } catch (e) {
+      console.warn("DB gallery query fallback:", e);
+    }
+  }
+  return GALLERY_ITEMS;
+}

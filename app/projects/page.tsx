@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PROJECTS_DATA } from "@/lib/site/projects";
+import { getDynamicProjects } from "@/lib/site/projects";
 import { COMPANY_NAME, FORMER_COMPANY_NAME, SITE_URL } from "@/lib/site/constants";
 import { ProjectsIndexView } from "@/components/ProjectsIndexView";
 
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function ProjectsPortfolioPage() {
-  return <ProjectsIndexView projects={PROJECTS_DATA} />;
+export default async function ProjectsPortfolioPage() {
+  const projects = await getDynamicProjects();
+  return <ProjectsIndexView projects={projects} />;
 }
