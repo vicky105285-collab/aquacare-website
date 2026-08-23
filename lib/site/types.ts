@@ -62,6 +62,7 @@ export type ProductItem = {
   img: string;
   features: string[];
   categoryId: string;
+  slug?: string;
   featured?: boolean;
 };
 

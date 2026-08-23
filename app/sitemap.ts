@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes = BLOG_POSTS.map((post) => `/blog/${post.slug}`);
   const projectRoutes = PROJECTS_DATA.map((proj) => `/projects/${proj.slug}`);
   const productCatRoutes = PRODUCT_CATEGORIES.map((cat) => `/products/${cat.slug}`);
-  const productItemRoutes = PRODUCTS.map((prod) => `/products/item/${slugify(prod.name)}`);
+  const productItemRoutes = PRODUCTS.map((prod) => `/products/item/${prod.slug || slugify(prod.name)}`);
 
   const allPaths = Array.from(
     new Set([

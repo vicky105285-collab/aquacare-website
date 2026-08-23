@@ -16,7 +16,7 @@ export type ProductCardProps = {
 
 export function ProductCard({ product, enquiryWhatsappHref, priority }: ProductCardProps) {
   const [imgSrc, setImgSrc] = useState(product.img);
-  const productSlug = slugify(product.name);
+  const productSlug = product.slug || slugify(product.name);
   const href = `/products/item/${productSlug}`;
 
   const encodedMsg = encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.brand}). Please share the latest price & quote.`);

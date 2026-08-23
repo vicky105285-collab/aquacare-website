@@ -13,7 +13,7 @@ export const revalidate = 0;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = PRODUCTS.find((p) => slugify(p.name) === slug);
+  const product = PRODUCTS.find((p) => (p.slug || slugify(p.name)) === slug);
 
   if (!product) {
     return { title: `Product Details | ${COMPANY_NAME}` };
@@ -49,14 +49,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   return PRODUCTS.map((product) => ({
-    slug: slugify(product.name),
+    slug: product.slug || slugify(product.name),
   }));
 }
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   
-  const product = PRODUCTS.find((p) => slugify(p.name) === slug);
+  const product = PRODUCTS.find((p) => (p.slug || slugify(p.name)) === slug);
 
   if (!product) {
     notFound();
