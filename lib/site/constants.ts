@@ -56,8 +56,9 @@ export const ADDRESS_POSTAL_CODE = "639002";
 export const ADDRESS_COUNTRY = "IN";
 export const PLUS_CODE = "X29X+3QR";
 
-export const LATITUDE = "10.967750";
-export const LONGITUDE = "78.049389";
+/** Exact Google Business Profile Listing Coordinates */
+export const LATITUDE = "10.9677355";
+export const LONGITUDE = "78.0493822";
 
 /** Single line for maps query, schema, and meta */
 export const ADDRESS_FULL = `${ADDRESS_STREET}, ${ADDRESS_LOCALITY}, ${ADDRESS_REGION} ${ADDRESS_POSTAL_CODE}`;
@@ -68,8 +69,8 @@ export const ADDRESS_LINES: readonly [string, string] = [
   `${ADDRESS_REGION} ${ADDRESS_POSTAL_CODE}`,
 ];
 
-/** Google Maps directions link based on exact coordinates */
-export const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/search/?api=1&query=${LATITUDE},${LONGITUDE}`;
+/** Exact Google Maps Business Listing URL for directions & external links */
+export const MAPS_DIRECTIONS_URL = "https://maps.app.goo.gl/n9AB68PGcExhybM37";
 
-/** Google Maps embed URL based on exact latitude & longitude coordinates */
-export const MAPS_EMBED_URL = `https://www.google.com/maps?q=${LATITUDE},${LONGITUDE}&hl=en&z=16&output=embed`;
+/** Exact Google Maps Place Embed URL for Yuvanthika Aqua Care & Solar Care Systems */
+export const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.4728373024846!2d78.0493822!3d10.9677355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f1dca0a3871%3A0xf941eee891d0bfd2!2sYuvanthika%20Aqua%20Care%20%26%20Solar%20Care%20Systems!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin";
