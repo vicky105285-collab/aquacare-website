@@ -1,5 +1,4 @@
-"use client";
-
+import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ProductCard } from "@/components/ProductCard";
 import type { ProductItem } from "@/lib/site/types";
@@ -36,12 +35,12 @@ export function Products({ items, enquiryWhatsappHref }: ProductsProps) {
         </div>
         
         <div className="mt-16 text-center">
-          <a
+          <Link
             href="/products"
             className="inline-flex items-center justify-center px-8 py-3 border border-slate-200 text-base font-medium rounded-xl text-slate-700 bg-white hover:bg-slate-50 transition-colors shadow-sm"
           >
             View All Products
-          </a>
+          </Link>
         </div>
       </div>
     </section>

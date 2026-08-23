@@ -1,4 +1,5 @@
-import { ChevronRight, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ChevronRight, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
+import { FORMER_COMPANY_NAME } from "@/lib/site/constants";
 import type { HeroFeatureCard, StatItem, TrustItem } from "@/lib/site/types";
 
 export type HeroProps = {
@@ -27,22 +28,19 @@ export function Hero({ callHref, whatsappHref, stats, featureCards, trustItems }
           className="absolute bottom-20 left-10 w-60 h-60 rounded-full bg-blue-400/10 animate-pulse motion-reduce:animate-none"
           style={{ animationDelay: "1s" }}
         />
-        <div
-          className="absolute top-1/2 right-1/4 w-40 h-40 rounded-full border border-cyan-400/20 animate-spin motion-reduce:animate-none"
-          style={{ animationDuration: "20s" }}
-        />
-        <div
-          className="absolute top-1/3 right-1/3 w-24 h-24 rounded-full border border-white/10 animate-spin motion-reduce:animate-none"
-          style={{ animationDuration: "15s", animationDirection: "reverse" }}
-        />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <p className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-cyan-300 text-sm font-medium">
-                <MapPin className="w-4 h-4 shrink-0" aria-hidden />
-                Karur, Tamil Nadu · Trusted since 2012
-              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-cyan-300 text-xs sm:text-sm font-medium">
+                  <MapPin className="w-4 h-4 shrink-0 text-cyan-400" aria-hidden />
+                  Karur & Entire Tamil Nadu · Established 2014
+                </p>
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-cyan-500/20 border border-cyan-400/30 rounded-full text-white text-xs font-semibold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-cyan-300" /> Formerly {FORMER_COMPANY_NAME}
+                </span>
+              </div>
 
               <h1 id="hero-heading" className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight text-white">
                 Pure Water.
@@ -51,15 +49,14 @@ export function Hero({ callHref, whatsappHref, stats, featureCards, trustItems }
                   Clean Energy.
                 </span>
                 <br />
-                Better Life.
+                Turnkey Care.
               </h1>
 
-              <p className="text-blue-100/80 text-lg leading-relaxed max-w-lg">
-                South India&apos;s most trusted name for RO water purifiers, solar solutions, and home appliance
-                services — delivering excellence across Karur and beyond.
+              <p className="text-blue-100/90 text-base sm:text-lg leading-relaxed max-w-lg">
+                Tamil Nadu&apos;s premier specialist for residential RO purifiers, commercial & industrial RO/ETP/STP plants, water softeners, and solar water heaters.
               </p>
-              <p className="text-cyan-300/70 text-sm font-medium" lang="ta">
-                தூய்மையான தண்ணீர் · சுத்தமான ஆற்றல் · மகிழ்ச்சியான வாழ்க்கை
+              <p className="text-cyan-300/80 text-sm font-medium" lang="ta">
+                தூய்மையான தண்ணீர் · சுத்தமான ஆற்றல் · சிறப்பான சேவை
               </p>
 
               <div className="flex flex-wrap gap-4">
@@ -68,7 +65,7 @@ export function Hero({ callHref, whatsappHref, stats, featureCards, trustItems }
                   className="group flex items-center gap-3 px-7 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-2xl font-bold text-sm shadow-2xl shadow-blue-500/40 hover:shadow-blue-500/60 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                 >
                   <Phone className="w-5 h-5" aria-hidden />
-                  Free Consultation
+                  Call Now (Free Advice)
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden />
                 </a>
                 <a
@@ -137,3 +134,4 @@ export function Hero({ callHref, whatsappHref, stats, featureCards, trustItems }
     </>
   );
 }
+

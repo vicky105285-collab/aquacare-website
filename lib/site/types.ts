@@ -1,14 +1,39 @@
 import type { LucideIcon } from "lucide-react";
 
-export type ServiceSlug =
+export type ResidentialServiceSlug =
   | "ro-water-purifier"
+  | "ro-installation"
   | "ro-service"
-  | "amc"
-  | "solar-water-heater"
-  | "solar-panel"
+  | "ro-amc"
   | "water-softener"
+  | "solar-water-heater"
+  | "solar-system-maintenance"
+  | "ups-battery-replacement"
+  | "washing-machine-service"
+  | "refrigerator-service";
+
+export type CommercialServiceSlug =
+  | "commercial-ro-plant"
+  | "commercial-water-treatment-plant";
+
+export type IndustrialServiceSlug =
+  | "industrial-ro-plant"
+  | "dm-plant"
+  | "etp-plant"
+  | "stp-plant"
+  | "industrial-water-treatment-plant"
+  | "operation-and-maintenance-services";
+
+export type ServiceSlug =
+  | ResidentialServiceSlug
+  | CommercialServiceSlug
+  | IndustrialServiceSlug
+  | "amc"
+  | "solar-panel"
   | "fridge-repair"
   | "washing-machine-repair";
+
+export type ServiceCategoryType = "residential" | "commercial" | "industrial";
 
 export type StatItem = {
   val: string;
@@ -22,6 +47,7 @@ export type ServiceItem = {
   tamil: string;
   desc: string;
   color: string;
+  category?: ServiceCategoryType;
 };
 
 export type ProductItem = {
@@ -109,6 +135,7 @@ export type ServiceFaq = {
 
 export type ServiceDetail = {
   slug: ServiceSlug;
+  category: ServiceCategoryType;
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
@@ -116,6 +143,52 @@ export type ServiceDetail = {
   heroSubtitle: string;
   tamilLine: string;
   benefits: { title: string; body: string }[];
+  features?: { title: string; desc: string }[];
   process: { step: string; title: string; desc: string }[];
   faqs: ServiceFaq[];
+  specifications?: { key: string; value: string }[];
+  localSeoContent?: {
+    district: string;
+    details: string;
+  }[];
 };
+
+/** Reusable Project Structure as requested by User */
+export type ProjectItem = {
+  id: string;
+  slug: string;
+  projectName: string;
+  location: string;
+  capacity: string;
+  industry: string;
+  category: ServiceCategoryType;
+  problem: string;
+  solution: string;
+  gallery: { url: string; caption: string }[];
+  testimonial?: {
+    quote: string;
+    clientName: string;
+    designation: string;
+    company?: string;
+  };
+  keyHighlights?: string[];
+  completionYear?: string;
+};
+
+/** Unlimited SEO Blog Post Infrastructure */
+export type BlogPost = {
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string[];
+  publishedAt: string;
+  updatedAt: string;
+  author: string;
+  authorRole?: string;
+  category: string;
+  readTime: string;
+  image: string;
+  content: string;
+  toc?: { id: string; text: string }[];
+};
+

@@ -1,7 +1,8 @@
 "use client";
 
-import { MessageCircle, Phone } from "lucide-react";
+import { MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { BUSINESS_HISTORY_NOTE } from "@/lib/site/constants";
 import type { BookingStep, WhyChoosePoint } from "@/lib/site/types";
 
 export type WhyChooseUsProps = {
@@ -17,17 +18,22 @@ export function WhyChooseUs({ points, bookingSteps, callHref, whatsappHref }: Wh
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <AnimatedSection>
-            <p className="text-cyan-600 font-semibold text-sm tracking-widest uppercase mb-3">Why Aqua Care</p>
+            <p className="text-cyan-600 font-semibold text-sm tracking-widest uppercase mb-3">Why Choose Yuvanthika</p>
             <h2 id="why-heading" className="text-3xl sm:text-4xl font-black text-slate-800 leading-tight">
-              Karur&apos;s #1 Choice for
+              Tamil Nadu&apos;s #1 Choice for
               <br />
               <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
-                Water & Solar Care
+                Water Treatment & Solar Care
               </span>
             </h2>
-            <p className="text-slate-500 text-lg mt-4 leading-relaxed">
-              Over 12 years of trust, backed by certified technicians, genuine spare parts, and a service promise that
-              puts your satisfaction first.
+            <div className="mt-4 p-3.5 bg-blue-50 border border-blue-100 rounded-xl">
+              <p className="text-xs font-semibold text-blue-900 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-cyan-600 shrink-0" />
+                {BUSINESS_HISTORY_NOTE}
+              </p>
+            </div>
+            <p className="text-slate-500 text-base mt-4 leading-relaxed">
+              Over 10 years of operational excellence across Karur and Tamil Nadu, backed by certified engineers, authentic spares, and honest pricing.
             </p>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {points.map((item) => (
@@ -88,3 +94,4 @@ export function WhyChooseUs({ points, bookingSteps, callHref, whatsappHref }: Wh
     </section>
   );
 }
+

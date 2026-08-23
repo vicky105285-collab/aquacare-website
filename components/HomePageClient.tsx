@@ -4,6 +4,8 @@ import { AMCPlans } from "@/components/AMCPlans";
 import { CALL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
 import { CTASection } from "@/components/CTASection";
 import { Contact } from "@/components/Contact";
+import { BrandsWeService } from "@/components/BrandsWeService";
+import { ServiceArea } from "@/components/ServiceArea";
 import {
   AMC_PLANS,
   BOOKING_STEPS,
@@ -32,6 +34,7 @@ export function HomePageClient() {
         featureCards={HERO_FEATURE_CARDS}
         trustItems={TRUST_ITEMS}
       />
+      <BrandsWeService />
       <Services items={SERVICES} />
       <Products items={PRODUCTS} enquiryWhatsappHref={WHATSAPP} />
       <AMCPlans plans={AMC_PLANS} callHref={CALL} />
@@ -49,6 +52,7 @@ export function HomePageClient() {
         subheadline="Get a free home visit and expert consultation today. No commitment required."
         callLabel={`Call ${PHONE_DISPLAY}`}
       />
+      <ServiceArea />
       <Contact cards={CONTACT_CARDS} />
     </>
   );

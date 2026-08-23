@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site/constants";
 import { HomePageClient } from "@/components/HomePageClient";
 
-const title = `${SITE_NAME} | RO, Solar & Home Services in Karur`;
-const description = `${SITE_TAGLINE} Multi-stage RO purifiers, solar water heaters & panels, AMC plans, water softeners, and appliance repair with same-day service across Karur district.`;
+const title = `${SITE_NAME} | RO Water Purifier, Solar Heater & STP Plant in Karur`;
+const description = `${SITE_TAGLINE} Multi-stage RO purifiers, industrial ETP/STP plants, solar water heaters & panels, AMC plans, and water softeners with same-day service across Karur, Namakkal, and Erode.`;
 
 export const metadata: Metadata = {
   title,

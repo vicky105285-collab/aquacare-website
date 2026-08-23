@@ -41,7 +41,7 @@ export function GoogleReviews({ reviews }: { reviews: TestimonialItem[] }) {
             <span className="text-xs text-slate-500 ml-2 font-medium">A month ago</span>
           </div>
           <p className="text-slate-600 text-sm leading-relaxed flex-1">
-            "{review.text}"
+            &ldquo;{review.text}&rdquo;
           </p>
         </div>
       ))}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePageView } from "@/components/ServicePageView";
-import { SITE_NAME, SITE_URL } from "@/lib/site/constants";
+import { COMPANY_NAME, FORMER_COMPANY_NAME, PHONE_E164, SITE_URL } from "@/lib/site/constants";
 import { getServiceDetail, SERVICE_SLUGS } from "@/lib/site/service-details";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -13,31 +13,34 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const d = getServiceDetail(slug);
-  if (!d) return { title: "Service" };
+  if (!d) return { title: "Service | Yuvanthika Aquacare & Solar Care Systems" };
   const url = `${SITE_URL}/services/${d.slug}`;
-  
-  // Inject local keywords dynamically
+
   const localKeywords = [
     ...d.keywords,
-    `${d.heroTitle} in Karur`,
-    `Best ${d.heroTitle} near me`,
-    "Karur district water service"
+    `${d.heroTitle} Karur`,
+    `${d.heroTitle} Tamil Nadu`,
+    "Yuvanthika Aquacare & Solar Care Systems",
+    "Aqua Care Karur",
+    "Water Treatment Services Karur",
+    "Solar Systems Karur",
   ];
 
   return {
-    title: `${d.metaTitle} | Karur & Nearby`,
-    description: d.metaDescription,
+    title: d.metaTitle,
+    description: `${d.metaDescription} Formerly known as ${FORMER_COMPANY_NAME}.`,
     keywords: localKeywords,
     alternates: { canonical: url },
     openGraph: {
       type: "article",
       url,
-      title: `${d.metaTitle} in Karur`,
+      title: d.metaTitle,
       description: d.metaDescription,
+      siteName: COMPANY_NAME,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${d.metaTitle} in Karur`,
+      title: d.metaTitle,
       description: d.metaDescription,
     },
   };
@@ -55,15 +58,26 @@ export default async function ServiceDetailPage({ params }: Props) {
     "name": d.heroTitle,
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Aqua Care Systems Karur",
-      "image": `${SITE_URL}/logo.png`,
+      "name": COMPANY_NAME,
+      "alternateName": FORMER_COMPANY_NAME,
+      "url": SITE_URL,
+      "telephone": PHONE_E164,
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Karur"
-    },
+    "areaServed": [
+      "Karur",
+      "Namakkal",
+      "Erode",
+      "Tiruchirappalli",
+      "Salem",
+      "Dindigul",
+      "Tiruppur",
+      "Coimbatore",
+      "Madurai",
+      "Thanjavur",
+      "Tamil Nadu",
+    ],
     "description": d.heroSubtitle,
-    "serviceType": d.heroTitle
+    "serviceType": d.heroTitle,
   };
 
   return (
@@ -76,3 +90,4 @@ export default async function ServiceDetailPage({ params }: Props) {
     </>
   );
 }
+

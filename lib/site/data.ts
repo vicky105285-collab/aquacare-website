@@ -2845,7 +2845,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     name: "Rajesh Kumar",
     loc: "Karur",
     stars: 5,
-    text: "Excellent service! My RO purifier was installed within hours. The water quality is fantastic. Highly recommend Aqua Care to everyone.",
+    text: "Excellent service! My RO purifier was installed within hours. The water quality is fantastic. Highly recommend Yuvanthika Aquacare to everyone.",
   },
   {
     name: "Priya Lakshmi",
