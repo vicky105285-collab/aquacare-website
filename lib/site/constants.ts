@@ -9,6 +9,9 @@ export const BUSINESS_OWNER = "Mr. Ananth";
 
 /** Developer & engineering credit */
 export const DEVELOPER_CREDIT = "Dr. Vignesh M.S.";
+export const DEVELOPER_WHATSAPP_PHONE = "919543434749";
+export const DEVELOPER_WHATSAPP_URL =
+  "https://wa.me/919543434749?text=Hi%20Dr.%20Vignesh,%20I%20saw%20the%20Yuvanthika%20Aquacare%20website%20you%20developed%20and%20would%20like%20to%20discuss%20building%20a%20website%20for%20my%20business.";
 
 /** Trust & history badge note */
 export const BUSINESS_HISTORY_NOTE =

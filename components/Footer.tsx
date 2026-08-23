@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, MessageCircle, Phone, User, ShieldCheck } from "lucide-react";
-import { ADDRESS_FULL, BUSINESS_HISTORY_NOTE, BUSINESS_OWNER, CALL, COMPANY_NAME, DEVELOPER_CREDIT, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
+import { ADDRESS_FULL, BUSINESS_HISTORY_NOTE, BUSINESS_OWNER, CALL, COMPANY_NAME, DEVELOPER_CREDIT, DEVELOPER_WHATSAPP_URL, EMAIL, INSTAGRAM, MAILTO_EMAIL, PHONE_DISPLAY, WHATSAPP } from "@/lib/site/constants";
 import { InstagramSvg } from "@/components/InstagramSvg";
 import type { FooterServiceLink } from "@/lib/site/types";
 
@@ -146,10 +146,16 @@ export function Footer({ copyrightYear }: FooterProps) {
               Owned & Operated by <strong className="text-cyan-400 font-bold">{BUSINESS_OWNER}</strong>
             </span>
             <span className="hidden sm:inline text-slate-700">|</span>
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <User className="w-3.5 h-3.5 text-blue-400" />
-              Website Designed, Developed & Engineered by <strong className="text-blue-400 font-bold">{DEVELOPER_CREDIT}</strong>
-            </span>
+            <a
+              href={DEVELOPER_WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-slate-300 hover:text-blue-400 transition-colors group cursor-pointer"
+              title="Contact Dr. Vignesh M.S. via WhatsApp for website design & development"
+            >
+              <User className="w-3.5 h-3.5 text-blue-400 group-hover:scale-110 transition-transform" />
+              <span>Website Designed, Developed & Engineered by <strong className="text-blue-400 font-bold underline underline-offset-2 decoration-blue-400/40 group-hover:decoration-blue-400">{DEVELOPER_CREDIT}</strong></span>
+            </a>
           </div>
         </div>
       </div>
