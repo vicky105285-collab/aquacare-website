@@ -19,8 +19,34 @@ export const metadata: Metadata = {
 };
 
 export default function WaterSoftenerKarurPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": SITE_URL
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": `${SITE_URL}/services`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Water Softener Karur",
+        "item": `${SITE_URL}/services/water-softener-karur`
+      }
+    ]
+  };
+
   return (
     <article className="min-h-screen bg-slate-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <section className="bg-gradient-to-br from-teal-950 via-teal-900 to-slate-900 text-white py-20 px-4 md:px-8">
         <div className="max-w-6xl mx-auto text-center pt-8">
           <div className="inline-flex items-center gap-2 bg-teal-500/20 border border-teal-400/30 rounded-full px-4 py-1.5 text-teal-300 text-xs font-semibold mb-6">

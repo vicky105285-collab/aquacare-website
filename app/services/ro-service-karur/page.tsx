@@ -51,9 +51,35 @@ export default function ROServiceKarurPage() {
     ],
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": SITE_URL
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": `${SITE_URL}/services`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "RO Service Karur",
+        "item": `${SITE_URL}/services/ro-service-karur`
+      }
+    ]
+  };
+
   return (
     <article className="min-h-screen bg-slate-50">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-cyan-900 text-white py-20 px-4 md:px-8 relative">
         <div className="max-w-6xl mx-auto text-center pt-8">

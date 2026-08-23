@@ -124,6 +124,29 @@ export default async function ProjectDetailPage({ params }: Props) {
           "@id": `${SITE_URL}/#organization`,
         },
       },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE_URL
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": `${SITE_URL}/projects`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": project.projectTitle || project.projectName,
+            "item": `${SITE_URL}/projects/${project.slug}`
+          }
+        ]
+      }
     ],
   };
 
