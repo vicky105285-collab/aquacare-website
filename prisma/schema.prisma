@@ -1,0 +1,171 @@
+// Prisma Schema for Yuvanthika Aquacare & Solar Care Systems CMS
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Blog {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  featuredImage   String?
+  content         String   @db.Text
+  metaTitle       String?
+  metaDescription String?
+  keywords        String[]
+  author          String   @default("Yuvanthika Water Expert")
+  publishDate     DateTime @default(now())
+  isPublished     Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Project {
+  id                 String   @id @default(cuid())
+  slug               String   @unique
+  projectTitle       String
+  projectType        String   // e.g. "Industrial RO Plant", "Water Softener", "Solar Water Heater"
+  location           String   // e.g. "Reddipalayam, Karur"
+  district           String   // e.g. "Karur", "Namakkal", "Erode"
+  customerCategory   String   // "residential" | "commercial" | "industrial"
+  industryType       String   // e.g. "Textile Processing & Dyeing"
+  capacity           String   // e.g. "50,000 LPH"
+  installationDate   String   // e.g. "2024-03"
+  problemFaced       String   @db.Text
+  solutionProvided   String   @db.Text
+  productsUsed       String[]
+  projectDescription String   @db.Text
+  benefitsAchieved   String[]
+  testimonialQuote   String?  @db.Text
+  clientName         String?
+  designation        String?
+  company            String?
+  projectImages      Json     // Array of { url: string, caption: string }
+  videoUrl           String?
+  featured           Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Gallery {
+  id        String    @id @default(cuid())
+  title     String
+  category  String    // "RO Installations", "Industrial Projects", "Solar Installations", "Service Visits"
+  mediaType MediaType @default(IMAGE)
+  mediaUrl  String
+  caption   String?
+  album     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  brand          String   @default("YUVANTHIKA AQUACARE")
+  categoryId     String   // "domestic-ro", "commercial-ro", "industrial", "solar", "softeners"
+  image          String
+  price          String
+  mrp            String?
+  liters         String?
+  stages         String?
+  tank           String?
+  features       String[]
+  description    String?  @db.Text
+  specifications Json?    // Key-value pairs
+  featured       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Service {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  category        String   // "residential" | "commercial" | "industrial"
+  metaTitle       String?
+  metaDescription String?
+  keywords        String[]
+  heroTitle       String?
+  heroSubtitle    String?
+  content         String?  @db.Text
+  process         Json?
+  faqs            Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  stars     Int      @default(5)
+  text      String   @db.Text
+  avatarUrl String?
+  featured  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lead {
+  id              String     @id @default(cuid())
+  name            String
+  phone           String
+  email           String?
+  serviceRequired String
+  message         String?    @db.Text
+  status          LeadStatus @default(NEW)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MediaLibrary {
+  id        String   @id @default(cuid())
+  name      String
+  folder    String   // "/Projects", "/Products", "/Gallery", "/Blog", "/Services", "/Testimonials"
+  fileUrl   String
+  mimeType  String
+  sizeBytes Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
