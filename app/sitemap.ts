@@ -31,7 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const landingRoutes = LANDING_PAGES.map((page) => `/${page.slug}`);
   const serviceRoutes = SERVICE_SLUGS.map((slug) => `/services/${slug}`);
-  const blogRoutes = BLOG_POSTS.map((post) => `/blog/${post.slug}`);
+  const blogRoutes = BLOG_POSTS.map((post) => `/blog/${post.slug_en || post.slug}`);
+  const taBlogRoutes = BLOG_POSTS.map((post) => `/ta/blog/${post.slug_ta || post.slug}`);
   const projectRoutes = PROJECTS_DATA.map((proj) => `/projects/${proj.slug}`);
   const productCatRoutes = PRODUCT_CATEGORIES.map((cat) => `/products/${cat.slug}`);
   const productItemRoutes = PRODUCTS.map((prod) => `/products/item/${prod.slug || slugify(prod.name)}`);
@@ -39,9 +40,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const allPaths = Array.from(
     new Set([
       ...staticRoutes,
+      "/ta/blog",
       ...landingRoutes,
       ...serviceRoutes,
       ...blogRoutes,
+      ...taBlogRoutes,
       ...projectRoutes,
       ...productCatRoutes,
       ...productItemRoutes,

@@ -198,11 +198,15 @@ export type ProjectItem = {
 /** Unlimited SEO Blog Post Infrastructure */
 export type BlogPost = {
   slug: string;
+  slug_en?: string;
+  slug_ta?: string;
   title: string;
-  titleTa?: string;
+  title_en?: string;
   title_ta?: string;
+  titleTa?: string;
   description: string;
   descriptionTa?: string;
+  excerpt_en?: string;
   excerpt_ta?: string;
   keywords: string[];
   publishedAt: string;
@@ -213,8 +217,9 @@ export type BlogPost = {
   readTime: string;
   image: string;
   content: string;
-  contentTa?: string;
+  content_en?: string;
   content_ta?: string;
+  contentTa?: string;
   toc?: { id: string; text: string }[];
 };
 

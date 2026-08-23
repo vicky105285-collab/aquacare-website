@@ -8,7 +8,7 @@ import { BlogPostDetailClient } from "@/components/BlogPostDetailClient";
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({ slug: post.slug_en || post.slug }));
+  return BLOG_POSTS.map((post) => ({ slug: post.slug_ta || post.slug }));
 }
 
 export const revalidate = 0;
@@ -16,63 +16,65 @@ export const revalidate = 0;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getDynamicBlogPostBySlug(slug);
-  if (!post) return { title: "Blog Article" };
+  if (!post) return { title: "தமிழ் கட்டுரை" };
 
-  const enTitle = post.title_en || post.title;
-  const enDesc = post.excerpt_en || post.description;
-  const enSlug = post.slug_en || post.slug;
+  const taTitle = post.title_ta || post.titleTa || post.title;
+  const taDesc = post.excerpt_ta || post.descriptionTa || post.description;
   const taSlug = post.slug_ta || post.slug;
+  const enSlug = post.slug_en || post.slug;
 
-  const url = `${SITE_URL}/blog/${enSlug}`;
-  const taUrl = `${SITE_URL}/ta/blog/${taSlug}`;
+  const url = `${SITE_URL}/ta/blog/${taSlug}`;
+  const enUrl = `${SITE_URL}/blog/${enSlug}`;
 
   return {
-    title: `${enTitle} | ${COMPANY_NAME}`,
-    description: enDesc,
+    title: `${taTitle} | ${COMPANY_NAME}`,
+    description: taDesc,
     keywords: post.keywords,
     alternates: {
       canonical: url,
       languages: {
-        "en-IN": url,
-        "ta-IN": taUrl,
-        "x-default": url,
+        "en-IN": enUrl,
+        "ta-IN": url,
+        "x-default": enUrl,
       },
     },
     openGraph: {
       type: "article",
       url,
-      title: enTitle,
-      description: enDesc,
+      title: taTitle,
+      description: taDesc,
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [post.author],
       siteName: COMPANY_NAME,
-      images: [{ url: post.image, alt: enTitle }],
+      images: [{ url: post.image, alt: taTitle }],
     },
     twitter: {
       card: "summary_large_image",
-      title: enTitle,
-      description: enDesc,
+      title: taTitle,
+      description: taDesc,
       images: [post.image],
     },
   };
 }
 
-export default async function BlogPostDetailPage({ params }: Props) {
+export default async function TamilBlogPostDetailPage({ params }: Props) {
   const { slug } = await params;
   const post = await getDynamicBlogPostBySlug(slug);
   if (!post) notFound();
 
-  const enSlug = post.slug_en || post.slug;
-  const articleUrl = `${SITE_URL}/blog/${enSlug}`;
+  const taTitle = post.title_ta || post.titleTa || post.title;
+  const taDesc = post.excerpt_ta || post.descriptionTa || post.description;
+  const taSlug = post.slug_ta || post.slug;
+  const articleUrl = `${SITE_URL}/ta/blog/${taSlug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": post.title_en || post.title,
-    "description": post.excerpt_en || post.description,
+    "headline": taTitle,
+    "description": taDesc,
     "image": post.image,
-    "inLanguage": "en-IN",
+    "inLanguage": "ta-IN",
     "datePublished": post.publishedAt,
     "dateModified": post.updatedAt,
     "author": {
@@ -101,8 +103,8 @@ export default async function BlogPostDetailPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Suspense fallback={<div className="py-24 text-center text-slate-400 text-sm">Loading article...</div>}>
-        <BlogPostDetailClient post={post} initialLang="en" />
+      <Suspense fallback={<div className="py-24 text-center text-slate-400 text-sm">தமிழ் கட்டுரை ஏற்றப்படுகிறது...</div>}>
+        <BlogPostDetailClient post={post} initialLang="ta" />
       </Suspense>
     </>
   );

@@ -38,11 +38,16 @@ model User {
 model Blog {
   id              String   @id @default(cuid())
   title           String
+  title_en        String?
   title_ta        String?
   slug            String   @unique
+  slug_en         String?
+  slug_ta         String?
   featuredImage   String?
   content         String   @db.Text
+  content_en      String?  @db.Text
   content_ta      String?  @db.Text
+  excerpt_en      String?  @db.Text
   excerpt_ta      String?  @db.Text
   metaTitle       String?
   metaDescription String?

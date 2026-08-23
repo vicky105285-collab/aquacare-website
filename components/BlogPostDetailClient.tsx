@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CTASection } from "@/components/CTASection";
@@ -12,40 +12,56 @@ import { buildWhatsAppUrl, CALL, COMPANY_NAME, FORMER_COMPANY_NAME, PHONE_DISPLA
 import type { BlogPost } from "@/lib/site/types";
 import { ArrowLeft, Clock, MessageCircle, User, Sparkles } from "lucide-react";
 
-export function BlogPostDetailClient({ post }: { post: BlogPost }) {
+export function BlogPostDetailClient({
+  post,
+  initialLang = "en",
+}: {
+  post: BlogPost;
+  initialLang?: "en" | "ta";
+}) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [activeLang, setActiveLang] = useState<"en" | "ta" | null>(null);
-
-  const urlLang = searchParams.get("lang");
-  const lang: "en" | "ta" =
-    activeLang ?? (urlLang === "ta" ? "ta" : "en");
+  const pathname = usePathname();
+  const [lang, setLang] = useState<"en" | "ta">(
+    pathname.startsWith("/ta/") ? "ta" : initialLang
+  );
 
   const handleLanguageToggle = (newLang: "en" | "ta") => {
-    setActiveLang(newLang);
+    setLang(newLang);
     try {
       localStorage.setItem("app_lang", newLang);
       document.cookie = `app_lang=${newLang}; path=/; max-age=31536000`;
     } catch (e) {
       console.error(e);
     }
-    const params = new URLSearchParams(searchParams.toString());
     if (newLang === "ta") {
-      params.set("lang", "ta");
+      router.push(`/ta/blog/${post.slug_ta || post.slug}`);
     } else {
-      params.delete("lang");
+      router.push(`/blog/${post.slug_en || post.slug}`);
     }
-    const queryStr = params.toString();
-    router.replace(queryStr ? `?${queryStr}` : window.location.pathname, { scroll: false });
   };
 
   const isTamil = lang === "ta";
-  const displayTitle = isTamil && post.titleTa ? post.titleTa : post.title;
-  const displayDesc = isTamil && post.descriptionTa ? post.descriptionTa : post.description;
-  const displayContent = isTamil && post.contentTa ? post.contentTa : post.content;
 
-  const articleUrl = `${SITE_URL}/blog/${post.slug}${isTamil ? "?lang=ta" : ""}`;
-  const wa = buildWhatsAppUrl(`Hi, I read your article "${displayTitle}" (${isTamil ? "Tamil" : "English"}) and would like to consult with your team.`);
+  // Auto Fallback Logic (Never show blank pages)
+  const displayTitle = isTamil
+    ? post.title_ta || post.titleTa || post.title_en || post.title
+    : post.title_en || post.title;
+
+  const displayDesc = isTamil
+    ? post.excerpt_ta || post.descriptionTa || post.excerpt_en || post.description
+    : post.excerpt_en || post.description;
+
+  const displayContent = isTamil
+    ? post.content_ta || post.contentTa || post.content_en || post.content
+    : post.content_en || post.content;
+
+  const articleUrl = isTamil
+    ? `${SITE_URL}/ta/blog/${post.slug_ta || post.slug}`
+    : `${SITE_URL}/blog/${post.slug_en || post.slug}`;
+
+  const wa = buildWhatsAppUrl(
+    `Hi, I read your article "${displayTitle}" (${isTamil ? "Tamil" : "English"}) and would like to consult with your team.`
+  );
 
   return (
     <article>
@@ -59,7 +75,7 @@ export function BlogPostDetailClient({ post }: { post: BlogPost }) {
           <Breadcrumbs
             items={[
               { href: "/", label: "Home" },
-              { href: "/blog", label: "Blog" },
+              { href: isTamil ? "/ta/blog" : "/blog", label: isTamil ? "வலைப்பதிவு (Blog)" : "Blog" },
               { href: articleUrl, label: displayTitle },
             ]}
           />
@@ -173,7 +189,7 @@ export function BlogPostDetailClient({ post }: { post: BlogPost }) {
 
           <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
             <Link
-              href="/blog"
+              href={isTamil ? "/ta/blog" : "/blog"}
               className="inline-flex items-center text-sm font-semibold text-blue-700 hover:text-blue-900"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> {isTamil ? "அனைத்து கட்டுரைகளுக்கும் திரும்புக" : "Back to all articles"}

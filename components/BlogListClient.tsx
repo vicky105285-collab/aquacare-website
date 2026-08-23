@@ -3,43 +3,67 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle";
 import type { BlogPost } from "@/lib/site/types";
-import { ArrowRight, BookOpen, Clock, User, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Clock, User, Sparkles, Search } from "lucide-react";
 
-export function BlogListClient({ posts, companyName }: { posts: BlogPost[]; companyName: string }) {
+export function BlogListClient({
+  posts,
+  companyName,
+  initialLang = "en",
+}: {
+  posts: BlogPost[];
+  companyName: string;
+  initialLang?: "en" | "ta";
+}) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<"en" | "ta" | null>(null);
+  const pathname = usePathname();
+  const [lang, setLang] = useState<"en" | "ta">(
+    pathname.startsWith("/ta/") ? "ta" : initialLang
+  );
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleToggleLanguage = (newLang: "en" | "ta") => {
-    setSelectedLang(newLang);
+    setLang(newLang);
     try {
       localStorage.setItem("app_lang", newLang);
       document.cookie = `app_lang=${newLang}; path=/; max-age=31536000`;
     } catch (e) {
       console.error(e);
     }
-    const params = new URLSearchParams(searchParams.toString());
-    if (newLang === "ta") {
-      params.set("lang", "ta");
-    } else {
-      params.delete("lang");
+    if (newLang === "ta" && !pathname.startsWith("/ta/")) {
+      router.push("/ta/blog");
+    } else if (newLang === "en" && pathname.startsWith("/ta/")) {
+      router.push("/blog");
     }
-    const queryStr = params.toString();
-    router.replace(queryStr ? `?${queryStr}` : window.location.pathname, { scroll: false });
   };
 
-  const urlLang = searchParams.get("lang");
-  const lang: "en" | "ta" =
-    selectedLang ?? (urlLang === "ta" ? "ta" : "en");
   const isTamil = lang === "ta";
+
+  // Filter posts based on search query across both English and Tamil
+  const filteredPosts = posts.filter((post) => {
+    const q = searchQuery.toLowerCase();
+    const titleEn = (post.title_en || post.title).toLowerCase();
+    const titleTa = (post.title_ta || post.titleTa || "").toLowerCase();
+    const descEn = (post.excerpt_en || post.description).toLowerCase();
+    const descTa = (post.excerpt_ta || post.descriptionTa || "").toLowerCase();
+
+    return (
+      titleEn.includes(q) ||
+      titleTa.includes(q) ||
+      descEn.includes(q) ||
+      descTa.includes(q) ||
+      post.category.toLowerCase().includes(q)
+    );
+  });
 
   return (
     <section className="py-16 lg:py-20 bg-slate-50" aria-labelledby="posts-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+        
+        {/* Header & Controls Bar */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
           <div>
             <h2 id="posts-heading" className="text-2xl sm:text-3xl font-black text-slate-800 flex items-center gap-3">
               <BookOpen className="w-7 h-7 text-blue-600 shrink-0" />
@@ -52,16 +76,40 @@ export function BlogListClient({ posts, companyName }: { posts: BlogPost[]; comp
             </p>
           </div>
 
-          <div className="shrink-0 flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0">
+            {/* Search Input */}
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={isTamil ? "கட்டுரைகளை தேட..." : "Search articles..."}
+                className="w-full sm:w-60 pl-9 pr-4 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:border-cyan-500"
+              />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            </div>
+
             <BlogLanguageToggle currentLang={lang} onToggle={handleToggleLanguage} variant="hero" />
           </div>
         </div>
 
+        {/* Blog Post Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => {
-            const title = isTamil && post.titleTa ? post.titleTa : post.title;
-            const desc = isTamil && post.descriptionTa ? post.descriptionTa : post.description;
-            const linkHref = `/blog/${post.slug}${isTamil ? "?lang=ta" : ""}`;
+          {filteredPosts.map((post) => {
+            // Auto Fallback: Use Tamil if present, else English (Never blank)
+            const title = isTamil
+              ? post.title_ta || post.titleTa || post.title_en || post.title
+              : post.title_en || post.title;
+
+            const desc = isTamil
+              ? post.excerpt_ta || post.descriptionTa || post.excerpt_en || post.description
+              : post.excerpt_en || post.description;
+
+            const linkHref = isTamil
+              ? `/ta/blog/${post.slug_ta || post.slug}`
+              : `/blog/${post.slug_en || post.slug}`;
+
+            const hasTamilContent = !!(post.title_ta || post.titleTa);
 
             return (
               <div
@@ -78,8 +126,8 @@ export function BlogListClient({ posts, companyName }: { posts: BlogPost[]; comp
                   />
                   <div className="absolute top-3 left-3 bg-blue-600 text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
                     <span>{post.category}</span>
-                    {post.titleTa && (
-                      <span title="Tamil translation available">
+                    {hasTamilContent && (
+                      <span title="Tamil version available">
                         <Sparkles className="w-3 h-3 text-amber-300 ml-1" />
                       </span>
                     )}
