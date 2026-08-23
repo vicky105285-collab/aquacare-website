@@ -227,8 +227,8 @@ export function AIChatBot() {
 
   return (
     <>
-      {/* Floating Trigger Button */}
-      <div className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] sm:bottom-[92px] right-4 sm:right-6 z-[99]">
+      {/* Floating Trigger Button — Positioned above Sticky Mobile CTA bar on mobile & above WhatsApp button on desktop */}
+      <div className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] md:bottom-44 right-4 md:right-6 z-[99]">
         {!isOpen && (
           <button
             onClick={() => setIsOpen(true)}
