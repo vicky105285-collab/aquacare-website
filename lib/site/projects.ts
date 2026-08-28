@@ -56,21 +56,21 @@ export const PROJECTS_DATA: ProjectItem[] = [
     },
     projectImages: [
       {
-        url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "High pressure SS 316 pumps and FRP pressure vessels installed in Karur textile unit",
       },
       {
-        url: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Automated PLC control panel monitoring flow rate and TDS parameters",
       },
     ],
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "High pressure SS 316 pumps and FRP pressure vessels installed in Karur textile unit",
       },
       {
-        url: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Automated PLC control panel monitoring flow rate and TDS parameters",
       },
     ],
@@ -128,13 +128,13 @@ export const PROJECTS_DATA: ProjectItem[] = [
     },
     projectImages: [
       {
-        url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Automatic softener vessel and brine regeneration skid in Namakkal plant",
       },
     ],
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Automatic softener vessel and brine regeneration skid in Namakkal plant",
       },
     ],
@@ -191,13 +191,13 @@ export const PROJECTS_DATA: ProjectItem[] = [
     },
     projectImages: [
       {
-        url: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Roof-mounted 5000 LPD ETC solar array installed on hospital roof in Erode",
       },
     ],
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Roof-mounted 5000 LPD ETC solar array installed on hospital roof in Erode",
       },
     ],
@@ -255,17 +255,17 @@ export const PROJECTS_DATA: ProjectItem[] = [
     },
     projectImages: [
       {
-        url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Aeration tank and secondary clarifier setup for biological waste reduction",
       },
       {
-        url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Multi-effect evaporator and RO permeate recovery unit",
       },
     ],
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Aeration tank and secondary clarifier setup for biological waste reduction",
       },
     ],
@@ -322,13 +322,13 @@ export const PROJECTS_DATA: ProjectItem[] = [
     },
     projectImages: [
       {
-        url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Subsurface MBBR reactor tanks and blower piping network",
       },
     ],
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Subsurface MBBR reactor tanks and blower piping network",
       },
     ],
@@ -385,13 +385,13 @@ export const PROJECTS_DATA: ProjectItem[] = [
     },
     projectImages: [
       {
-        url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Cation and Anion exchanger columns with automatic regeneration skid",
       },
     ],
     gallery: [
       {
-        url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+        url: "",
         caption: "Cation and Anion exchanger columns with automatic regeneration skid",
       },
     ],

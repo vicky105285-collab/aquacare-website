@@ -26,6 +26,7 @@ import {
 import { Hero } from "@/components/Hero";
 import { Products } from "@/components/Products";
 import { Services } from "@/components/Services";
+import { WaterJourneySection } from "@/components/WaterJourneySection";
 import { Testimonials } from "@/components/Testimonials";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { FeaturedProjectsSection } from "@/components/FeaturedProjectsSection";
@@ -43,6 +44,7 @@ export function HomePageClient() {
       <BrandsWeService />
       <TrustBadgesSection />
       <Services items={SERVICES} />
+      <WaterJourneySection />
       <Products items={PRODUCTS} enquiryWhatsappHref={WHATSAPP} />
       <FreeWaterTestingSection />
       <BeforeAfterGallerySection />

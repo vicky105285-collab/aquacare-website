@@ -42,7 +42,7 @@ export function ProjectDetailPageView({ project }: { project: ProjectItem }) {
     setTimeout(() => setCopiedKey(null), 2500);
   };
 
-  const images = project.projectImages || project.gallery || [];
+  const images = (project.projectImages || project.gallery || []).filter((img) => img.url);
   const title = project.projectTitle || project.projectName || "Project Case Study";
   const problem = project.problemFaced || project.problem || "";
   const solution = project.solutionProvided || project.solution || "";

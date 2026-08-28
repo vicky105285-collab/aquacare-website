@@ -36,4 +36,25 @@ body {
       transform: translateY(0);
     }
   }
+
+  /* Water Journey — flowing-water highlight travelling along the filled connector */
+  @keyframes waterFlow {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 28px 0;
+    }
+  }
+
+  .water-flow {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 10px,
+      rgba(255, 255, 255, 0.5) 10px,
+      rgba(255, 255, 255, 0.5) 14px
+    );
+    animation: waterFlow 0.9s linear infinite;
+  }
 }

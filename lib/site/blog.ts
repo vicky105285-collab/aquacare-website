@@ -26,7 +26,7 @@ export const BLOG_POSTS: BlogPost[] = [
     authorRole: "Senior Water Treatment Specialists",
     category: "Residential RO",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4e?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Why Regular RO Water Purifier Maintenance Matters in Tamil Nadu
 
@@ -164,11 +164,11 @@ Yuvanthika Aquacare & Solar Care Systems provides certified doorstep RO service,
     authorRole: "Water Softening Specialists",
     category: "Water Softening",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Understanding Hard Water in Tamil Nadu Groundwater
 
-Groundwater across inland Tamil Nadu districts—including Karur, Tiruppur, Namakkal, Erode, Salem, and Dindigul—frequently contains excessive concentrations of dissolved Calcium ($Ca^{2+}$) and Magnesium ($Mg^{2+}$) bicarbonate, chloride, and sulfate ions.
+Groundwater across inland Tamil Nadu districts—including Karur, Tiruppur, Namakkal, Erode, Salem, and Dindigul—frequently contains excessive concentrations of dissolved Calcium (Ca²⁺) and Magnesium (Mg²⁺) bicarbonate, chloride, and sulfate ions.
 
 Water hardness is measured in Parts Per Million (PPM) or Milligrams per Liter (mg/L):
 - **0 - 60 PPM**: Soft Water
@@ -178,7 +178,7 @@ Water hardness is measured in Parts Per Million (PPM) or Milligrams per Liter (m
 
 ### Destructive Effects of Hard Water on Homes & Businesses
 
-1. **Limescale Buildup in Solar Heaters & Geysers**: Heat causes dissolved calcium to precipitate as calcium carbonate scale ($CaCO_3$). A 1mm scale layer reduces heating efficiency by 15%, causing soaring electricity bills and heater element failure.
+1. **Limescale Buildup in Solar Heaters & Geysers**: Heat causes dissolved calcium to precipitate as calcium carbonate scale (CaCO₃). A 1mm scale layer reduces heating efficiency by 15%, causing soaring electricity bills and heater element failure.
 2. **Skin Dryness & Hair Fall**: Hard water soap scum traps natural moisture, clogging skin pores and weakening hair roots.
 3. **Plumbing Pipe Clogging & Tap Corrosion**: Scale encrusts bathroom fittings, concealed PPR/PVC piping, and luxury fixtures.
 4. **Appliance Damage**: Washing machines and dishwashers suffer pump failure, detergent waste, and shortened service life.
@@ -197,7 +197,7 @@ Contact Yuvanthika Aquacare & Solar Care Systems in Karur to get a free on-site 
     contentTa: `
 ## தமிழ்நாட்டின் நிலத்தடி நீரில் கடின நீரைப் புரிந்து கொள்ளுதல்
 
-கரூர், திருப்பூர், நாமக்கல், ஈரோடு, சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் அதிகளவில் கரைந்த கால்சியம் ($Ca^{2+}$) மற்றும் மெக்னீசியம் ($Mg^{2+}$) தாதுக்கள் உள்ளன.
+கரூர், திருப்பூர், நாமக்கல், ஈரோடு, சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் அதிகளவில் கரைந்த கால்சியம் (Ca²⁺) மற்றும் மெக்னீசியம் (Mg²⁺) தாதுக்கள் உள்ளன.
 
 நீரின் கடினத்தன்மை PPM (Parts Per Million) இல் அளவிடப்படுகிறது:
 - **0 - 60 PPM**: மென்மையான நீர் (Soft Water)
@@ -223,7 +223,7 @@ Contact Yuvanthika Aquacare & Solar Care Systems in Karur to get a free on-site 
     content_ta: `
 ## தமிழ்நாட்டின் நிலத்தடி நீரில் கடின நீரைப் புரிந்து கொள்ளுதல்
 
-கரூர், திருப்பூர், நாமக்கல், ஈரோடு, சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் அதிகளவில் கரைந்த கால்சியம் ($Ca^{2+}$) மற்றும் மெக்னீசியம் ($Mg^{2+}$) தாதுக்கள் உள்ளன.
+கரூர், திருப்பூர், நாமக்கல், ஈரோடு, சேலம் போன்ற மாவட்டங்களில் நிலத்தடி நீரில் அதிகளவில் கரைந்த கால்சியம் (Ca²⁺) மற்றும் மெக்னீசியம் (Mg²⁺) தாதுக்கள் உள்ளன.
 
 நீரின் கடினத்தன்மை PPM (Parts Per Million) இல் அளவிடப்படுகிறது:
 - **0 - 60 PPM**: மென்மையான நீர் (Soft Water)
@@ -276,7 +276,7 @@ Contact Yuvanthika Aquacare & Solar Care Systems in Karur to get a free on-site 
     authorRole: "Commercial & Residential Engineers",
     category: "Water Softening",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Why Every Modern Property Needs Soft Water
 
@@ -353,7 +353,7 @@ Speak to Yuvanthika Aquacare experts today to size the ideal resin vessel for yo
     authorRole: "Lead Industrial Water Engineer",
     category: "Industrial Solutions",
     readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Engineering Industrial RO Plants for High Performance
 
@@ -366,7 +366,7 @@ Designing a robust industrial RO system requires careful consideration of feed w
 1. **Raw Water Feed Pump Skid**: Provides consistent inlet pressure and volumetric flow.
 2. **Multi-Media Dual Pressure Sand Filter (DMF)**: Removes suspended solids, turbidity, and colloidal matter down to 20 microns.
 3. **Activated Carbon Filter (ACF)**: Adsorbs free chlorine, organic contaminants, pesticides, and residual color.
-4. **Dosing Systems (Anti-scalant & SMBS)**: Prevents mineral precipitation ($CaSO_4$, $BaSO_4$, $SiO_2$) on membrane surfaces and neutralizes oxidant chlorine.
+4. **Dosing Systems (Anti-scalant & SMBS)**: Prevents mineral precipitation (CaSO₄, BaSO₄, SiO₂) on membrane surfaces and neutralizes oxidant chlorine.
 5. **5-Micron Precision Micron Cartridge Filter (MCF)**: Final guard filter protecting high-pressure pumps and RO membranes.
 
 Partner with Yuvanthika Aquacare & Solar Care Systems in Karur for custom turnkey industrial RO plant engineering, installation, and 24/7 technical AMC.
@@ -430,7 +430,7 @@ Partner with Yuvanthika Aquacare & Solar Care Systems in Karur for custom turnke
     authorRole: "Environmental Compliance Engineers",
     category: "Industrial Solutions",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Managing Industrial Wastewater in Tamil Nadu Textile Belts
 
@@ -507,7 +507,7 @@ Yuvanthika Aquacare & Solar Care Systems engineers customized ETP and ZLD plants
     authorRole: "Wastewater Systems Engineers",
     category: "Commercial Solutions",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Why Modern Facilities Require Underground or Compact STPs
 

@@ -86,8 +86,8 @@ export function ProductCard({
 
         {/* Spec Pills */}
         <div className="flex flex-wrap gap-1.5 mb-4">
-          {[product.stages, product.tank, product.liters].filter(Boolean).map((spec) => (
-            <span key={spec} className="px-2.5 py-0.5 bg-blue-50/80 text-blue-700 text-[11px] font-semibold rounded-full border border-blue-100/80">
+          {[product.stages, product.tank, product.liters].filter(Boolean).map((spec, i) => (
+            <span key={`${spec}-${i}`} className="px-2.5 py-0.5 bg-blue-50/80 text-blue-700 text-[11px] font-semibold rounded-full border border-blue-100/80">
               {spec}
             </span>
           ))}

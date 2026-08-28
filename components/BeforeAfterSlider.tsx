@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useCallback } from "react";
 import Image from "next/image";
+import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 
 export type BeforeAfterSliderProps = {
   beforeImg: string;
@@ -62,12 +63,16 @@ export function BeforeAfterSlider({
     >
       {/* After Image (Background / Base Layer) */}
       <div className="absolute inset-0 w-full h-full">
-        <Image
-          src={afterImg}
-          alt={afterTitle}
-          fill
-          className="object-cover"
-        />
+        {afterImg ? (
+          <Image
+            src={afterImg}
+            alt={afterTitle}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <ImagePlaceholder className="bg-slate-800 text-slate-600" />
+        )}
         <span className="absolute bottom-3 right-3 bg-emerald-500/90 text-white font-bold text-[10px] sm:text-xs px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider backdrop-blur-md">
           {afterTitle}
         </span>
@@ -79,12 +84,16 @@ export function BeforeAfterSlider({
         style={{ width: `${sliderPosition}%` }}
       >
         <div className="relative w-full h-full min-w-[300px] sm:min-w-[600px]">
-          <Image
-            src={beforeImg}
-            alt={beforeTitle}
-            fill
-            className="object-cover"
-          />
+          {beforeImg ? (
+            <Image
+              src={beforeImg}
+              alt={beforeTitle}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <ImagePlaceholder className="bg-slate-700 text-slate-500" />
+          )}
         </div>
         <span className="absolute bottom-3 left-3 bg-red-500/90 text-white font-bold text-[10px] sm:text-xs px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider backdrop-blur-md">
           {beforeTitle}

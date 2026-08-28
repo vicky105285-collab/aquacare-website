@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const taUrl = `${SITE_URL}/ta/blog/${taSlug}`;
 
   return {
-    title: `${enTitle} | ${COMPANY_NAME}`,
+    // Root layout applies the "%s | SITE_NAME" title template — keep this bare.
+    title: enTitle,
     description: enDesc,
     keywords: post.keywords,
     alternates: {

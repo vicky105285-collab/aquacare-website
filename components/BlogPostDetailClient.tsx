@@ -11,6 +11,24 @@ import { BlogLanguageToggle } from "@/components/BlogLanguageToggle";
 import { buildWhatsAppUrl, CALL, COMPANY_NAME, FORMER_COMPANY_NAME, PHONE_DISPLAY, SITE_URL } from "@/lib/site/constants";
 import type { BlogPost } from "@/lib/site/types";
 import { ArrowLeft, Clock, MessageCircle, User, Sparkles } from "lucide-react";
+import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+
+/**
+ * Minimal inline markdown for article body text: renders **bold** spans.
+ * Blog content uses no inline links, so nothing else is parsed.
+ */
+function renderInline(text: string, keyPrefix: string): React.ReactNode {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
+    if (part.length > 4 && part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={`${keyPrefix}-${i}`} className="font-semibold text-slate-900">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <React.Fragment key={`${keyPrefix}-${i}`}>{part}</React.Fragment>;
+  });
+}
 
 export function BlogPostDetailClient({
   post,
@@ -112,14 +130,18 @@ export function BlogPostDetailClient({
           </div>
 
           <div className="my-8 relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200">
-            <Image
-              src={post.image}
-              alt={displayTitle}
-              fill
-              priority
-              sizes="(max-width: 1200px) 100vw, 900px"
-              className="object-cover"
-            />
+            {post.image ? (
+              <Image
+                src={post.image}
+                alt={displayTitle}
+                fill
+                priority
+                sizes="(max-width: 1200px) 100vw, 900px"
+                className="object-cover"
+              />
+            ) : (
+              <ImagePlaceholder />
+            )}
           </div>
 
           {/* Trust Banner inside article */}
@@ -139,21 +161,21 @@ export function BlogPostDetailClient({
               if (trimmed.startsWith("## ")) {
                 return (
                   <h2 key={index} className="text-2xl font-black text-slate-900 mt-10 mb-4 pb-2 border-b border-slate-200">
-                    {trimmed.replace("## ", "")}
+                    {renderInline(trimmed.replace("## ", ""), `h2-${index}`)}
                   </h2>
                 );
               }
               if (trimmed.startsWith("### ")) {
                 return (
                   <h3 key={index} className="text-xl font-bold text-slate-800 mt-8 mb-3">
-                    {trimmed.replace("### ", "")}
+                    {renderInline(trimmed.replace("### ", ""), `h3-${index}`)}
                   </h3>
                 );
               }
               if (trimmed.startsWith("#### ")) {
                 return (
                   <h4 key={index} className="text-lg font-bold text-slate-800 mt-6 mb-2">
-                    {trimmed.replace("#### ", "")}
+                    {renderInline(trimmed.replace("#### ", ""), `h4-${index}`)}
                   </h4>
                 );
               }
@@ -162,7 +184,7 @@ export function BlogPostDetailClient({
                   <ul key={index} className="list-disc pl-6 space-y-2 my-4">
                     {trimmed.split("\n").map((line, lIdx) => (
                       <li key={lIdx} className="text-slate-700">
-                        {line.replace("- ", "")}
+                        {renderInline(line.replace("- ", ""), `ul-${index}-${lIdx}`)}
                       </li>
                     ))}
                   </ul>
@@ -173,7 +195,7 @@ export function BlogPostDetailClient({
                   <ol key={index} className="list-decimal pl-6 space-y-2 my-4">
                     {trimmed.split("\n").map((line, lIdx) => (
                       <li key={lIdx} className="text-slate-700">
-                        {line.replace(/^\d+\.\s*/, "")}
+                        {renderInline(line.replace(/^\d+\.\s*/, ""), `ol-${index}-${lIdx}`)}
                       </li>
                     ))}
                   </ol>
@@ -181,7 +203,7 @@ export function BlogPostDetailClient({
               }
               return (
                 <p key={index} className="my-4 leading-relaxed text-slate-700">
-                  {trimmed}
+                  {renderInline(trimmed, `p-${index}`)}
                 </p>
               );
             })}

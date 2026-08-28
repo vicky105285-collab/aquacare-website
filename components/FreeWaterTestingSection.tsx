@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Droplets, CheckCircle2, Phone, Sparkles, Send } from "lucide-react";
-import { PHONE_DISPLAY } from "@/lib/site/constants";
+import { PHONE_DISPLAY, CALL, buildWhatsAppUrl } from "@/lib/site/constants";
 import { formatWhatsAppLeadMessage } from "@/lib/ai-agent";
 
 export function FreeWaterTestingSection({ className = "" }: { className?: string }) {
@@ -47,7 +47,7 @@ export function FreeWaterTestingSection({ className = "" }: { className?: string
         currentPage: typeof window !== "undefined" ? window.location.href : "https://yuvanthikaaquasolar.in",
       });
 
-      const waUrl = `https://wa.me/919842423589?text=${encodeURIComponent(message)}`;
+      const waUrl = buildWhatsAppUrl(message);
       window.open(waUrl, "_blank");
     } catch (err) {
       console.error("Free water test submission error:", err);
@@ -95,7 +95,7 @@ export function FreeWaterTestingSection({ className = "" }: { className?: string
 
             <div className="p-4 bg-slate-900/80 border border-slate-800 rounded-2xl flex items-center justify-between text-xs text-slate-400">
               <span>Prefer Direct Phone Booking?</span>
-              <a href="tel:+919842423589" className="font-bold text-cyan-400 hover:underline flex items-center gap-1">
+              <a href={CALL} className="font-bold text-cyan-400 hover:underline flex items-center gap-1">
                 <Phone className="w-3.5 h-3.5" /> {PHONE_DISPLAY}
               </a>
             </div>
@@ -153,7 +153,7 @@ export function FreeWaterTestingSection({ className = "" }: { className?: string
                     pattern="[0-9]{10}"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="e.g., 9842423589"
+                    placeholder="e.g., 98765 43210"
                     className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-500"
                   />
                 </div>

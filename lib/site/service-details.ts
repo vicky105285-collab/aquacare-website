@@ -425,7 +425,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
     heroSubtitle: "Produce ultra-pure water with near-zero electrical conductivity (<1.0 µS/cm) for boiler feedwater and chemical processing.",
     tamilLine: "டிமினரலைசேஷன் (DM) ஆலை — மிகத் தூய்மையான நீர்.",
     benefits: [
-      { title: "Near Zero Conductivity Water", body: "Removes all dissolved ionic minerals ($Ca, Mg, Na, Cl, SO_4, SiO_2$) efficiently." },
+      { title: "Near Zero Conductivity Water", body: "Removes all dissolved ionic minerals (Ca²⁺, Mg²⁺, Na⁺, Cl⁻, SO₄²⁻, SiO₂) efficiently." },
       { title: "Boiler Scale & Corrosion Prevention", body: "Protects high-pressure steam boilers from tube blowout and scale deposits." },
       { title: "Dual-Bed & Mixed-Bed Options", body: "Strong Acid Cation (SAC) + Strong Base Anion (SBA) with Mixed Bed polishing." },
     ],

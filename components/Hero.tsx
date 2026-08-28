@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ChevronRight, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { FORMER_COMPANY_NAME } from "@/lib/site/constants";
 import type { HeroFeatureCard, StatItem, TrustItem } from "@/lib/site/types";
@@ -89,22 +90,40 @@ export function Hero({ callHref, whatsappHref, stats, featureCards, trustItems }
               </div>
             </div>
 
-            <div className="hidden lg:grid grid-cols-2 gap-4">
-              {featureCards.map((item, i) => (
-                <div
-                  key={item.title}
-                  className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-300"
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}
-                  >
-                    <item.icon className="w-6 h-6 text-white" aria-hidden />
-                  </div>
-                  <p className="text-white font-bold">{item.title}</p>
-                  <p className="text-cyan-300/70 text-sm mt-1">{item.sub}</p>
+            <div className="hidden lg:block space-y-4">
+              <figure className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm shadow-2xl shadow-blue-500/20 overflow-hidden">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src="/images/products/industrial-ss-ro-water-plant.jpg"
+                    alt="Stainless-steel industrial RO water plant built and installed by Yuvanthika Aquacare"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 44vw"
+                    className="object-cover"
+                  />
                 </div>
-              ))}
+                <figcaption className="px-4 py-3 text-xs font-medium text-cyan-100/80 border-t border-white/10">
+                  Industrial RO plant — designed, built &amp; commissioned in-house
+                </figcaption>
+              </figure>
+
+              <div className="grid grid-cols-2 gap-4">
+                {featureCards.map((item, i) => (
+                  <div
+                    key={item.title}
+                    className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-300"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                  >
+                    <div
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}
+                    >
+                      <item.icon className="w-6 h-6 text-white" aria-hidden />
+                    </div>
+                    <p className="text-white font-bold">{item.title}</p>
+                    <p className="text-cyan-300/70 text-sm mt-1">{item.sub}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

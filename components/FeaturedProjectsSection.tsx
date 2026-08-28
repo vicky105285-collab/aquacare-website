@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { PROJECTS_DATA } from "@/lib/site/projects";
 import { MapPin, ArrowRight, ShieldCheck } from "lucide-react";
 
@@ -80,13 +81,17 @@ export function FeaturedProjectsSection() {
               <AnimatedSection key={project.id} delay={idx * 100}>
                 <div className="bg-slate-800/90 rounded-2xl overflow-hidden border border-slate-700 hover:border-cyan-500/50 shadow-xl transition-all duration-300 flex flex-col h-full group">
                   <div className="relative h-52 w-full overflow-hidden bg-slate-900">
-                    <Image
-                      src={images[0]?.url || "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"}
-                      alt={title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    {images[0]?.url ? (
+                      <Image
+                        src={images[0].url}
+                        alt={title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <ImagePlaceholder className="bg-slate-800 text-slate-600" />
+                    )}
                     <div className="absolute top-3 left-3 bg-cyan-500 text-slate-950 text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                       {project.projectType}
                     </div>

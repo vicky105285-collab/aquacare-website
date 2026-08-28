@@ -7,6 +7,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle";
 import type { BlogPost } from "@/lib/site/types";
 import { ArrowRight, BookOpen, Clock, User, Sparkles, Search } from "lucide-react";
+import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 
 export function BlogListClient({
   posts,
@@ -117,13 +118,17 @@ export function BlogListClient({
                 className="flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-cyan-300 transition-all duration-300 group"
               >
                 <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  {post.image ? (
+                    <Image
+                      src={post.image}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <ImagePlaceholder />
+                  )}
                   <div className="absolute top-3 left-3 bg-blue-600 text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
                     <span>{post.category}</span>
                     {hasTamilContent && (

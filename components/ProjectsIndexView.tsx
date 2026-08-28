@@ -7,6 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CTASection } from "@/components/CTASection";
 import { FORMER_COMPANY_NAME, CALL, WHATSAPP, PHONE_DISPLAY } from "@/lib/site/constants";
+import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import type { ProjectItem } from "@/lib/site/types";
 import { MapPin, ShieldCheck, ArrowRight, Filter, Search } from "lucide-react";
 
@@ -197,13 +198,17 @@ export function ProjectsIndexView({ projects }: { projects: ProjectItem[] }) {
                 >
                   {/* Image Display */}
                   <div className="relative h-60 w-full bg-slate-100 overflow-hidden">
-                    <Image
-                      src={pImages[0]?.url || "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"}
-                      alt={pTitle}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    {pImages[0]?.url ? (
+                      <Image
+                        src={pImages[0].url}
+                        alt={pTitle}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <ImagePlaceholder />
+                    )}
                     <div className="absolute top-3 left-3 bg-blue-600 text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                       {project.industryType || project.industry}
                     </div>

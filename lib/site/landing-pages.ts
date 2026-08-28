@@ -128,7 +128,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       {
         heading: "The Critical Impact of Water Hardness in Textile Dyeing",
         body: [
-          "In textile dyeing and printing, water hardness ions (Calcium $Ca^{2+}$ and Magnesium $Mg^{2+}$) react with reactive dyes and chemical auxiliaries to form insoluble mineral precipitates. This results in streaky fabric coloration, poor color fastness, harsh fabric feel, and frequent batch rejections.",
+          "In textile dyeing and printing, water hardness ions (Calcium Ca²⁺ and Magnesium Mg²⁺) react with reactive dyes and chemical auxiliaries to form insoluble mineral precipitates. This results in streaky fabric coloration, poor color fastness, harsh fabric feel, and frequent batch rejections.",
           "Yuvanthika automated water softeners use food-grade Na+ cation exchange resin to replace calcium and magnesium with soft sodium ions, guaranteeing zero-hardness water for your process.",
         ],
       },
@@ -323,7 +323,7 @@ export const LANDING_PAGES: LandingPageData[] = [
       {
         heading: "Solving Complex Borewell Water Issues in Inland Tamil Nadu",
         body: [
-          "Borewell water in inland Tamil Nadu often contains a combination of high TDS, dissolved iron ($Fe^{2+}$), manganese, suspended clay, and extreme hardness. Yuvanthika Aquacare designs multi-stage treatment trains tailored to your exact water laboratory report.",
+          "Borewell water in inland Tamil Nadu often contains a combination of high TDS, dissolved iron (Fe²⁺), manganese, suspended clay, and extreme hardness. Yuvanthika Aquacare designs multi-stage treatment trains tailored to your exact water laboratory report.",
         ],
       },
     ],
