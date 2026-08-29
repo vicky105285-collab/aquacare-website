@@ -16,26 +16,53 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { title, content, featuredImage, metaTitle, metaDescription, keywords, author, isPublished } = body;
+    const {
+      slug, title, title_ta, excerpt_ta, content, content_ta,
+      featuredImage, metaTitle, metaDescription, keywords, author, isPublished,
+    } = body;
+
+    // The edit form also edits articles that only exist as static content (their
+    // list id is their slug, not a cuid). Upsert on the slug so the first save
+    // creates the real DB row and later saves update it.
+    const targetSlug = (slug || (id?.includes("-") ? id : "") || slugify(title || "")).trim();
+    if (!targetSlug) {
+      return NextResponse.json({ error: "A slug or title is required" }, { status: 400 });
+    }
+    const kw = keywords === undefined
+      ? undefined
+      : Array.isArray(keywords)
+        ? keywords
+        : String(keywords).split(",").map((k: string) => k.trim()).filter(Boolean);
 
     if (prisma) {
-      const updated = await prisma.blog.update({
-        where: { id },
-        data: {
-          ...(title && { title, slug: slugify(title) }),
-          ...(content && { content }),
-          // `!== undefined` so the owner can also CLEAR the featured image ("").
-          ...(featuredImage !== undefined && { featuredImage }),
-          ...(metaTitle && { metaTitle }),
-          ...(metaDescription && { metaDescription }),
-          ...(keywords && { keywords: Array.isArray(keywords) ? keywords : keywords.split(",") }),
-          ...(author && { author }),
-          ...(typeof isPublished === "boolean" && { isPublished }),
+      const fields = {
+        ...(title !== undefined && { title }),
+        ...(title_ta !== undefined && { title_ta: title_ta || null }),
+        ...(excerpt_ta !== undefined && { excerpt_ta: excerpt_ta || null }),
+        ...(content !== undefined && { content }),
+        ...(content_ta !== undefined && { content_ta: content_ta || null }),
+        ...(featuredImage !== undefined && { featuredImage }),
+        ...(metaTitle !== undefined && { metaTitle }),
+        ...(metaDescription !== undefined && { metaDescription }),
+        ...(kw !== undefined && { keywords: kw }),
+        ...(author !== undefined && { author }),
+        ...(typeof isPublished === "boolean" && { isPublished }),
+      };
+      const post = await prisma.blog.upsert({
+        where: { slug: targetSlug },
+        update: fields,
+        create: {
+          slug: targetSlug,
+          title: title || targetSlug,
+          content: content ?? "",
+          keywords: kw ?? [],
+          ...fields,
         },
       });
       revalidatePath("/blog");
-      revalidatePath(`/blog/${updated.slug}`);
-      return NextResponse.json({ success: true, post: updated });
+      revalidatePath(`/blog/${post.slug}`);
+      revalidatePath(`/ta/blog/${post.slug}`);
+      return NextResponse.json({ success: true, post });
     }
 
     revalidatePath("/blog");

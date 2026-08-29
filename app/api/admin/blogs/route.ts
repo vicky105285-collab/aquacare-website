@@ -22,14 +22,17 @@ export async function GET() {
     }
   }
 
-  // Fallback to static blog data
+  // Fallback to static blog data (full fields so the Admin edit form can prefill).
   return NextResponse.json(
     BLOG_POSTS.map((post) => ({
       id: post.slug,
       title: post.title,
+      title_ta: post.title_ta ?? post.titleTa ?? "",
       slug: post.slug,
       featuredImage: post.image,
-      content: post.description,
+      content: post.content ?? post.description ?? "",
+      content_ta: post.content_ta ?? post.contentTa ?? "",
+      excerpt_ta: post.excerpt_ta ?? post.descriptionTa ?? "",
       metaTitle: post.title,
       metaDescription: post.description,
       keywords: post.keywords,

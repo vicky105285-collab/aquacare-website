@@ -2,34 +2,86 @@
 
 import React, { useEffect, useState } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-import { Plus, Eye, Sparkles, CheckCircle2, Upload, X, ImageIcon } from "lucide-react";
+import { Plus, Eye, Sparkles, CheckCircle2, Upload, X, ImageIcon, Pencil } from "lucide-react";
 import type { SessionUser } from "@/lib/auth";
 
 interface BlogPost {
   id: string;
   title: string;
+  title_ta?: string;
   slug: string;
   author: string;
   publishDate: string;
   isPublished: boolean;
+  featuredImage?: string;
+  content?: string;
+  content_ta?: string;
+  excerpt_ta?: string;
 }
+
+const EMPTY = {
+  title: "",
+  title_ta: "",
+  excerpt_ta: "",
+  content: "",
+  content_ta: "",
+  author: "Yuvanthika Water Expert",
+  keywords: "RO Purifier Karur, Water Softener Tamil Nadu",
+  featuredImage: "",
+};
 
 export default function AdminBlogPage() {
   const [user, setUser] = useState<SessionUser | null>(null);
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [isAdding, setIsAdding] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editing, setEditing] = useState<BlogPost | null>(null);
 
   // Form State
-  const [title, setTitle] = useState("");
-  const [title_ta, setTitleTa] = useState("");
-  const [excerpt_ta, setExcerptTa] = useState("");
-  const [content, setContent] = useState("");
-  const [content_ta, setContentTa] = useState("");
-  const [author, setAuthor] = useState("Yuvanthika Water Expert");
-  const [keywords, setKeywords] = useState("RO Purifier Karur, Water Softener Tamil Nadu");
-  const [featuredImage, setFeaturedImage] = useState("");
+  const [title, setTitle] = useState(EMPTY.title);
+  const [title_ta, setTitleTa] = useState(EMPTY.title_ta);
+  const [excerpt_ta, setExcerptTa] = useState(EMPTY.excerpt_ta);
+  const [content, setContent] = useState(EMPTY.content);
+  const [content_ta, setContentTa] = useState(EMPTY.content_ta);
+  const [author, setAuthor] = useState(EMPTY.author);
+  const [keywords, setKeywords] = useState(EMPTY.keywords);
+  const [featuredImage, setFeaturedImage] = useState(EMPTY.featuredImage);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const resetForm = () => {
+    setTitle(EMPTY.title);
+    setTitleTa(EMPTY.title_ta);
+    setExcerptTa(EMPTY.excerpt_ta);
+    setContent(EMPTY.content);
+    setContentTa(EMPTY.content_ta);
+    setAuthor(EMPTY.author);
+    setKeywords(EMPTY.keywords);
+    setFeaturedImage(EMPTY.featuredImage);
+    setEditing(null);
+  };
+
+  const openCreate = () => {
+    resetForm();
+    setIsFormOpen(true);
+  };
+
+  const openEdit = (post: BlogPost) => {
+    setEditing(post);
+    setTitle(post.title || "");
+    setTitleTa(post.title_ta || "");
+    setExcerptTa(post.excerpt_ta || "");
+    setContent(post.content || "");
+    setContentTa(post.content_ta || "");
+    setAuthor(post.author || EMPTY.author);
+    setKeywords(EMPTY.keywords);
+    setFeaturedImage(post.featuredImage || "");
+    setIsFormOpen(true);
+  };
+
+  const closeForm = () => {
+    setIsFormOpen(false);
+    resetForm();
+  };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -43,9 +95,12 @@ export default function AdminBlogPage() {
       if (res.ok) {
         const data = await res.json();
         if (data.url) setFeaturedImage(data.url);
+      } else {
+        setMessage("Image upload failed — check the Cloudinary configuration.");
       }
     } catch (err) {
       console.error(err);
+      setMessage("Image upload failed.");
     } finally {
       setUploading(false);
       e.target.value = "";
@@ -67,38 +122,48 @@ export default function AdminBlogPage() {
     load();
   }, []);
 
-  const handleCreatePost = async (e: React.FormEvent) => {
+  const refresh = async () => {
+    const listRes = await fetch("/api/admin/blogs");
+    if (listRes.ok) setPosts(await listRes.json());
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const payload = {
+      slug: editing?.slug,
+      title,
+      title_ta,
+      excerpt_ta,
+      content,
+      content_ta,
+      author,
+      keywords: keywords.split(","),
+      featuredImage,
+    };
     try {
-      const res = await fetch("/api/admin/blogs", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          title_ta,
-          excerpt_ta,
-          content,
-          content_ta,
-          author,
-          keywords: keywords.split(","),
-          featuredImage,
-        }),
-      });
+      const res = editing
+        ? await fetch(`/api/admin/blogs/${encodeURIComponent(editing.id)}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          })
+        : await fetch("/api/admin/blogs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
 
       if (res.ok) {
-        setMessage("Blog post created & published successfully with Tamil translations!");
-        setIsAdding(false);
-        setTitle("");
-        setTitleTa("");
-        setExcerptTa("");
-        setContent("");
-        setContentTa("");
-        setFeaturedImage("");
-        const listRes = await fetch("/api/admin/blogs");
-        if (listRes.ok) setPosts(await listRes.json());
+        setMessage(editing ? "Article updated successfully." : "Blog post created & published successfully.");
+        closeForm();
+        await refresh();
+      } else {
+        const err = await res.json().catch(() => ({}));
+        setMessage(err.error || "Save failed.");
       }
     } catch (err) {
       console.error(err);
+      setMessage("Save failed.");
     }
   };
 
@@ -113,10 +178,10 @@ export default function AdminBlogPage() {
             </p>
           </div>
           <button
-            onClick={() => setIsAdding(!isAdding)}
+            onClick={() => (isFormOpen ? closeForm() : openCreate())}
             className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold text-xs rounded-xl hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20"
           >
-            <Plus className="w-4 h-4" /> {isAdding ? "Close Form" : "Create New Blog"}
+            <Plus className="w-4 h-4" /> {isFormOpen ? "Close Form" : "Create New Blog"}
           </button>
         </div>
 
@@ -126,10 +191,10 @@ export default function AdminBlogPage() {
           </div>
         )}
 
-        {isAdding && (
-          <form onSubmit={handleCreatePost} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+        {isFormOpen && (
+          <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
             <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
-              <Sparkles className="w-4 h-4" /> Write New Multilingual Article
+              <Sparkles className="w-4 h-4" /> {editing ? `Edit: ${editing.title}` : "Write New Multilingual Article"}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -249,12 +314,23 @@ export default function AdminBlogPage() {
                 />
               </div>
             </div>
-            <button
-              type="submit"
-              className="px-5 py-3 bg-cyan-500 text-slate-950 font-black text-xs rounded-xl hover:bg-cyan-400"
-            >
-              Publish Article
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="submit"
+                className="px-5 py-3 bg-cyan-500 text-slate-950 font-black text-xs rounded-xl hover:bg-cyan-400"
+              >
+                {editing ? "Save Changes" : "Publish Article"}
+              </button>
+              {editing && (
+                <button
+                  type="button"
+                  onClick={closeForm}
+                  className="px-4 py-3 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl hover:bg-slate-700"
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
           </form>
         )}
 
@@ -265,20 +341,38 @@ export default function AdminBlogPage() {
           <div className="divide-y divide-slate-800/60">
             {posts.map((post) => (
               <div key={post.id} className="p-4 flex items-center justify-between hover:bg-slate-800/40">
-                <div>
-                  <h3 className="font-bold text-white text-sm">{post.title}</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    URL: <code className="text-cyan-400">/blog/{post.slug}</code> • By {post.author}
-                  </p>
+                <div className="flex items-center gap-3 min-w-0">
+                  {post.featuredImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={post.featuredImage} alt="" className="h-10 w-14 object-cover rounded-md border border-slate-700 shrink-0" />
+                  ) : (
+                    <div className="h-10 w-14 rounded-md border border-dashed border-slate-700 shrink-0 flex items-center justify-center">
+                      <ImageIcon className="w-4 h-4 text-slate-600" />
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <h3 className="font-bold text-white text-sm truncate">{post.title}</h3>
+                    <p className="text-xs text-slate-400 mt-0.5 truncate">
+                      URL: <code className="text-cyan-400">/blog/{post.slug}</code> • By {post.author}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 shrink-0">
                   <span className="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold rounded-full">
                     Published
                   </span>
+                  <button
+                    onClick={() => openEdit(post)}
+                    className="flex items-center gap-1 p-2 text-slate-400 hover:text-cyan-400 bg-slate-800 rounded-lg"
+                    title="Edit article / featured image"
+                  >
+                    <Pencil className="w-4 h-4" />
+                  </button>
                   <a
                     href={`/blog/${post.slug}`}
                     target="_blank"
                     className="p-2 text-slate-400 hover:text-cyan-400 bg-slate-800 rounded-lg"
+                    title="View on site"
                   >
                     <Eye className="w-4 h-4" />
                   </a>
