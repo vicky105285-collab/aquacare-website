@@ -16,7 +16,7 @@ export function GoogleReviews({ reviews }: { reviews: TestimonialItem[] }) {
                 {review.name.charAt(0)}
               </div>
               <div>
-                <h4 className="font-bold text-slate-800 text-sm">{review.name}</h4>
+                <p className="font-bold text-slate-800 text-sm">{review.name}</p>
                 <div className="flex items-center gap-1 text-xs text-slate-500 mt-0.5">
                   <BadgeCheck className="w-3.5 h-3.5 text-blue-500" />
                   Local Guide • {review.loc}

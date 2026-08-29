@@ -173,10 +173,11 @@ export function FreeWaterTestingSection({ className = "" }: { className?: string
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                    <label htmlFor="fwt-water-source" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                       Water Source
                     </label>
                     <select
+                      id="fwt-water-source"
                       value={waterSource}
                       onChange={(e) => setWaterSource(e.target.value)}
                       className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-500"
@@ -190,10 +191,11 @@ export function FreeWaterTestingSection({ className = "" }: { className?: string
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label htmlFor="fwt-requirement" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                     System Requirement
                   </label>
                   <select
+                    id="fwt-requirement"
                     value={requirement}
                     onChange={(e) => setRequirement(e.target.value)}
                     className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-500"

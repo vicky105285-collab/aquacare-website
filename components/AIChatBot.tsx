@@ -243,7 +243,7 @@ export function AIChatBot() {
             <span className="font-black text-xs tracking-wider hidden sm:inline-block uppercase">
               AI Assistant
             </span>
-            <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-bold">
+            <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-bold" aria-hidden="true">
               Online
             </span>
           </button>
