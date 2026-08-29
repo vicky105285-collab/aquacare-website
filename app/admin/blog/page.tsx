@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-import { Plus, Eye, Sparkles, CheckCircle2 } from "lucide-react";
+import { Plus, Eye, Sparkles, CheckCircle2, Upload, X, ImageIcon } from "lucide-react";
 import type { SessionUser } from "@/lib/auth";
 
 interface BlogPost {
@@ -27,7 +27,30 @@ export default function AdminBlogPage() {
   const [content_ta, setContentTa] = useState("");
   const [author, setAuthor] = useState("Yuvanthika Water Expert");
   const [keywords, setKeywords] = useState("RO Purifier Karur, Water Softener Tamil Nadu");
+  const [featuredImage, setFeaturedImage] = useState("");
+  const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("folder", "Blog");
+      const res = await fetch("/api/admin/media/upload", { method: "POST", body: fd });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.url) setFeaturedImage(data.url);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  };
 
   useEffect(() => {
     async function load() {
@@ -58,6 +81,7 @@ export default function AdminBlogPage() {
           content_ta,
           author,
           keywords: keywords.split(","),
+          featuredImage,
         }),
       });
 
@@ -69,6 +93,7 @@ export default function AdminBlogPage() {
         setExcerptTa("");
         setContent("");
         setContentTa("");
+        setFeaturedImage("");
         const listRes = await fetch("/api/admin/blogs");
         if (listRes.ok) setPosts(await listRes.json());
       }
@@ -163,6 +188,45 @@ export default function AdminBlogPage() {
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm focus:border-cyan-500 outline-none"
                 />
               </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-300 mb-1">Featured Image (optional)</label>
+              <p className="text-[11px] text-slate-500 mb-2">
+                Upload a genuine photo, or paste an image URL. Leave empty to show a clean placeholder — never a stock image.
+              </p>
+              {featuredImage ? (
+                <div className="flex items-center gap-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={featuredImage} alt="Featured preview" className="h-16 w-24 object-cover rounded-lg border border-slate-700" />
+                  <code className="text-[11px] text-cyan-400 break-all flex-1">{featuredImage}</code>
+                  <button
+                    type="button"
+                    onClick={() => setFeaturedImage("")}
+                    className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-800 text-slate-300 text-[11px] font-bold rounded-lg hover:bg-slate-700"
+                  >
+                    <X className="w-3.5 h-3.5" /> Remove
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-wrap items-center gap-3">
+                  <label className="flex items-center gap-2 px-3 py-2 bg-slate-800 text-slate-200 text-xs font-bold rounded-xl cursor-pointer hover:bg-slate-700">
+                    <Upload className="w-4 h-4" /> {uploading ? "Uploading…" : "Upload Image"}
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploading} />
+                  </label>
+                  <span className="text-slate-600 text-xs">or</span>
+                  <div className="relative flex-1 min-w-[220px]">
+                    <ImageIcon className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="url"
+                      value={featuredImage}
+                      onChange={(e) => setFeaturedImage(e.target.value)}
+                      placeholder="https://res.cloudinary.com/…"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2 pl-9 pr-3 text-white text-sm focus:border-cyan-500 outline-none"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

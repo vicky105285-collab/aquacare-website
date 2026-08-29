@@ -26,7 +26,7 @@ export const BLOG_POSTS: BlogPost[] = [
     authorRole: "Senior Water Treatment Specialists",
     category: "Residential RO",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4e?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Why Regular RO Water Purifier Maintenance Matters in Tamil Nadu
 
@@ -164,7 +164,7 @@ Yuvanthika Aquacare & Solar Care Systems provides certified doorstep RO service,
     authorRole: "Water Softening Specialists",
     category: "Water Softening",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Understanding Hard Water in Tamil Nadu Groundwater
 
@@ -276,7 +276,7 @@ Contact Yuvanthika Aquacare & Solar Care Systems in Karur to get a free on-site 
     authorRole: "Commercial & Residential Engineers",
     category: "Water Softening",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Why Every Modern Property Needs Soft Water
 
@@ -353,7 +353,7 @@ Speak to Yuvanthika Aquacare experts today to size the ideal resin vessel for yo
     authorRole: "Lead Industrial Water Engineer",
     category: "Industrial Solutions",
     readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Engineering Industrial RO Plants for High Performance
 
@@ -430,7 +430,7 @@ Partner with Yuvanthika Aquacare & Solar Care Systems in Karur for custom turnke
     authorRole: "Environmental Compliance Engineers",
     category: "Industrial Solutions",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Managing Industrial Wastewater in Tamil Nadu Textile Belts
 
@@ -507,7 +507,7 @@ Yuvanthika Aquacare & Solar Care Systems engineers customized ETP and ZLD plants
     authorRole: "Wastewater Systems Engineers",
     category: "Commercial Solutions",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1200&q=80",
+    image: "",
     content: `
 ## Why Modern Facilities Require Underground or Compact STPs
 
@@ -587,7 +587,7 @@ export async function getDynamicBlogPosts(): Promise<BlogPost[]> {
           authorRole: "Water Specialist",
           category: "Knowledge Hub",
           readTime: "5 min read",
-          image: p.featuredImage || "/products/7-wave-krystal.webp",
+          image: p.featuredImage || "",
           content: p.content,
           contentTa: p.content_ta || undefined,
           content_ta: p.content_ta || undefined,
@@ -620,7 +620,7 @@ export async function getDynamicBlogPostBySlug(slug: string): Promise<BlogPost |
           authorRole: "Water Specialist",
           category: "Knowledge Hub",
           readTime: "5 min read",
-          image: p.featuredImage || "/products/7-wave-krystal.webp",
+          image: p.featuredImage || "",
           content: p.content,
           contentTa: p.content_ta || undefined,
           content_ta: p.content_ta || undefined,

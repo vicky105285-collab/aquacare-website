@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site/constants";
+import { SITE_NAME, SITE_URL } from "@/lib/site/constants";
 import { HomePageClient } from "@/components/HomePageClient";
 
 const title = `${SITE_NAME} | RO Water Purifier, Solar Heater & STP Plant in Karur`;
-const description = `${SITE_TAGLINE} Multi-stage RO purifiers, industrial ETP/STP plants, solar water heaters & panels, AMC plans, and water softeners with same-day service across Karur, Namakkal, and Erode.`;
+const description =
+  "RO water purifiers, industrial RO / ETP / STP plants, water softeners & solar water heaters in Karur & across Tamil Nadu. Same-day service, AMC plans, trusted since 2014.";
 
 export const metadata: Metadata = {
   title,

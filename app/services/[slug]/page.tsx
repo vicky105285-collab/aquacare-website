@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   ];
 
   return {
-    title: d.metaTitle,
+    // metaTitle is brand-free in the data; append the brand once here.
+    title: `${d.metaTitle} | ${COMPANY_NAME}`,
     description: `${d.metaDescription} Formerly known as ${FORMER_COMPANY_NAME}.`,
     keywords: localKeywords,
     alternates: { canonical: url },

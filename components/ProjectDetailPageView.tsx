@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import { SmartImage } from "@/components/SmartImage";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CTASection } from "@/components/CTASection";
@@ -42,7 +42,9 @@ export function ProjectDetailPageView({ project }: { project: ProjectItem }) {
     setTimeout(() => setCopiedKey(null), 2500);
   };
 
-  const images = project.projectImages || project.gallery || [];
+  const allImages = project.projectImages || project.gallery || [];
+  // Only real uploaded photos — never render a gallery of empty placeholders.
+  const images = allImages.filter((img: { url?: string }) => img?.url && img.url.trim().length > 0);
   const title = project.projectTitle || project.projectName || "Project Case Study";
   const problem = project.problemFaced || project.problem || "";
   const solution = project.solutionProvided || project.solution || "";
@@ -210,7 +212,7 @@ export function ProjectDetailPageView({ project }: { project: ProjectItem }) {
               {images.map((img, idx) => (
                 <div key={idx} className="group relative bg-slate-100 rounded-2xl overflow-hidden border border-slate-200">
                   <div className="relative h-64 w-full">
-                    <Image
+                    <SmartImage
                       src={img.url}
                       alt={img.caption || title}
                       fill

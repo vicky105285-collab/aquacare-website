@@ -36,4 +36,43 @@ body {
       transform: translateY(0);
     }
   }
+
+  /* Water Journey — a "current" of light travelling along the filled connector. */
+  @keyframes waterCurrent {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 32px 0;
+    }
+  }
+
+  .water-current {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 12px,
+      rgba(255, 255, 255, 0.55) 12px,
+      rgba(255, 255, 255, 0.55) 16px
+    );
+    animation: waterCurrent 0.85s linear infinite;
+  }
+
+  /* Product card image — a single diagonal light sweep on hover. */
+  .card-shine {
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 70%
+    );
+    background-size: 220% 100%;
+    background-position: 180% 0;
+    opacity: 0;
+  }
+  .group:hover .card-shine {
+    opacity: 1;
+    background-position: -40% 0;
+    transition: background-position 0.7s ease, opacity 0.3s ease;
+  }
 }

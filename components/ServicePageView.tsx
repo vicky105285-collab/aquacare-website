@@ -21,26 +21,10 @@ export type ServicePageViewProps = {
 export function ServicePageView({ detail }: ServicePageViewProps) {
   const wa = enquiryHref(detail.heroTitle);
 
-  // Generate FAQ Schema for SEO
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": detail.faqs.map((f) => ({
-      "@type": "Question",
-      "name": f.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": f.a,
-      },
-    })),
-  };
+  // FAQPage JSON-LD is emitted once by <FaqAccordion> below — don't duplicate it here.
 
   return (
     <article>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <div className="relative">
         <PageHero title={detail.heroTitle} subtitle={detail.heroSubtitle} tamilLine={detail.tamilLine} />
         <div className="absolute top-0 left-0 right-0">

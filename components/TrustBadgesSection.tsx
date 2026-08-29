@@ -71,7 +71,7 @@ export const TRUST_BADGES: TrustBadgeItem[] = [
   {
     icon: HeartHandshake,
     title: "Customer Satisfaction Focused",
-    sub: "4.9★ Google Business rating",
+    sub: "4.6★ Google Business rating",
     color: "from-rose-500 to-pink-600",
   },
   {

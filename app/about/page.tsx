@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 import { ShieldCheck, Award } from "lucide-react";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Us | Yuvanthika Aquacare & Solar Care Systems",
+  title: "About Us",
   description:
     `Yuvanthika Aquacare & Solar Care Systems (Formerly known as ${FORMER_COMPANY_NAME}) has delivered residential, commercial & industrial water treatment & solar solutions across Tamil Nadu since 2014.`,
   path: "/about",

@@ -65,7 +65,9 @@ export async function POST(request: Request) {
           slug,
           content,
           content_ta: content_ta || null,
-          featuredImage: featuredImage || "/products/7-wave-krystal.webp",
+          // Empty when the owner supplies no photo — the site shows a clean
+          // placeholder (SmartImage), never a stock/irrelevant image.
+          featuredImage: featuredImage || "",
           metaTitle: metaTitle || title,
           metaDescription: metaDescription || content.slice(0, 160),
           keywords: Array.isArray(keywords) ? keywords : (keywords || "").split(",").map((k: string) => k.trim()),

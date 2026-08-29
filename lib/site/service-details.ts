@@ -33,7 +33,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   "ro-water-purifier": {
     slug: "ro-water-purifier",
     category: "residential",
-    metaTitle: "RO Water Purifier Sales & Installation Karur | Yuvanthika Aquacare",
+    metaTitle: "RO Water Purifier Sales & Installation Karur",
     metaDescription:
       "Hospital-grade multi-stage RO water purifiers with copper, alkaline & UV filtration for homes in Karur, Namakkal, Erode & Tamil Nadu. 10+ years trust.",
     keywords: [
@@ -130,7 +130,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   "ro-service": {
     slug: "ro-service",
     category: "residential",
-    metaTitle: "Same-Day RO Service & Repair in Karur | Yuvanthika Aquacare",
+    metaTitle: "Same-Day RO Service & Repair in Karur",
     metaDescription:
       "Fast same-day doorstep RO water purifier repair, filter change, motor pump fix, leak repair in Karur, Namakkal, Erode. Call +91 84288 88854.",
     keywords: ["RO Service Karur", "RO Repair Near Me", "Water Purifier Service Karur", "RO Filter Change"],
@@ -155,7 +155,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   "ro-amc": {
     slug: "ro-amc",
     category: "residential",
-    metaTitle: "RO Annual Maintenance Contract (AMC) Karur | Yuvanthika",
+    metaTitle: "RO Annual Maintenance Contract (AMC) Karur",
     metaDescription:
       "Hassle-free RO AMC plans in Karur with unlimited breakdown calls, free filter changes, and proactive quarterly visits.",
     keywords: ["RO AMC Karur", "Annual Maintenance Contract RO", "RO Maintenance Plan", "RO Service Contract"],
@@ -179,7 +179,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   "water-softener": {
     slug: "water-softener",
     category: "residential",
-    metaTitle: "Best Water Softener Systems in Karur & Tamil Nadu | Yuvanthika",
+    metaTitle: "Best Water Softener Systems in Karur & Tamil Nadu",
     metaDescription:
       "Eliminate hard water scale, protect solar heaters, geysers, hair & skin with custom ion-exchange water softeners in Karur & Tamil Nadu.",
     keywords: ["Water Softener Karur", "Hard Water Softener Tamil Nadu", "Ion Exchange Softener", "Whole House Softener Karur"],
@@ -264,7 +264,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   "ups-battery-replacement": {
     slug: "ups-battery-replacement",
     category: "residential",
-    metaTitle: "UPS & Inverter Battery Sales & Service Karur | Yuvanthika",
+    metaTitle: "UPS & Inverter Battery Sales & Service Karur",
     metaDescription:
       "Home inverter UPS sales, battery replacement, tubular battery maintenance & acid topping in Karur, Namakkal, Erode.",
     keywords: ["UPS Battery Karur", "Inverter Battery Service", "Tubular Battery Replacement", "UPS Repair Karur"],
@@ -309,7 +309,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   "refrigerator-service": {
     slug: "refrigerator-service",
     category: "residential",
-    metaTitle: "Refrigerator Service & Gas Charging Karur | Yuvanthika",
+    metaTitle: "Refrigerator Service & Gas Charging Karur",
     metaDescription:
       "Expert fridge repair, cooling issues, compressor replacement, gas refill in Karur, Namakkal, Erode. Doorstep visits.",
     keywords: ["Refrigerator Service Karur", "Fridge Repair Near Me", "Fridge Gas Charging Karur", "Compressor Repair"],
@@ -491,7 +491,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
   "industrial-water-treatment-plant": {
     slug: "industrial-water-treatment-plant",
     category: "industrial",
-    metaTitle: "Industrial Water Treatment Plants Karur & Tamil Nadu | Yuvanthika",
+    metaTitle: "Industrial Water Treatment Plants Karur & Tamil Nadu",
     metaDescription:
       "Comprehensive raw water treatment, filtration, clarification & softening plants for manufacturing factories across Tamil Nadu.",
     keywords: ["Industrial Water Treatment Karur", "Factory Water Treatment Tamil Nadu", "Industrial Water Filter"],

@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { SmartImage } from "@/components/SmartImage";
 import { useRouter, usePathname } from "next/navigation";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { BlogLanguageToggle } from "@/components/BlogLanguageToggle";
 import type { BlogPost } from "@/lib/site/types";
 import { ArrowRight, BookOpen, Clock, User, Sparkles, Search } from "lucide-react";
@@ -19,6 +20,7 @@ export function BlogListClient({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const reduce = useReducedMotion();
   const [lang, setLang] = useState<"en" | "ta">(
     pathname.startsWith("/ta/") ? "ta" : initialLang
   );
@@ -94,7 +96,8 @@ export function BlogListClient({
         </div>
 
         {/* Blog Post Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode="popLayout">
           {filteredPosts.map((post) => {
             // Auto Fallback: Use Tamil if present, else English (Never blank)
             const title = isTamil
@@ -112,12 +115,18 @@ export function BlogListClient({
             const hasTamilContent = !!(post.title_ta || post.titleTa);
 
             return (
-              <div
+              <motion.div
                 key={post.slug}
-                className="flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-cyan-300 transition-all duration-300 group"
+                layout
+                initial={reduce ? false : { opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? undefined : { opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={reduce ? undefined : { y: -6 }}
+                className="flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-cyan-300 transition-[box-shadow,border-color] duration-300 group"
               >
                 <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
-                  <Image
+                  <SmartImage
                     src={post.image}
                     alt={title}
                     fill
@@ -165,10 +174,11 @@ export function BlogListClient({
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

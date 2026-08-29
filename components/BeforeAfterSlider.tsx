@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useCallback } from "react";
-import Image from "next/image";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { SmartImage } from "@/components/SmartImage";
+import { useInView, useReducedMotion } from "motion/react";
 
 export type BeforeAfterSliderProps = {
   beforeImg: string;
@@ -18,56 +19,78 @@ export function BeforeAfterSlider({
   afterTitle = "After Treatment",
   className = "",
 }: BeforeAfterSliderProps) {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
+  const [pos, setPos] = useState(50);
+  const [dragging, setDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const hintedRef = useRef(false);
+  const inView = useInView(containerRef, { once: true, amount: 0.4 });
+  const reduce = useReducedMotion();
 
-  const handleMove = useCallback((clientX: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = clientX - rect.left;
-    let percentage = (x / rect.width) * 100;
-    if (percentage < 0) percentage = 0;
-    if (percentage > 100) percentage = 100;
-    setSliderPosition(percentage);
+  const setFromClientX = useCallback((clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const pct = ((clientX - rect.left) / rect.width) * 100;
+    setPos(Math.min(100, Math.max(0, pct)));
   }, []);
 
-  const handleTouchMove = useCallback(
-    (e: React.TouchEvent) => {
-      if (!isDragging) return;
-      handleMove(e.touches[0].clientX);
-    },
-    [isDragging, handleMove]
-  );
+  const onPointerDown = (e: React.PointerEvent) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setDragging(true);
+    setFromClientX(e.clientX);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging) return;
+    setFromClientX(e.clientX);
+  };
+  const endDrag = (e: React.PointerEvent) => {
+    setDragging(false);
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      /* pointer already released */
+    }
+  };
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging) return;
-      handleMove(e.clientX);
-    },
-    [isDragging, handleMove]
-  );
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    const step = e.shiftKey ? 10 : 4;
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      setPos((p) => Math.max(0, p - step));
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      setPos((p) => Math.min(100, p + step));
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setPos(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setPos(100);
+    }
+  };
+
+  // One-time "drag me" nudge the first time the control is on screen.
+  useEffect(() => {
+    if (!inView || hintedRef.current || reduce) return;
+    hintedRef.current = true;
+    const timers = [42, 58, 50].map((v, i) =>
+      window.setTimeout(() => setPos(v), 350 + i * 260),
+    );
+    return () => timers.forEach((t) => window.clearTimeout(t));
+  }, [inView, reduce]);
 
   return (
     <div
       ref={containerRef}
-      onMouseDown={() => setIsDragging(true)}
-      onMouseUp={() => setIsDragging(false)}
-      onMouseLeave={() => setIsDragging(false)}
-      onMouseMove={handleMouseMove}
-      onTouchStart={() => setIsDragging(true)}
-      onTouchEnd={() => setIsDragging(false)}
-      onTouchMove={handleTouchMove}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
       className={`relative w-full overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 select-none cursor-ew-resize aspect-[4/3] sm:aspect-[16/9] ${className}`}
     >
       {/* After Image (Background / Base Layer) */}
       <div className="absolute inset-0 w-full h-full">
-        <Image
-          src={afterImg}
-          alt={afterTitle}
-          fill
-          className="object-cover"
-        />
+        <SmartImage src={afterImg} alt={afterTitle} fill className="object-cover" />
         <span className="absolute bottom-3 right-3 bg-emerald-500/90 text-white font-bold text-[10px] sm:text-xs px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider backdrop-blur-md">
           {afterTitle}
         </span>
@@ -76,15 +99,13 @@ export function BeforeAfterSlider({
       {/* Before Image (Clipped Overlay Layer) */}
       <div
         className="absolute inset-0 w-full h-full overflow-hidden"
-        style={{ width: `${sliderPosition}%` }}
+        style={{
+          width: `${pos}%`,
+          transition: dragging ? "none" : "width 0.18s ease-out",
+        }}
       >
         <div className="relative w-full h-full min-w-[300px] sm:min-w-[600px]">
-          <Image
-            src={beforeImg}
-            alt={beforeTitle}
-            fill
-            className="object-cover"
-          />
+          <SmartImage src={beforeImg} alt={beforeTitle} fill className="object-cover" />
         </div>
         <span className="absolute bottom-3 left-3 bg-red-500/90 text-white font-bold text-[10px] sm:text-xs px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider backdrop-blur-md">
           {beforeTitle}
@@ -93,10 +114,22 @@ export function BeforeAfterSlider({
 
       {/* Slider Splitter Handle */}
       <div
-        className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] pointer-events-none"
-        style={{ left: `calc(${sliderPosition}% - 2px)` }}
+        className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+        style={{
+          left: `calc(${pos}% - 2px)`,
+          transition: dragging ? "none" : "left 0.18s ease-out",
+        }}
       >
-        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white text-slate-900 font-bold text-xs flex items-center justify-center shadow-2xl border-2 border-cyan-500">
+        <div
+          role="slider"
+          tabIndex={0}
+          aria-label="Reveal the before and after comparison"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(pos)}
+          onKeyDown={onKeyDown}
+          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white text-slate-900 font-bold text-xs flex items-center justify-center shadow-2xl border-2 border-cyan-500 cursor-ew-resize outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+        >
           ↔
         </div>
       </div>

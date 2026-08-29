@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { SmartImage } from "@/components/SmartImage";
+import { motion, useReducedMotion } from "motion/react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { PROJECTS_DATA } from "@/lib/site/projects";
 import { MapPin, ArrowRight, ShieldCheck } from "lucide-react";
 
 export function FeaturedProjectsSection() {
   const [activeTab, setActiveTab] = useState<"featured" | "industrial" | "recent">("featured");
+  const reduce = useReducedMotion();
 
   const displayedProjects = PROJECTS_DATA.filter((p) => {
     if (activeTab === "featured") return p.featured;
@@ -78,10 +80,14 @@ export function FeaturedProjectsSection() {
 
             return (
               <AnimatedSection key={project.id} delay={idx * 100}>
-                <div className="bg-slate-800/90 rounded-2xl overflow-hidden border border-slate-700 hover:border-cyan-500/50 shadow-xl transition-all duration-300 flex flex-col h-full group">
+                <motion.div
+                  whileHover={reduce ? undefined : { y: -6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                  className="bg-slate-800/90 rounded-2xl overflow-hidden border border-slate-700 hover:border-cyan-500/50 shadow-xl transition-[border-color,box-shadow] duration-300 flex flex-col h-full group"
+                >
                   <div className="relative h-52 w-full overflow-hidden bg-slate-900">
-                    <Image
-                      src={images[0]?.url || "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"}
+                    <SmartImage
+                      src={images[0]?.url}
                       alt={title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
@@ -125,7 +131,7 @@ export function FeaturedProjectsSection() {
                       </Link>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </AnimatedSection>
             );
           })}

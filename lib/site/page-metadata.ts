@@ -15,13 +15,11 @@ export function pageMetadata(opts: {
     title: `${opts.title} | ${SITE_NAME}`,
     description: opts.description,
     keywords: opts.keywords,
+    // No `languages` here: only the blog has a real Tamil version (at /ta/blog/*,
+    // which sets its own correct hreflang). A `?lang=ta` alternate pointed Google
+    // at the English page and produced "hreflang – no return tag" errors.
     alternates: {
       canonical: url,
-      languages: {
-        en: url,
-        ta: `${url}?lang=ta`,
-        "x-default": url,
-      },
     },
     openGraph: {
       type: "website",

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import { SmartImage } from "@/components/SmartImage";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
@@ -112,7 +112,7 @@ export function BlogPostDetailClient({
           </div>
 
           <div className="my-8 relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200">
-            <Image
+            <SmartImage
               src={post.image}
               alt={displayTitle}
               fill

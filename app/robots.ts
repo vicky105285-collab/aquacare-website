@@ -6,7 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/private/',
+      // Admin UI and API routes have no search value and shouldn't be crawled.
+      disallow: ['/admin/', '/api/'],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   }

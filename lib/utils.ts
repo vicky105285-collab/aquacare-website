@@ -1,3 +1,11 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+/** Merge Tailwind class lists safely (used by Motion Primitives / Animate UI components). */
+export function cn(...inputs: ClassValue[]): string {
+  return twMerge(clsx(inputs));
+}
+
 export function slugify(text: string): string {
   return text
     .toString()

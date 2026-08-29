@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const url = `${SITE_URL}/ta/blog/${taSlug}`;
   const enUrl = `${SITE_URL}/blog/${enSlug}`;
+  const ogImage = post.image || `${SITE_URL}/images/og-image.png`;
 
   return {
     title: `${taTitle} | ${COMPANY_NAME}`,
@@ -47,13 +48,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: post.updatedAt,
       authors: [post.author],
       siteName: COMPANY_NAME,
-      images: [{ url: post.image, alt: taTitle }],
+      images: [{ url: ogImage, alt: taTitle }],
     },
     twitter: {
       card: "summary_large_image",
       title: taTitle,
       description: taDesc,
-      images: [post.image],
+      images: [ogImage],
     },
   };
 }
@@ -73,7 +74,7 @@ export default async function TamilBlogPostDetailPage({ params }: Props) {
     "@type": "BlogPosting",
     "headline": taTitle,
     "description": taDesc,
-    "image": post.image,
+    "image": post.image || `${SITE_URL}/images/og-image.png`,
     "inLanguage": "ta-IN",
     "datePublished": post.publishedAt,
     "dateModified": post.updatedAt,

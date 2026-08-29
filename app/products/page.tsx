@@ -21,7 +21,7 @@ export default async function ProductsPage() {
     <article>
       <PageHero
         title="Products"
-        subtitle="Curated models chosen for Tamil Nadu water conditions — with genuine spares and professional commissioning."
+        subtitle="We supply and service domestic RO machines, commercial RO purifiers and industrial RO plants across Karur & Tamil Nadu — curated models with genuine spares and professional commissioning."
         tamilLine="தரமான RO மற்றும் நீர் அமைப்புகள்."
       />
       <ProductCatalog items={products} categories={PRODUCT_CATEGORIES} enquiryWhatsappHref={WHATSAPP} />

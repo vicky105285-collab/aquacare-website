@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 import { ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = pageMetadata({
-  title: `Contact Us | ${COMPANY_NAME} Karur & Tamil Nadu`,
+  title: "Contact Us — Karur & Tamil Nadu",
   description: `Contact ${COMPANY_NAME} (Formerly ${FORMER_COMPANY_NAME}). Phone/WhatsApp ${PHONE_DISPLAY}. Showroom address: ${ADDRESS_FULL}. Email ${EMAIL}. Doorstep water & solar service across Tamil Nadu.`,
   path: "/contact",
   keywords: [

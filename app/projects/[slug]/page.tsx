@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDynamicProjectBySlug, PROJECTS_DATA } from "@/lib/site/projects";
 import { ProjectDetailPageView } from "@/components/ProjectDetailPageView";
-import { COMPANY_NAME, FORMER_COMPANY_NAME, SITE_URL, ADDRESS_FULL, PHONE_DISPLAY } from "@/lib/site/constants";
+import { COMPANY_NAME, FORMER_COMPANY_NAME, SITE_URL } from "@/lib/site/constants";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     `${project.industryType || project.industry} water plant ${project.district}`,
   ];
 
-  const primaryImage = project.projectImages?.[0]?.url || project.gallery?.[0]?.url || `${SITE_URL}/og-image.jpg`;
+  const primaryImage = project.projectImages?.[0]?.url || project.gallery?.[0]?.url || `${SITE_URL}/images/og-image.png`;
 
   return {
     title,
@@ -80,26 +80,11 @@ export default async function ProjectDetailPage({ params }: Props) {
     notFound();
   }
 
-  // JSON-LD Case Study & LocalBusiness Schema
+  // JSON-LD case study. The organisation (#organization) is already fully defined
+  // by the root layout; nodes below just reference it by @id.
   const caseStudySchema = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "LocalBusiness",
-        "@id": `${SITE_URL}/#organization`,
-        "name": COMPANY_NAME,
-        "alternateName": FORMER_COMPANY_NAME,
-        "url": SITE_URL,
-        "telephone": PHONE_DISPLAY,
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": ADDRESS_FULL,
-          "addressLocality": "Karur",
-          "addressRegion": "Tamil Nadu",
-          "postalCode": "639002",
-          "addressCountry": "IN",
-        },
-      },
       {
         "@type": "Service",
         "@id": `${SITE_URL}/projects/${project.slug}#service`,

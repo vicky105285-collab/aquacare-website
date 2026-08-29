@@ -107,10 +107,10 @@ const orgJsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${SITE_NAME} | Water Treatment & Solar Solutions Tamil Nadu`,
-    template: `%s | ${SITE_NAME}`,
-  },
+  // Plain string (no title.template): page-level titles already include the brand
+  // exactly once (via `pageMetadata()` or their own string). A template would
+  // append a 2nd/3rd brand — see lib/site/page-metadata.ts and app/services/[slug].
+  title: `${SITE_NAME} | Water Treatment & Solar Solutions Tamil Nadu`,
   description: `${SITE_TAGLINE} ${BUSINESS_HISTORY_NOTE}`,
   keywords: [
     "Yuvanthika Aquacare & Solar Care Systems",
@@ -169,7 +169,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>

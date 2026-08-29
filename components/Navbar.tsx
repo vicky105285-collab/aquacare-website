@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { Menu, MessageCircle, Phone, X } from "lucide-react";
 import { BRAND_LOGO_LINE_1, BRAND_LOGO_LINE_2, CALL, WHATSAPP } from "@/lib/site/constants";
 import { MAIN_NAV } from "@/lib/site/navigation";
@@ -16,6 +17,7 @@ function navLinkActive(pathname: string, href: string, match: "exact" | "prefix"
 
 export function Navbar() {
   const pathname = usePathname();
+  const reduce = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isHome = pathname === "/";
@@ -72,15 +74,20 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     prefetch
-                    className={`relative px-3 py-2 rounded-lg text-sm font-medium tracking-wide transition-colors ${navMuted} ${
+                    className={`group relative px-3 py-2 rounded-lg text-sm font-medium tracking-wide transition-colors ${navMuted} ${
                       active ? "text-blue-600" : ""
                     }`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
                     {active ? (
-                      <span className="absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600" />
-                    ) : null}
+                      <motion.span
+                        layoutId={reduce ? undefined : "navbar-active-underline"}
+                        className="absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600"
+                      />
+                    ) : (
+                      <span className="absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-current opacity-0 scale-x-0 origin-left transition-all duration-300 group-hover:opacity-40 group-hover:scale-x-100" />
+                    )}
                   </Link>
                 );
               })}

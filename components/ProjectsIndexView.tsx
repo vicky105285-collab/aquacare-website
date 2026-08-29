@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { SmartImage } from "@/components/SmartImage";
 import { PageHero } from "@/components/PageHero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CTASection } from "@/components/CTASection";
@@ -197,8 +197,8 @@ export function ProjectsIndexView({ projects }: { projects: ProjectItem[] }) {
                 >
                   {/* Image Display */}
                   <div className="relative h-60 w-full bg-slate-100 overflow-hidden">
-                    <Image
-                      src={pImages[0]?.url || "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"}
+                    <SmartImage
+                      src={pImages[0]?.url}
                       alt={pTitle}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

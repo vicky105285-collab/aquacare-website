@@ -24,7 +24,8 @@ export async function PUT(
         data: {
           ...(title && { title, slug: slugify(title) }),
           ...(content && { content }),
-          ...(featuredImage && { featuredImage }),
+          // `!== undefined` so the owner can also CLEAR the featured image ("").
+          ...(featuredImage !== undefined && { featuredImage }),
           ...(metaTitle && { metaTitle }),
           ...(metaDescription && { metaDescription }),
           ...(keywords && { keywords: Array.isArray(keywords) ? keywords : keywords.split(",") }),

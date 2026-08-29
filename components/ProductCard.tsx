@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { CheckCircle, ArrowRight, Phone, MessageCircle } from "lucide-react";
 import type { ProductItem } from "@/lib/site/types";
 import { slugify } from "@/lib/utils";
@@ -23,6 +24,7 @@ export function ProductCard({
   onToggleCompare,
   isCompared,
 }: ProductCardProps) {
+  const reduce = useReducedMotion();
   const [imgSrc, setImgSrc] = useState(product.img);
   const productSlug = product.slug || slugify(product.name);
   const href = `/products/item/${productSlug}`;
@@ -33,7 +35,11 @@ export function ProductCard({
     : `${WHATSAPP}?text=${encodedMsg}`;
 
   return (
-    <article className="group bg-white rounded-2xl border border-slate-100 hover:border-cyan-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] overflow-hidden transition-all duration-300 flex flex-col h-full relative">
+    <motion.article
+      whileHover={reduce ? undefined : { y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      className="group bg-white rounded-2xl border border-slate-100 hover:border-cyan-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] overflow-hidden transition-[box-shadow,border-color] duration-300 flex flex-col h-full relative"
+    >
       {/* Image Container */}
       <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50/60 aspect-[4/3] block flex-shrink-0">
         <Link href={href} className="absolute inset-0 z-0">
@@ -73,6 +79,9 @@ export function ProductCard({
         )}
 
         <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+        {/* One-pass light sheen on hover */}
+        <span className="card-shine pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />
       </div>
 
       {/* Card Body */}
@@ -86,8 +95,8 @@ export function ProductCard({
 
         {/* Spec Pills */}
         <div className="flex flex-wrap gap-1.5 mb-4">
-          {[product.stages, product.tank, product.liters].filter(Boolean).map((spec) => (
-            <span key={spec} className="px-2.5 py-0.5 bg-blue-50/80 text-blue-700 text-[11px] font-semibold rounded-full border border-blue-100/80">
+          {[product.stages, product.tank, product.liters].filter(Boolean).map((spec, i) => (
+            <span key={`${spec}-${i}`} className="px-2.5 py-0.5 bg-blue-50/80 text-blue-700 text-[11px] font-semibold rounded-full border border-blue-100/80">
               {spec}
             </span>
           ))}
@@ -118,23 +127,25 @@ export function ProductCard({
           </div>
 
           <div className="grid grid-cols-2 gap-2 pt-1">
-            <a
+            <motion.a
               href={CALL}
-              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+              whileTap={reduce ? undefined : { scale: 0.96 }}
+              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
             >
               <Phone className="w-3.5 h-3.5 text-cyan-400" /> Call Now
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-green-600 hover:bg-green-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+              whileTap={reduce ? undefined : { scale: 0.96 }}
+              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-green-600 hover:bg-green-500 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
             >
               <MessageCircle className="w-3.5 h-3.5" /> WhatsApp
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphify output (knowledge-graph build artifacts)
+/graphify-out/
+
+# local Claude Code tooling
+/.claude/
+.next-dev.log
+.next-dev.err.log

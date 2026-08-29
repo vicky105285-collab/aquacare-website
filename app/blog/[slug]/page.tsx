@@ -25,6 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const url = `${SITE_URL}/blog/${enSlug}`;
   const taUrl = `${SITE_URL}/ta/blog/${taSlug}`;
+  // Genuine featured image if the owner set one in the CMS; otherwise the brand
+  // OG image — never a stock photo.
+  const ogImage = post.image || `${SITE_URL}/images/og-image.png`;
 
   return {
     title: `${enTitle} | ${COMPANY_NAME}`,
@@ -47,13 +50,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: post.updatedAt,
       authors: [post.author],
       siteName: COMPANY_NAME,
-      images: [{ url: post.image, alt: enTitle }],
+      images: [{ url: ogImage, alt: enTitle }],
     },
     twitter: {
       card: "summary_large_image",
       title: enTitle,
       description: enDesc,
-      images: [post.image],
+      images: [ogImage],
     },
   };
 }
@@ -71,7 +74,7 @@ export default async function BlogPostDetailPage({ params }: Props) {
     "@type": "BlogPosting",
     "headline": post.title_en || post.title,
     "description": post.excerpt_en || post.description,
-    "image": post.image,
+    "image": post.image || `${SITE_URL}/images/og-image.png`,
     "inLanguage": "en-IN",
     "datePublished": post.publishedAt,
     "dateModified": post.updatedAt,

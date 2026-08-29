@@ -10,6 +10,7 @@ import { TrustBadgesSection } from "@/components/TrustBadgesSection";
 import { FreeWaterTestingSection } from "@/components/FreeWaterTestingSection";
 import { BeforeAfterGallerySection } from "@/components/BeforeAfterGallerySection";
 import { IndustriesWeServeSection } from "@/components/IndustriesWeServeSection";
+import { WaterJourneySection } from "@/components/WaterJourneySection";
 import { GoogleReviewCTA } from "@/components/GoogleReviewCTA";
 import {
   AMC_PLANS,
@@ -43,6 +44,7 @@ export function HomePageClient() {
       <BrandsWeService />
       <TrustBadgesSection />
       <Services items={SERVICES} />
+      <WaterJourneySection />
       <Products items={PRODUCTS} enquiryWhatsappHref={WHATSAPP} />
       <FreeWaterTestingSection />
       <BeforeAfterGallerySection />

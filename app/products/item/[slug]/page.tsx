@@ -83,17 +83,10 @@ export default async function ProductPage({ params }: Props) {
     "brand": {
       "@type": "Brand",
       "name": product.brand
-    },
-    "offers": {
-      "@type": "Offer",
-      "url": canonicalUrl,
-      "itemCondition": "https://schema.org/NewCondition",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": COMPANY_NAME
-      }
     }
+    // No `offers`: the catalogue deliberately publishes no prices ("Price: Contact
+    // Us"). A price-less Offer triggers "Missing field price/priceCurrency" errors
+    // in Search Console on every product page. A price-less Product is still valid.
   };
 
   const jsonLdBreadcrumb = {

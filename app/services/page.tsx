@@ -8,7 +8,7 @@ import { COMPANY_NAME, FORMER_COMPANY_NAME } from "@/lib/site/constants";
 export const revalidate = 0;
 
 export const metadata: Metadata = pageMetadata({
-  title: `Residential, Commercial & Industrial Services | ${COMPANY_NAME}`,
+  title: "Residential, Commercial & Industrial Water & Solar Services",
   description:
     `Comprehensive RO purifiers, water softeners, solar heaters, commercial & industrial RO plants, ETP, STP, DM plants in Karur & Tamil Nadu by ${COMPANY_NAME} (${FORMER_COMPANY_NAME}).`,
   path: "/services",
