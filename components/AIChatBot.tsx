@@ -233,7 +233,7 @@ export function AIChatBot() {
           <button
             onClick={() => setIsOpen(true)}
             className="group relative flex items-center gap-2.5 px-4 py-3 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white rounded-full shadow-[0_8px_30px_rgba(6,182,212,0.4)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20"
-            aria-label="Open AI Assistant Chat"
+            aria-label="AI Assistant Online — open chat"
           >
             <div className="relative">
               <Bot className="w-6 h-6 text-white" />
