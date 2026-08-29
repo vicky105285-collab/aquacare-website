@@ -30,34 +30,40 @@ import { BLOG_POSTS } from "../lib/site/blog";
 const prisma = new PrismaClient();
 
 async function seedBlogs() {
-  let ok = 0;
+  // INSERT-ONLY: never updates an existing row, so it is safe to run on every
+  // deploy and will never overwrite an article edited later in the Admin panel.
+  let created = 0;
+  let skipped = 0;
   for (const post of BLOG_POSTS) {
     try {
-      const data = {
-        title: post.title,
-        title_ta: post.title_ta ?? post.titleTa ?? null,
-        featuredImage: post.image || null,
-        content: post.content ?? "",
-        content_ta: post.content_ta ?? post.contentTa ?? null,
-        excerpt_ta: post.excerpt_ta ?? post.descriptionTa ?? null,
-        metaTitle: post.title,
-        metaDescription: post.description ?? null,
-        keywords: Array.isArray(post.keywords) ? post.keywords : [],
-        author: post.author || "Yuvanthika Water Expert",
-        publishDate: post.publishedAt ? new Date(post.publishedAt) : new Date(),
-        isPublished: true,
-      };
-      await prisma.blog.upsert({
-        where: { slug: post.slug },
-        update: data,
-        create: { slug: post.slug, ...data },
+      const existing = await prisma.blog.findUnique({ where: { slug: post.slug }, select: { id: true } });
+      if (existing) {
+        skipped++;
+        continue;
+      }
+      await prisma.blog.create({
+        data: {
+          slug: post.slug,
+          title: post.title,
+          title_ta: post.title_ta ?? post.titleTa ?? null,
+          featuredImage: post.image || null,
+          content: post.content ?? "",
+          content_ta: post.content_ta ?? post.contentTa ?? null,
+          excerpt_ta: post.excerpt_ta ?? post.descriptionTa ?? null,
+          metaTitle: post.title,
+          metaDescription: post.description ?? null,
+          keywords: Array.isArray(post.keywords) ? post.keywords : [],
+          author: post.author || "Yuvanthika Water Expert",
+          publishDate: post.publishedAt ? new Date(post.publishedAt) : new Date(),
+          isPublished: true,
+        },
       });
-      ok++;
+      created++;
     } catch (e) {
       console.warn(`  ! blog "${post.slug}" skipped:`, (e as Error).message);
     }
   }
-  console.log(`Blogs upserted: ${ok}/${BLOG_POSTS.length}`);
+  console.log(`Blogs: ${created} created, ${skipped} already present (${BLOG_POSTS.length} total)`);
 }
 
 async function seedBootstrapAdmin() {
@@ -67,13 +73,16 @@ async function seedBootstrapAdmin() {
     console.log("Admin bootstrap: skipped (ADMIN_BOOTSTRAP_EMAIL / ADMIN_BOOTSTRAP_PASSWORD not set)");
     return;
   }
+  const existing = await prisma.user.findUnique({ where: { email }, select: { id: true } });
+  if (existing) {
+    console.log(`Admin bootstrap: ${email} already exists — left unchanged.`);
+    return;
+  }
   const passwordHash = await bcrypt.hash(password, 10);
-  await prisma.user.upsert({
-    where: { email },
-    update: { password: passwordHash, role: "SUPER_ADMIN" },
-    create: { email, name: "Yuvanthika Super Admin", password: passwordHash, role: "SUPER_ADMIN" },
+  await prisma.user.create({
+    data: { email, name: "Yuvanthika Super Admin", password: passwordHash, role: "SUPER_ADMIN" },
   });
-  console.log(`Admin bootstrap: user ${email} is ready (SUPER_ADMIN).`);
+  console.log(`Admin bootstrap: created ${email} (SUPER_ADMIN).`);
 }
 
 async function main() {

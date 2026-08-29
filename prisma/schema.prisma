@@ -5,8 +5,11 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  // Pooled connection for the serverless runtime (PgBouncer via Neon).
+  url       = env("DATABASE_URL")
+  // Direct connection for migrations / seeding (Prisma requires a non-pooled URL).
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 enum Role {
