@@ -58,11 +58,20 @@ export async function POST(request: Request) {
     }
 
     // 3. Default Master Password Fallback — dev / un-provisioned only.
-    // Automatically disabled once production auth is configured, i.e. a real
-    // ADMIN_JWT_SECRET is set AND a database is connected (where real admin
-    // users live). Until then (current behaviour) it stays available so the
-    // panel is never locked out.
-    const productionAuthConfigured = Boolean(process.env.ADMIN_JWT_SECRET) && Boolean(prisma);
+    // Disabled automatically once EITHER a real admin account exists in the
+    // database OR ADMIN_JWT_SECRET is configured. Until one of those is true
+    // (a fresh, un-provisioned install) it stays available so the panel is
+    // never locked out. There is no lock-out risk: it only ever mattered when
+    // no real admin existed.
+    let realAdminExists = false;
+    if (prisma) {
+      try {
+        realAdminExists = (await prisma.user.count()) > 0;
+      } catch (e) {
+        console.warn("admin count check failed:", e);
+      }
+    }
+    const productionAuthConfigured = realAdminExists || Boolean(process.env.ADMIN_JWT_SECRET);
     if (!sessionUser && !isMasterPasswordDisabled() && !productionAuthConfigured) {
       const isMasterEmail = MASTER_ADMIN_EMAILS.includes(cleanEmail) || cleanEmail.includes("admin");
       const isMasterPassword =
