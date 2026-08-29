@@ -181,7 +181,8 @@ export default function RootLayout({
           Skip to main content
         </a>
         <AppShell>{children}</AppShell>
-        <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
+        {/* Only load GA on the production deployment — keeps Preview/dev traffic out of the prod GA4 property. */}
+        {process.env.VERCEL_ENV === "production" && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
       </body>
     </html>
   );
