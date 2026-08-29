@@ -57,8 +57,13 @@ export async function POST(request: Request) {
       }
     }
 
-    // 3. Check Default Master Password Fallback (Only if master password is NOT disabled)
-    if (!sessionUser && !isMasterPasswordDisabled()) {
+    // 3. Default Master Password Fallback — dev / un-provisioned only.
+    // Automatically disabled once production auth is configured, i.e. a real
+    // ADMIN_JWT_SECRET is set AND a database is connected (where real admin
+    // users live). Until then (current behaviour) it stays available so the
+    // panel is never locked out.
+    const productionAuthConfigured = Boolean(process.env.ADMIN_JWT_SECRET) && Boolean(prisma);
+    if (!sessionUser && !isMasterPasswordDisabled() && !productionAuthConfigured) {
       const isMasterEmail = MASTER_ADMIN_EMAILS.includes(cleanEmail) || cleanEmail.includes("admin");
       const isMasterPassword =
         cleanPassword === "admin123" ||
@@ -77,9 +82,9 @@ export async function POST(request: Request) {
     }
 
     if (!sessionUser) {
-      if (isMasterPasswordDisabled()) {
+      if (isMasterPasswordDisabled() || productionAuthConfigured) {
         return NextResponse.json(
-          { error: "Invalid email or password. Default master passwords (admin123) have been disabled for security." },
+          { error: "Invalid email or password. Default master passwords are disabled on this environment." },
           { status: 401 }
         );
       }
