@@ -135,8 +135,20 @@ export function Footer({ copyrightYear }: FooterProps) {
           </div>
         </div>
 
+        {/* Help & Legal */}
+        <nav
+          aria-label="Help and legal"
+          className="mt-12 pt-8 border-t border-slate-800 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs"
+        >
+          <Link href="/faq" className="text-slate-300 hover:text-cyan-400">FAQ</Link>
+          <Link href="/privacy-policy" className="text-slate-300 hover:text-cyan-400">Privacy Policy</Link>
+          <Link href="/terms-and-conditions" className="text-slate-300 hover:text-cyan-400">Terms &amp; Conditions</Link>
+          <Link href="/cookie-policy" className="text-slate-300 hover:text-cyan-400">Cookie Policy</Link>
+          <Link href="/disclaimer" className="text-slate-300 hover:text-cyan-400">Disclaimer</Link>
+        </nav>
+
         {/* Ownership & Copyright Bar */}
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="mt-6 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p className="text-center md:text-left font-medium">
             © {copyrightYear} {COMPANY_NAME}. All Rights Reserved.
           </p>

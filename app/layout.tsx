@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/AppShell";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { ConsentAnalytics } from "@/components/ConsentAnalytics";
+import { CookieConsent } from "@/components/CookieConsent";
 import {
   ADDRESS_LOCALITY,
   ADDRESS_POSTAL_CODE,
@@ -181,8 +182,10 @@ export default function RootLayout({
           Skip to main content
         </a>
         <AppShell>{children}</AppShell>
-        {/* Only load GA on the production deployment — keeps Preview/dev traffic out of the prod GA4 property. */}
-        {process.env.VERCEL_ENV === "production" && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
+        <CookieConsent />
+        {/* GA loads only on the production deployment AND only after the visitor
+            accepts analytics cookies (ConsentAnalytics handles the consent gate). */}
+        {process.env.VERCEL_ENV === "production" && <ConsentAnalytics gaId={GA_MEASUREMENT_ID} />}
       </body>
     </html>
   );

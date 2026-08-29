@@ -30,15 +30,35 @@ import { BLOG_POSTS } from "../lib/site/blog";
 const prisma = new PrismaClient();
 
 async function seedBlogs() {
-  // INSERT-ONLY: never updates an existing row, so it is safe to run on every
-  // deploy and will never overwrite an article edited later in the Admin panel.
+  // INSERT for new articles; for articles already in the CMS, only BACKFILL the
+  // metadata columns that are still null (category / readTime / authorRole).
+  // Never touches title / content / image / keywords on an existing row, so a
+  // later Admin edit is safe.
   let created = 0;
-  let skipped = 0;
+  let backfilled = 0;
+  let untouched = 0;
   for (const post of BLOG_POSTS) {
     try {
-      const existing = await prisma.blog.findUnique({ where: { slug: post.slug }, select: { id: true } });
+      const meta = {
+        category: post.category ?? null,
+        readTime: post.readTime ?? null,
+        authorRole: post.authorRole ?? null,
+      };
+      const existing = await prisma.blog.findUnique({
+        where: { slug: post.slug },
+        select: { id: true, category: true, readTime: true, authorRole: true },
+      });
       if (existing) {
-        skipped++;
+        const patch: Record<string, string> = {};
+        if (!existing.category && meta.category) patch.category = meta.category;
+        if (!existing.readTime && meta.readTime) patch.readTime = meta.readTime;
+        if (!existing.authorRole && meta.authorRole) patch.authorRole = meta.authorRole;
+        if (Object.keys(patch).length) {
+          await prisma.blog.update({ where: { id: existing.id }, data: patch });
+          backfilled++;
+        } else {
+          untouched++;
+        }
         continue;
       }
       await prisma.blog.create({
@@ -54,6 +74,7 @@ async function seedBlogs() {
           metaDescription: post.description ?? null,
           keywords: Array.isArray(post.keywords) ? post.keywords : [],
           author: post.author || "Yuvanthika Water Expert",
+          ...meta,
           publishDate: post.publishedAt ? new Date(post.publishedAt) : new Date(),
           isPublished: true,
         },
@@ -63,7 +84,9 @@ async function seedBlogs() {
       console.warn(`  ! blog "${post.slug}" skipped:`, (e as Error).message);
     }
   }
-  console.log(`Blogs: ${created} created, ${skipped} already present (${BLOG_POSTS.length} total)`);
+  console.log(
+    `Blogs: ${created} created, ${backfilled} metadata-backfilled, ${untouched} unchanged (${BLOG_POSTS.length} total)`
+  );
 }
 
 async function seedBootstrapAdmin() {

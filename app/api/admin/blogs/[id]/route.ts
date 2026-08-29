@@ -18,7 +18,8 @@ export async function PUT(
     const body = await request.json();
     const {
       slug, title, title_ta, excerpt_ta, content, content_ta,
-      featuredImage, metaTitle, metaDescription, keywords, author, isPublished,
+      featuredImage, metaTitle, metaDescription, keywords, author,
+      authorRole, category, readTime, isPublished,
     } = body;
 
     // The edit form also edits articles that only exist as static content (their
@@ -46,6 +47,9 @@ export async function PUT(
         ...(metaDescription !== undefined && { metaDescription }),
         ...(kw !== undefined && { keywords: kw }),
         ...(author !== undefined && { author }),
+        ...(authorRole !== undefined && { authorRole: authorRole || null }),
+        ...(category !== undefined && { category: category || null }),
+        ...(readTime !== undefined && { readTime: readTime || null }),
         ...(typeof isPublished === "boolean" && { isPublished }),
       };
       const post = await prisma.blog.upsert({

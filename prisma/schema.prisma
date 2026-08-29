@@ -56,6 +56,9 @@ model Blog {
   metaDescription String?
   keywords        String[]
   author          String   @default("Yuvanthika Water Expert")
+  authorRole      String?
+  category        String?
+  readTime        String?
   publishDate     DateTime @default(now())
   isPublished     Boolean  @default(true)
   createdAt       DateTime @default(now())

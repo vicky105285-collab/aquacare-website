@@ -18,6 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/contact",
     "/projects",
+    "/faq",
+    "/privacy-policy",
+    "/terms-and-conditions",
+    "/cookie-policy",
+    "/disclaimer",
     // Location-specific routes
     "/services/ro-service-karur",
     "/services/water-softener-karur",
@@ -53,10 +58,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const today = new Date().toISOString().split("T")[0];
 
-  return allPaths.map((route) => ({
-    url: `${SITE_URL}${route}`,
-    lastModified: today,
-    changeFrequency: route === "" ? "daily" : "weekly",
-    priority: route === "" ? 1.0 : route.startsWith("/services") || route.startsWith("/products") ? 0.9 : 0.8,
-  }));
+  const LEGAL = new Set(["/privacy-policy", "/terms-and-conditions", "/cookie-policy", "/disclaimer"]);
+
+  return allPaths.map((route) => {
+    let priority = 0.8;
+    if (route === "") priority = 1.0;
+    else if (route.startsWith("/services") || route.startsWith("/products")) priority = 0.9;
+    else if (LEGAL.has(route)) priority = 0.3;
+    else if (route === "/faq") priority = 0.7;
+
+    return {
+      url: `${SITE_URL}${route}`,
+      lastModified: today,
+      changeFrequency: (route === "" ? "daily" : LEGAL.has(route) ? "yearly" : "weekly") as
+        | "daily"
+        | "weekly"
+        | "yearly",
+      priority,
+    };
+  });
 }

@@ -37,6 +37,9 @@ export async function GET() {
       metaDescription: post.description,
       keywords: post.keywords,
       author: post.author,
+      authorRole: post.authorRole ?? "",
+      category: post.category ?? "",
+      readTime: post.readTime ?? "",
       publishDate: post.publishedAt,
       isPublished: true,
     }))
@@ -51,7 +54,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { title, title_ta, excerpt_ta, content, content_ta, featuredImage, metaTitle, metaDescription, keywords, author, isPublished } = body;
+    const { title, title_ta, excerpt_ta, content, content_ta, featuredImage, metaTitle, metaDescription, keywords, author, authorRole, category, readTime, isPublished } = body;
 
     if (!title || !content) {
       return NextResponse.json({ error: "Title and content are required" }, { status: 400 });
@@ -75,6 +78,9 @@ export async function POST(request: Request) {
           metaDescription: metaDescription || content.slice(0, 160),
           keywords: Array.isArray(keywords) ? keywords : (keywords || "").split(",").map((k: string) => k.trim()),
           author: author || session.name,
+          authorRole: authorRole || null,
+          category: category || null,
+          readTime: readTime || null,
           isPublished: isPublished !== false,
         },
       });

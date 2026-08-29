@@ -178,6 +178,13 @@ export function ServicePageView({ detail }: ServicePageViewProps) {
             Frequently Asked Questions
           </h2>
           <FaqAccordion faqs={detail.faqs} />
+          <p className="mt-8 text-center text-sm text-slate-500">
+            More questions about RO, water softeners, hard water and solar?{" "}
+            <Link href="/faq" className="font-semibold text-blue-700 hover:underline">
+              See the full FAQ
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

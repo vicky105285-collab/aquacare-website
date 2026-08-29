@@ -17,6 +17,9 @@ interface BlogPost {
   content?: string;
   content_ta?: string;
   excerpt_ta?: string;
+  authorRole?: string;
+  category?: string;
+  readTime?: string;
   keywords?: string[] | string;
 }
 
@@ -27,6 +30,9 @@ const EMPTY = {
   content: "",
   content_ta: "",
   author: "Yuvanthika Water Expert",
+  authorRole: "Water Treatment Specialist",
+  category: "Knowledge Hub",
+  readTime: "5 min read",
   keywords: "RO Purifier Karur, Water Softener Tamil Nadu",
   featuredImage: "",
 };
@@ -44,6 +50,9 @@ export default function AdminBlogPage() {
   const [content, setContent] = useState(EMPTY.content);
   const [content_ta, setContentTa] = useState(EMPTY.content_ta);
   const [author, setAuthor] = useState(EMPTY.author);
+  const [authorRole, setAuthorRole] = useState(EMPTY.authorRole);
+  const [category, setCategory] = useState(EMPTY.category);
+  const [readTime, setReadTime] = useState(EMPTY.readTime);
   const [keywords, setKeywords] = useState(EMPTY.keywords);
   const [featuredImage, setFeaturedImage] = useState(EMPTY.featuredImage);
   const [uploading, setUploading] = useState(false);
@@ -56,6 +65,9 @@ export default function AdminBlogPage() {
     setContent(EMPTY.content);
     setContentTa(EMPTY.content_ta);
     setAuthor(EMPTY.author);
+    setAuthorRole(EMPTY.authorRole);
+    setCategory(EMPTY.category);
+    setReadTime(EMPTY.readTime);
     setKeywords(EMPTY.keywords);
     setFeaturedImage(EMPTY.featuredImage);
     setEditing(null);
@@ -74,6 +86,9 @@ export default function AdminBlogPage() {
     setContent(post.content || "");
     setContentTa(post.content_ta || "");
     setAuthor(post.author || EMPTY.author);
+    setAuthorRole(post.authorRole || EMPTY.authorRole);
+    setCategory(post.category || EMPTY.category);
+    setReadTime(post.readTime || EMPTY.readTime);
     setKeywords(
       Array.isArray(post.keywords) ? post.keywords.join(", ") : post.keywords || EMPTY.keywords
     );
@@ -140,6 +155,9 @@ export default function AdminBlogPage() {
       content,
       content_ta,
       author,
+      authorRole,
+      category,
+      readTime,
       keywords: keywords.split(","),
       featuredImage,
     };
@@ -304,6 +322,39 @@ export default function AdminBlogPage() {
                   type="text"
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Author Role</label>
+                <input
+                  type="text"
+                  value={authorRole}
+                  onChange={(e) => setAuthorRole(e.target.value)}
+                  placeholder="e.g. Water Treatment Specialist"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Category</label>
+                <input
+                  type="text"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  placeholder="e.g. Residential RO"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Read Time</label>
+                <input
+                  type="text"
+                  value={readTime}
+                  onChange={(e) => setReadTime(e.target.value)}
+                  placeholder="e.g. 6 min read"
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white text-sm"
                 />
               </div>
