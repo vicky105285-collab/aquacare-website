@@ -17,6 +17,7 @@ interface BlogPost {
   content?: string;
   content_ta?: string;
   excerpt_ta?: string;
+  keywords?: string[] | string;
 }
 
 const EMPTY = {
@@ -73,7 +74,9 @@ export default function AdminBlogPage() {
     setContent(post.content || "");
     setContentTa(post.content_ta || "");
     setAuthor(post.author || EMPTY.author);
-    setKeywords(EMPTY.keywords);
+    setKeywords(
+      Array.isArray(post.keywords) ? post.keywords.join(", ") : post.keywords || EMPTY.keywords
+    );
     setFeaturedImage(post.featuredImage || "");
     setIsFormOpen(true);
   };
