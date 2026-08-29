@@ -44,9 +44,9 @@ export function WhyChooseUs({ points, bookingSteps, callHref, whatsappHref }: Wh
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0">
                     <item.icon className="w-5 h-5 text-white" aria-hidden />
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-700 text-sm">{item.title}</p>
-                    <p className="text-slate-400 text-xs mt-0.5">{item.desc}</p>
+                  <div className="min-w-0">
+                    <p className="font-bold text-slate-700 text-sm break-words">{item.title}</p>
+                    <p className="text-slate-400 text-xs mt-0.5 break-words">{item.desc}</p>
                   </div>
                 </div>
               ))}

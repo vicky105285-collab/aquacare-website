@@ -86,7 +86,7 @@ export function BeforeAfterSlider({
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
-      className={`relative w-full overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 select-none cursor-ew-resize aspect-[4/3] sm:aspect-[16/9] ${className}`}
+      className={`relative w-full overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 select-none cursor-ew-resize touch-pan-y aspect-[4/3] sm:aspect-[16/9] ${className}`}
     >
       {/* After Image (Background / Base Layer) */}
       <div className="absolute inset-0 w-full h-full">

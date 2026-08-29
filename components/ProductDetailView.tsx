@@ -26,7 +26,7 @@ export function ProductDetailView({ product, relatedProducts, categoryTitle, cat
       <div className="bg-white border-b border-slate-200 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex text-sm text-slate-500 font-medium" aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-3">
+            <ol className="flex flex-wrap items-center gap-y-1 space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
                 <Link href="/" className="hover:text-cyan-600 transition-colors">Home</Link>
               </li>

@@ -46,7 +46,9 @@ export function CookieConsent() {
       role="dialog"
       aria-label="Cookie consent"
       aria-live="polite"
-      className="fixed inset-x-0 bottom-0 z-[90] p-3 sm:p-4"
+      /* Sit above the mobile sticky Call/WhatsApp bar (~4.75rem); flush to the
+         bottom from md up, where that bar is hidden. */
+      className="fixed inset-x-0 bottom-[calc(4.75rem+env(safe-area-inset-bottom))] md:bottom-0 z-[90] p-3 sm:p-4"
     >
       <div className="mx-auto max-w-3xl rounded-2xl border border-slate-700 bg-slate-900 text-slate-200 shadow-2xl">
         <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4 sm:p-5">
@@ -66,14 +68,14 @@ export function CookieConsent() {
             <button
               type="button"
               onClick={() => choose("declined")}
-              className="rounded-xl border border-slate-600 px-4 py-2 text-xs font-bold text-slate-200 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="min-h-[44px] rounded-xl border border-slate-600 px-4 py-2 text-xs font-bold text-slate-200 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
             >
               Decline
             </button>
             <button
               type="button"
               onClick={() => choose("accepted")}
-              className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-xs font-bold text-white hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="min-h-[44px] rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-xs font-bold text-white hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
             >
               Accept
             </button>
